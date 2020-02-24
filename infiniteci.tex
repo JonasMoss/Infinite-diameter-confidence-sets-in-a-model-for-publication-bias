@@ -1,0 +1,343 @@
+\documentclass{article}
+
+
+\usepackage{arxiv}
+\usepackage{natbib}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage[colorlinks=true, citecolor = blue]{hyperref}      % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx, subfigure}
+\usepackage{lipsum}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{import}
+\usepackage{enumitem}
+\usepackage{csquotes}
+\usepackage{todonotes}
+\usepackage{xfrac}
+
+
+%%% ============================================================================
+%%% Theorems.
+%%% ============================================================================
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}
+\theoremstyle{plain}
+\newtheorem{lem}{\protect\lemmaname}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{\protect\definitionname}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{\protect\remarkname}
+\theoremstyle{definition}
+\newtheorem{example}[thm]{\protect\examplename}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{\protect\corollaryname}
+\theoremstyle{plain}
+\newtheorem{prop}[thm]{\protect\propositionname}
+\theoremstyle{definition}
+\newtheorem{xca}[thm]{\protect\exercisename}
+\ifx\proof\undefined
+\newenvironment{proof}[1][\protect\proofname]{\par
+	\normalfont\topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\itemindent\parindent
+	\item[\hskip\labelsep\scshape #1]\ignorespaces
+}{%
+	\endtrivlist\@endpefalse
+}
+\providecommand{\proofname}{Proof}
+\fi
+
+\providecommand{\corollaryname}{Corollary}
+\providecommand{\definitionname}{Definition}
+\providecommand{\propositionname}{Proposition}
+\providecommand{\examplename}{Example}
+\providecommand{\exercisename}{Exercise}
+\providecommand{\remarkname}{Remark}
+\providecommand{\theoremname}{Theorem}
+\providecommand{\lemmaname}{Lemma}
+
+%%% ============================================================================
+%%% Macros.
+%%% ============================================================================
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Cor}{Cor}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\diag}{diag} 
+
+\DeclareMathOperator{\argmax}{argmax}
+\newcommand{\geomean}{NA}
+
+\title{Please avoid the standardized alpha}
+
+\author{
+  Jonas Moss \\
+  Department of Mathematics, University of Oslo\\
+  PB 1053, Blindern, NO-0316, Oslo, Norway \\
+  \it{jonasmgj@math.uio.no}
+}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Meta-analysis is the quantitative combination of results from different studies. The assumptions of classical meta-analysis models are not satisfied whenever publication bias is present, which causes inconsistent parameter estimates. A popular method to account for publication bias in meta-analysis is the selection function model, but it has been noted that frequentist estimation of this model is problematic. This paper shows there is no confidence set of guaranteed finite diameter for the mean and heterogeneity parameters in the selection function model where the selection function is a step function. The proof is based on a generalization of the Gleser-Hwang theorem.
+\end{abstract}
+
+\section{Introduction}
+
+Meta-analysis is the quantitative combination of results from different studies \citep{lipsey2001practical} with the goal of reducing sampling error.
+Publication bias occurs when the published research literature is
+not representative of the all the research that has actually been
+done \citep{rothstein2006publication}. An important case of publication
+bias is when publication decisions are made based on \emph{p}-values
+\citep{sterling1959publication}, which (and its sister phenomenon, \emph{p}-hacking \citep{simmons2011false})
+can cause seriously biased conclusions when not accounted
+for \citep{simmons2011false,moss2019modelling}.
+
+One of the most important models for meta-analysis is the normal random effects
+model with normal likelihoods where the
+standard deviations are assumed to be known \citep{hedges1998fixed}.
+The likelihood for an observation in this model is $\phi(x_{i}\mid\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})$,
+where $\phi(x\mid\mu,\sigma)$ is the normal density with
+mean $\mu$ and standard deviation $\sigma$. The parameter $\tau$ is the standard deviation of the random effects distribution, and is known as the heterogeneity parameter, while $\sigma_i$ are the study specific standard errors and $\theta_0$ is the mean of the effect size distribution. A modification of the random
+effects meta-analysis model essentially due to \citet{hedges1984estimation}
+allows us to account for \emph{p}-value based publication bias.
+
+Let $u=\Phi(-x_{i}/\sigma_{i})$ be the standard one-sided
+\emph{p}-value for the null hypothesis $\theta_{i}=0$, and $w(u)$
+a probability for each $u$. The selection function meta-analysis
+model \citep{hedges1984estimation,hedges1992modeling} based on
+the\emph{ p}-value $u$ is
+\begin{equation}
+f(x_{i}\mid\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})\propto\phi(x_{i}\mid\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})w(u)\label{eq:Publication bias model}
+\end{equation}
+The model is also known as the weighting function publication bias
+model. Here is an interpretation of it:
+\begin{quote}
+Alice is an editor who receives a study with \emph{p}-value $u$.
+Her publication decision is a random function of this \emph{p}-value. That is, 
+she will publish the study with some probability $w(u)$.
+Every study you will ever read in Alice's journal has survived this
+selection mechanism, the rest are lost forever.
+\end{quote}
+This is a rejection sampling \citep{von1951various,flury1990acceptance}
+procedure. The publication probability function is likely to be well
+approximated by a step function, with cutoffs such as $0.01,0.025$
+and $0.05$ being especially important. To model this, let $\alpha$
+be a vector with $0=\alpha_{0}<\alpha_{1}<\cdots<\alpha_{J}=1$ and
+$\rho$ be a non-negative vector in $[0,1]^{J}$ with $\rho_{1}=1$.
+Now define $w(u\mid\rho,\alpha)=\sum_{j=1}^{J}\rho_{j}1_{(\alpha_{j-1},\alpha_{j}]}(u)$.
+This is a step function where the value of $w$ on each step $(\alpha_{j-1},\alpha_{j}]$
+is the probability of acceptance for a study with a\emph{ p}-value
+$u$ falling inside the interval $(\alpha_{j-1},\alpha_{j}]$. I will
+call the density proportional to $\phi(x_{i}\mid\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})w(u;\rho,\alpha)$
+the step function publication bias model and denote it $f(x_{i}\mid\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})$.
+
+The step function publication bias model was first used by \citet{hedges1984estimation},
+who used an $F$ distribution instead of a the normal distribution
+and a single step in $w(u\mid\rho,\alpha)$. \citet{iyengar1988selection}
+studied other choices of $w$ while \citet{citkowicz2017parsimonious}
+used a beta density publication probability function instead of a
+step function. \citet{hedges1992modeling} is an accessible paper
+about the model.
+
+Frequentist estimation of the step function publication bias model
+is problematic, as noted by for instance \citet[appendix, 1]{mcshane2016adjusting}.
+The purpose of this paper is to formalize and prove exactly how bad frequentist estimation of this model can be. I do this by proving there are no confidence sets of guaranteed finite diameter for the mean parameter $\theta_{0}$
+and the heterogeneity parameter $\tau$ for any coverage $1-\alpha$.
+This is a problematic result for two reasons: (i) It would be hopeless
+to report confidence sets for $\tau^{2}$ like $[0.5,\infty)$,
+as they have no practical value. (2) It shows that the automatic confidence
+sets procedures that are guaranteed to yield finite confidence sets
+of some positive nominal coverage, such as bootstrapped confidence
+sets, likelihood-ratio based confidence sets, and subsampling confidence
+sets never have true coverage greater than $0$ \citep[see][]{gleser996bootstrap}.
+
+The main result of this paper is the following theorem.
+\begin{thm}
+\label{prop:p-hacking infinite confidence interval}Let $h(x)=\prod_{i=1}^{n}f(x_{i}\mid\theta_{0},\tau,\sigma_{i})$
+be the density of a $n$ independent observations from a step function
+publication bias model. Then $h$ has no almost surely finite diameter
+confidence set for $\left|\theta\right|$ or $\sigma$ of non-zero
+coverage.
+\end{thm}
+
+\section{Definitions and Proofs}
+
+Let $P_{\theta},\theta\in\Theta$ be a family of dominated probability
+measures with densities $p_{\theta}$. Let $g:\Theta\to E$ for some
+set $E$ equipped with a positive function $\left\Vert \cdot\right\Vert :E\to[0,\infty)$.
+Here $g$ maps $\theta$ to the parameter we wish to form a confidence
+set for. The function $\left\Vert \cdot\right\Vert $ is a distance
+measure and could be a norm if $E$ is a vector space. Below it is the
+absolute value $\left|\cdot\right|$. A random set $C$ is a confidence
+set for $g(\theta)$ with coverage probability $1-\alpha$
+if $P_{\theta}(g(\theta)\in C)\geq1-\alpha$
+for all $\theta$. An\emph{ }acceptance set with level $\alpha$ has
+the property than $P_{\theta}(A_{g(\theta)})\geq1-\alpha$.
+There is a well known duality between confidence sets and acceptance
+sets: For each confidence set $C$ there is a collection of acceptance
+sets $A_{g(\theta)}$ satisfying $\omega\in A_{g(\theta)}\iff g(\theta)\in C(\omega)$.
+The classical reference for these concepts is \citep[chapter 3.5]{lehmann2006testing}.
+
+We will need terminology for the diameter of the confidence set according
+to the function $\left\Vert \cdot\right\Vert $. The diameter is
+a random variable, $D=\textrm{sup}_{\eta\in C}\left\Vert \eta\right\Vert $.
+A confidence set has infinite diameter at $\theta$ with positive
+probability if $P_{\theta}(D=\infty)>0$. If $P_{\theta}(D=\infty)>0$
+for all $\theta$, we will say that $D$ has infinite diameter with
+positive probability.
+
+The main ingredient in the proof of Theorem \ref{prop:p-hacking infinite confidence interval}
+is Theorem \ref{thm:Infinite diameter main theorem}, an extension
+and reformulation of the Gleser-Hwang theorem \citep{gleser1987nonexistence},
+a result they used to prove the non-existence of confidence sets with
+guaranteed finite diameter for models such as the errors-in-variables
+regression model and Fieller's ratio of means problem. \citet[theorem 1]{berger1999integrated}
+is a similar extension of the Gleser-Hwang theorem.
+
+The problem with non-existence
+of confidence sets with guaranteed finite diameter for finite-dimensional
+parameters has not received much attention in the statistical literature,
+as lamented by \citet{gleser996bootstrap}. Some references in this
+area are \citet{bahadur1956nonexistence}, who studied infinitely
+large confidence sets in non-parametric estimation of the mean, \citeauthor{romano2004non}'s
+(2004) extension of their results, \citet{Donoho1988-hg} and \citet{Pfanzagl1998-fe}.
+\begin{lem}
+Let $C$ be a confidence set and $A_{g(\theta)}$ its associated
+acceptance sets. If there exists a sequence $\left\{ \theta_{n}\right\} _{n=1}^{\infty}$
+with $\left\Vert g(\theta_{n})\right\Vert \to\infty$ such
+that $\lim_{n\to\infty}P_{\theta}(A_{g(\theta_{n})})>0,$then
+the diameter of $C$ at $\theta$ is infinite with positive probability.
+\end{lem}
+\begin{proof}
+Assume without loss of generality that $\left\Vert g(\theta_{n})\right\Vert \geq n$
+for each $n$; such a sequence can always be found by appropriately
+filtering the original $\left\{ \theta_{n}\right\} _{n=1}^{\infty}$.
+Since $\left\{ D\geq n\right\} $ is a decreasing sequence of sets,
+$P_{\theta}(D=\infty)=\lim_{n\to\infty}P_{\theta}(D\geq n)$
+for each $\theta$. From $A_{g(\theta_{n})}\subseteq\left\{ D\geq n\right\} $
+it follows that $P_{\theta}(A_{g(\theta_{n})})\leq P_{\theta}(D\geq n)$,
+thus $P_{\theta}(D=\infty)=\lim_{n\to\infty}P_{\theta}(D\geq n)\geq\lim_{n\to\infty}P_{\theta}(A_{g(\theta_{n})})>0$.
+\end{proof}
+This is the extension of the Gleser-Hwang theorem.
+\begin{thm}
+\label{thm:Infinite diameter main theorem}If there exists a sequence
+$\left\{ \theta_{i}\right\} _{i\in\mathbb{N}}$ with $\left\Vert g(\theta_{i})\right\Vert \to\infty$
+such that $p_{\theta_{i}}\to f^{\star}$ pointwise and $\textrm{supp}p_{\theta}=\textrm{supp}f^{\star}$
+for each $\theta$, then every confidence set with coverage $1-\alpha>0$
+has infinite diameter with positive probability.
+\end{thm}
+\begin{proof}
+Assume without loss of generality that $\left\Vert g(\theta_{n})\right\Vert \geq n$.
+By a variant of the dominated convergence theorem \citep[exercise 16.4a]{billingsley1995probability},$\int_{D\geq n}p_{\theta_{n}}d\mu\to\int_{D=\infty}f^{\star}d\mu$.
+Since $A_{g(\theta_{n})}\subseteq\left\{ D\leq n\right\} $,
+$1-\alpha\leq\int_{A_{g(\theta_{n})}}p_{\theta_{n}}d\mu\leq\int_{D\geq n}p_{\theta_{n}}d\mu$
+for all $n$, thus $\int_{D=\infty}f^{\star}d\mu>1-\alpha>0$. The
+result follows from $P_{\theta}(D\geq n)=\int_{D\geq n}(p_{\theta}/p_{\theta_{n}})p_{\theta_{n}}d\mu>\int_{D=\infty}(p_{\theta}/f^{\star})f^{\star}d\mu>0$.
+\end{proof}
+This an extension of Theorem \ref{thm:Infinite diameter main theorem}
+to mixture distributions.
+\begin{prop}
+\label{cor:Mixture model corollary}Let $f_{\theta}^{1},f_{\theta}^{2},\ldots$
+be a finite or infinite sequence of densities, $\pi(\theta)$
+a countable probability vector and $\sum_{n=1}^{\infty}\pi_{n}(\theta)f_{\theta}^{n}$
+a mixture distribution. Assume there is a sequence $\left\{ \theta_{i}\right\} _{i\in\mathbb{N}}$
+with $\left\Vert g(\theta_{i})\right\Vert \to\infty$ such
+that $f_{\theta_{i}}^{1}\to f^{\star}$ pointwise and $\textrm{supp}f_{\theta}^{1} = \textrm{supp}f^{\star}$
+for each $\theta$ . If there is a parameter $\theta'\in\Theta$ satisfying
+$\pi_{1}(\theta')>\alpha$, the mixture $\sum_{n=1}^{\infty}\pi_{n}(\theta)f_{\theta}^{n}$
+admits no almost surely finite diameter confidence set of coverage
+$1-\alpha$ for $g(\theta)$.
+\end{prop}
+
+\begin{proof}
+Let $C$ be confidence set for $g(\theta)$ with coverage
+$1-\alpha$. Since $\pi_{1}(\theta')>\alpha$ by assumption,
+$C$ must include a confidence $C_{1}$ for $f_{\theta}^{1}$ of some
+positive coverage. But by Theorem \ref{thm:Infinite diameter main theorem},
+$C_{1}$ has infinite diameter with positive probability for all $\theta$.
+Since $C\supseteq C_{1}$, $C$ has infinite diameter with positive
+probability too.
+\end{proof}
+The following lemma is a proof of proposition \ref{prop:p-hacking infinite confidence interval}
+for the special case when no non-significant studies are published.
+Let $\phi_{[a,b)}(x\mid\theta,\sigma)$ denote
+the density of a normal variable with mean $\theta$ and standard
+deviation $\sigma$ truncated to $[a,b)$.
+\begin{lem}
+\label{lem:One-sided normal limit}Let $f$ be a normal density truncated
+to $[c,\infty)$ with underlying mean $\theta_{n}=-n-c$
+and standard deviation $\sigma_{n}=n^{1/2}$. Then $\phi_{[c,\infty)}(x\mid\theta_{n},\sigma_{n})$
+converges pointwise to $\exp(-x-c)$, the density of a
+shifted exponential.
+\end{lem}
+
+\begin{proof}
+The formula for $\phi_{[c,\infty)}(x;\theta_{n},\sigma_{n})$
+is $\Phi(-\frac{n+c}{n^{1/2}})^{-1}\phi(x;-n-c,n^{1/2})1_{x>c}$.
+The normal density part equals 
+\[
+(2\pi)^{-1/2}n^{-\frac{1}{2}}\exp\left(\frac{-n^{2}-2n(c+x)+[2cx-c^{2}-x^{2}]}{2n}\right)
+\]
+When $n$ is large compared to $x$ and $c$, $[2cx-c^{2}-x^{2}]/2n$
+is negligible, hence 
+\[
+\phi(x;\theta_{n},\sigma_{n})\approx(2\pi)^{-1/2}n^{-\frac{1}{2}}\exp(-n/2)\exp(-x-c)
+\]
+which equals $\exp(-x-c)\phi(n^{1/2})/n^{1/2}$.
+Since $\Phi(-(\theta_{n}+c)/\sigma_{n})=\Phi(n^{1/2})\approx n^{1/2}/\phi(n^{1/2})$
+as $n$ grows (see e.g. \citet[equation 5]{borjesson1979simple}),
+we end up with $$\Phi(-(\theta_{n}+c)/\sigma_{n})^{-1}\phi(x;\theta_{n},\sigma_{n})1_{x>c}\to\exp(-x-c)$$
+\end{proof}
+%
+This lemma gives a mixture representation of the publication bias
+model. The proof is omitted.
+\begin{lem}
+\label{prop:Mixture representation} The density of an observation
+from the step function publication bias model with parameters $\theta_{0},\tau,\sigma_{i}$
+is
+\begin{equation}
+f(x\mid\theta_{0},\tau,\sigma_{i})=\sum_{j=1}^{N}\pi_{j}\phi_{[\Phi^{-1}(1-\alpha_{j}),\Phi^{-1}(1-\alpha_{j-1}))}(x\mid\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})\label{eq:Random effects, publication bias}
+\end{equation}
+where 
+\[
+\pi_{j}(\theta,\tau,\sigma_{i})=\rho_{j}\frac{\Phi(c_{j-1}\mid\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j}\mid\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})}{\sum_{j=1}^{J}\rho_{j}[\Phi(c_{j-1}\mid\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j}\mid\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]}
+\]
+\end{lem}
+
+\begin{proof}[Proof of Theorem \ref{prop:p-hacking infinite confidence interval}]
+Using the representation \ref{eq:Random effects, publication bias}
+of lemma \ref{prop:Mixture representation} and \ref{cor:Mixture model corollary}
+it is enough to show the result for $\phi_{[\Phi^{-1}(1-\alpha_{j}),\infty)}(x\mid\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})$
+where $\alpha_{j+1}=1$. To this end, let $c=\Phi(1-\alpha_{j})$.
+Then $\theta_{n}=-n-c$ and $\tau_{n}^{2}=n$ does the trick by lemma
+\ref{lem:One-sided normal limit}. For the case with more than one
+observation, observe that 
+\[
+\prod_{i=1}^{n}\sum_{j=1}^{N}\pi_{j}\phi_{[\Phi^{-1}(1-\alpha_{j}),\infty)}(x_{i}\mid\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})
+\]
+is mixture model. (Just expand it.) The component belonging to the
+mixture probability $\pi_{j}^{n}$ fulfills the demands of proposition
+\ref{cor:Mixture model corollary} for $\alpha_{j}$ when $\alpha_{j+1}=1$,
+as its density is a product of densities converging to shifted exponentials.
+\end{proof}
+
+
+\section*{Acknowledgements}
+I am grateful to Riccardo De Bin and Emil Aas Stoltenberg for reading through the manuscript and giving helpful comments.
+
+%\printbibliography
+
+\bibliographystyle{apalike}
+\bibliography{infiniteci}
+\end{document}
