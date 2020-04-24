@@ -12,6 +12,7 @@
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\diag}{diag} 
 \DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\supp}{supp}
 
 \title{Infinite diameter confidence sets in the selection function model for publication bias}
 
@@ -172,11 +173,11 @@ for each $\theta$. From $A_{g(\theta_{n})}\subseteq\left\{ D\geq n\right\} $
 it follows that $P_{\theta}(A_{g(\theta_{n})})\leq P_{\theta}(D\geq n)$,
 thus $P_{\theta}(D=\infty)=\lim_{n\to\infty}P_{\theta}(D\geq n)\geq\lim_{n\to\infty}P_{\theta}(A_{g(\theta_{n})})>0$.
 \end{proof}
-This is the extension of the Gleser--Hwang theorem.
+This is the extension of the Gleser--Hwang theorem. Here $\supp f = \{x\mid f(x) \neq 0\}$ denotes the support of $f$.
 \begin{thm}
 \label{thm:Infinite diameter main theorem}If there exists a sequence
 $\left\{ \theta_{i}\right\} _{i\in\mathbb{N}}$ with $\left\Vert g(\theta_{i})\right\Vert \to\infty$
-such that $p_{\theta_{i}}\to f^{\star}$ pointwise and $\textrm{supp}p_{\theta}=\textrm{supp}f^{\star}$
+such that $p_{\theta_{i}}\to f^{\star}$ pointwise and $\supp p_{\theta}=\supp f^{\star}$
 for each $\theta$, then every confidence set with coverage $1-\alpha>0$
 has infinite diameter with positive probability.
 \end{thm}
@@ -196,7 +197,7 @@ be a finite or infinite sequence of densities, $\pi(\theta)$
 a countable probability vector and $\sum_{n=1}^{\infty}\pi_{n}(\theta)f_{\theta}^{n}$
 a mixture distribution. Assume there is a sequence $\left\{ \theta_{i}\right\} _{i\in\mathbb{N}}$
 with $\left\Vert g(\theta_{i})\right\Vert \to\infty$ such
-that $f_{\theta_{i}}^{1}\to f^{\star}$ pointwise and $\textrm{supp}f_{\theta}^{1} = \textrm{supp}f^{\star}$
+that $f_{\theta_{i}}^{1}\to f^{\star}$ pointwise and $\supp f_{\theta}^{1} = \supp f^{\star}$
 for each $\theta$ . If there is a parameter $\theta'\in\Theta$ satisfying
 $\pi_{1}(\theta')>\alpha$, the mixture $\sum_{n=1}^{\infty}\pi_{n}(\theta)f_{\theta}^{n}$
 admits no almost surely finite diameter confidence set of coverage
