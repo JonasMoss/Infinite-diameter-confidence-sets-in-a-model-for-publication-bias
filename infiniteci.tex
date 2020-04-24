@@ -1,67 +1,24 @@
-\documentclass{article}
-
-
+\documentclass[twoside]{article}
 \usepackage{arxiv}
-\usepackage{natbib}
-\usepackage[utf8]{inputenc} % allow utf-8 input
-\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
-\usepackage[colorlinks=true, citecolor = blue]{hyperref}      % hyperlinks
-\usepackage{url}            % simple URL typesetting
-\usepackage{booktabs}       % professional-quality tables
-\usepackage{amsfonts}       % blackboard math symbols
-\usepackage{nicefrac}       % compact symbols for 1/2, etc.
-\usepackage{microtype}      % microtypography
-\usepackage{graphicx, subfigure}
-\usepackage{lipsum}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{import}
-\usepackage{enumitem}
-\usepackage{csquotes}
-\usepackage{todonotes}
-\usepackage{xfrac}
-
-
-%%% ============================================================================
-%%% Theorems.
-%%% ============================================================================
-\theoremstyle{plain}
-\newtheorem{thm}{\protect\theoremname}
-\theoremstyle{plain}
-\newtheorem{lem}{\protect\lemmaname}
-\theoremstyle{definition}
-\newtheorem{defn}[thm]{\protect\definitionname}
-\theoremstyle{remark}
-\newtheorem{rem}[thm]{\protect\remarkname}
-\theoremstyle{definition}
-\newtheorem{example}[thm]{\protect\examplename}
-\theoremstyle{plain}
-\newtheorem{cor}[thm]{\protect\corollaryname}
-\theoremstyle{plain}
-\newtheorem{prop}[thm]{\protect\propositionname}
-\theoremstyle{definition}
-\newtheorem{xca}[thm]{\protect\exercisename}
-\ifx\proof\undefined
-\newenvironment{proof}[1][\protect\proofname]{\par
-	\normalfont\topsep6\p@\@plus6\p@\relax
-	\trivlist
-	\itemindent\parindent
-	\item[\hskip\labelsep\scshape #1]\ignorespaces
-}{%
-	\endtrivlist\@endpefalse
-}
-\providecommand{\proofname}{Proof}
-\fi
-
-\providecommand{\corollaryname}{Corollary}
-\providecommand{\definitionname}{Definition}
-\providecommand{\propositionname}{Proposition}
-\providecommand{\examplename}{Example}
-\providecommand{\exercisename}{Exercise}
-\providecommand{\remarkname}{Remark}
-\providecommand{\theoremname}{Theorem}
-\providecommand{\lemmaname}{Lemma}
+% \usepackage{natbib}
+% \usepackage[utf8]{inputenc} % allow utf-8 input
+% \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+% \usepackage[colorlinks=true, citecolor = blue]{hyperref}      % hyperlinks
+% \usepackage{url}            % simple URL typesetting
+% \usepackage{booktabs}       % professional-quality tables
+% \usepackage{amsfonts}       % blackboard math symbols
+% \usepackage{nicefrac}       % compact symbols for 1/2, etc.
+% \usepackage{microtype}      % microtypography
+% \usepackage{graphicx, subfigure}
+% \usepackage{lipsum}
+% \usepackage{amsmath}
+% \usepackage{amsthm}
+% \usepackage{amssymb}
+% \usepackage{import}
+% \usepackage{enumitem}
+% \usepackage{csquotes}
+% \usepackage{todonotes}
+% \usepackage{xfrac}
 
 %%% ============================================================================
 %%% Macros.
@@ -80,11 +37,17 @@
 \title{Infinite diameter confidence sets in a model for publication bias}
 
 \author{
-  Jonas Moss \\
+  Jonas Moss \orcid{0000-0002-6876-6964} \\
   Department of Mathematics, University of Oslo\\
   PB 1053, Blindern, NO-0316, Oslo, Norway \\
   \it{jonasmgj@math.uio.no}
 }
+
+\titletag{An arXiv preprint, v1.1}
+\makeatletter
+\titlerunning{\@title}
+\makeatother
+\authorrunning{Jonas Moss}
 
 \begin{document}
 \maketitle
@@ -239,7 +202,7 @@ has infinite diameter with positive probability.
 \end{thm}
 \begin{proof}
 Assume without loss of generality that $\left\Vert g(\theta_{n})\right\Vert \geq n$.
-By a variant of the dominated convergence theorem \citep[exercise 16.4a]{billingsley1995probability},$\int_{D\geq n}p_{\theta_{n}}d\mu\to\int_{D=\infty}f^{\star}d\mu$.
+By a variant of the dominated convergence theorem \citep[exercise 16.4a]{billingsley1995probability}, $\int_{D\geq n}p_{\theta_{n}}d\mu\to\int_{D=\infty}f^{\star}d\mu$.
 Since $A_{g(\theta_{n})}\subseteq\left\{ D\leq n\right\} $,
 $1-\alpha\leq\int_{A_{g(\theta_{n})}}p_{\theta_{n}}d\mu\leq\int_{D\geq n}p_{\theta_{n}}d\mu$
 for all $n$, thus $\int_{D=\infty}f^{\star}d\mu>1-\alpha>0$. The
@@ -338,6 +301,5 @@ I am grateful to Riccardo De Bin and Emil Aas Stoltenberg for reading through th
 
 %\printbibliography
 
-\bibliographystyle{apalike}
 \bibliography{infiniteci}
 \end{document}
