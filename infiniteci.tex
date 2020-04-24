@@ -13,7 +13,7 @@
 \DeclareMathOperator{\diag}{diag} 
 \DeclareMathOperator{\argmax}{argmax}
 
-\title{Infinite diameter confidence sets in a model for publication bias}
+\title{Infinite diameter confidence sets in the selection function model for publication bias}
 
 \author{
   Jonas Moss \orcid{0000-0002-6876-6964} \\
@@ -22,7 +22,7 @@
   \it{jonasmgj@math.uio.no}
 }
 
-\titletag{An arXiv preprint, v1.1}
+\titletag{An arXiv preprint, v2}
 \makeatletter
 \titlerunning{\@title}
 \makeatother
@@ -31,17 +31,19 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Meta-analysis is the quantitative combination of results from different studies. The assumptions of classical meta-analysis models are not satisfied whenever publication bias is present, which causes inconsistent parameter estimates. A popular method to account for publication bias in meta-analysis is the selection function model, but it has been noted that frequentist estimation of this model is problematic. This paper shows there is no confidence set of guaranteed finite diameter for the mean and heterogeneity parameters in the selection function model where the selection function is a step function. The proof is based on a generalization of the Gleser--Hwang theorem.
+Meta-analysis is the quantitative combination of results from different studies. The assumptions of classical meta-analysis models are not satisfied whenever publication bias is present, which causes inconsistent parameter estimates. A popular method to account for publication bias in meta-analysis is the selection function model, but frequentist estimation of this model is problematic. This paper shows there is no confidence set of guaranteed finite diameter for the mean and heterogeneity parameters in the selection function model. The proof is based on a generalization of the Gleser--Hwang theorem.
 \end{abstract}
+
+\keywords{meta-analysis \and publication bias \and selection function model \and p-hacking}
 
 \section{Introduction}
 
-Meta-analysis is the quantitative combination of results from different studies \citep{lipsey2001practical} with the goal of reducing sampling error.
+Meta-analysis is the quantitative combination of results from different studies with the goal of reducing sampling error \citep{lipsey2001practical}.
 Publication bias occurs when the published research literature is
 not representative of the all the research that has actually been
 done \citep{rothstein2006publication}. An important case of publication
 bias is when publication decisions are made based on \textit{p}-values
-\citep{sterling1959publication}, which (and its sister phenomenon, \textit{p}-hacking \citep{simmons2011false})
+\citep{sterling1959publication}, which, along its sister phenomenon \textit{p}-hacking \citep{simmons2011false},
 can cause seriously biased conclusions when not accounted
 for \citep{simmons2011false,moss2019modelling}.
 
@@ -50,8 +52,7 @@ model with normal likelihoods where the
 standard deviations are assumed to be known \citep{hedges1998fixed}.
 The likelihood for an observation in this model is $\phi(x_{i}\mid\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})$,
 where $\phi(x\mid\mu,\sigma)$ is the normal density with
-mean $\mu$ and standard deviation $\sigma$. The parameter $\tau$ is the standard deviation of the random effects distribution, and is known as the heterogeneity parameter, while $\sigma_i$ are the study specific standard errors and $\theta_0$ is the mean of the effect size distribution. A modification of the random
-effects meta-analysis model essentially due to \citet{hedges1984estimation}
+mean $\mu$ and standard deviation $\sigma$. The parameter $\tau$ is the standard deviation of the random effects distribution, known as the heterogeneity parameter. The $\sigma_i$s are the study-specific standard errors, and $\theta_0$ is the mean of the effect size distribution. A modification of the random effects meta-analysis model due to \citet{hedges1984estimation}
 allows us to account for \textit{p}-value based publication bias.
 
 Let $u=\Phi(-x_{i}/\sigma_{i})$ be the standard one-sided
@@ -93,12 +94,12 @@ step function. \citet{hedges1992modeling} is an accessible paper
 about the model.
 
 Frequentist estimation of the step function publication bias model
-is problematic, as noted by for instance \citet[appendix, 1]{mcshane2016adjusting}.
+is problematic, as noted by \citet[Appendix, 1]{mcshane2016adjusting}.
 The purpose of this paper is to formalize and prove exactly how bad frequentist estimation of this model can be. I do this by proving there are no confidence sets of guaranteed finite diameter for the mean parameter $\theta_{0}$
 and the heterogeneity parameter $\tau$ for any coverage $1-\alpha$.
 This is a problematic result for two reasons: (i) It would be hopeless
 to report confidence sets for $\tau^{2}$ like $[0.5,\infty)$,
-as they have no practical value. (2) It shows that the automatic confidence
+as they have no practical value. (ii) It shows that the automatic confidence
 sets procedures that are guaranteed to yield finite confidence sets
 of some positive nominal coverage, such as bootstrapped confidence
 sets, likelihood-ratio based confidence sets, and subsampling confidence
@@ -113,10 +114,7 @@ confidence set for $\left|\theta\right|$ or $\sigma$ of non-zero
 coverage.
 \end{thm}
 
-
-
 \section{Definitions and Proofs}
-
 Let $P_{\theta},\theta\in\Theta$ be a family of dominated probability
 measures with densities $p_{\theta}$. Let $g:\Theta\to E$ for some
 set $E$ equipped with a positive function $\left\Vert \cdot\right\Vert :E\to[0,\infty)$.
@@ -190,7 +188,7 @@ $1-\alpha\leq\int_{A_{g(\theta_{n})}}p_{\theta_{n}}d\mu\leq\int_{D\geq n}p_{\the
 for all $n$, thus $\int_{D=\infty}f^{\star}d\mu>1-\alpha>0$. The
 result follows from $P_{\theta}(D\geq n)=\int_{D\geq n}(p_{\theta}/p_{\theta_{n}})p_{\theta_{n}}d\mu>\int_{D=\infty}(p_{\theta}/f^{\star})f^{\star}d\mu>0$.
 \end{proof}
-This an extension of Theorem \ref{thm:Infinite diameter main theorem}
+This is an extension of Theorem \ref{thm:Infinite diameter main theorem}
 to mixture distributions.
 \begin{prop}
 \label{cor:Mixture model corollary}Let $f_{\theta}^{1},f_{\theta}^{2},\ldots$
