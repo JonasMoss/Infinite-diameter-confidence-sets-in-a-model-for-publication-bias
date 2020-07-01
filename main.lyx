@@ -1,0 +1,1069 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass amsart
+\begin_preamble
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Cor}{Cor}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\diag}{diag} 
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\supp}{supp}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style apalike
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Infinite diameter confidence sets in Hedges’ publication bias model
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Introduction.
+
+\series default
+ Talk about publication bias and why it is important.
+ Add one paragraph about impossibility theorems in frequentist statistics.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Hedges' publication bias model.
+
+\series default
+ Talk about this model specifically.
+ Explain why it is exactly what we want.
+ Name some applications.
+ Make a plot showing how it can go bad.
+ Show how this can affect estimates and confidence sets.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Confidence sets of infinite diameter.
+ 
+\series default
+A technical section introducing the concepts.
+ Connec the partitions to Hedges' model, and state the modified Gleser–Hwang
+ theorem; include an example from Gleser–Hwang and from the Berger paper.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Infinite diameter in Hedges' model.
+ 
+\series default
+Start with infinite diameters in the full selection for significance model.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Appendix.
+ 
+\series default
+Proofs and so on.
+\end_layout
+
+\begin_layout Section
+Mixtures
+\end_layout
+
+\begin_layout Standard
+What if all the mixture components have the same witness? Then it has to
+ work, even if the weights change, right? 
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Section
+Hedges' publication bias model
+\end_layout
+
+\begin_layout Standard
+The most popular and well-known meta-analysis method is the random effects
+ model with normal likelihoods (Borenstein).
+ Written in hierarchical notation, it equals
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\theta & \sim & N(\theta_{0},\tau),\\
+x_{i}\mid\theta,\sigma & \sim & N(\theta,\sqrt{\tau^{2}+\sigma_{i}^{2}}).
+\end{eqnarray*}
+
+\end_inset
+
+Here 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+ is the standard deviation of the 
+\begin_inset Formula $i$
+\end_inset
+
+th study.
+ Following the convention in meta-analysis, we assume these parameters to
+ be known.
+ The mean parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is the population effect size, and 
+\begin_inset Formula $N(\theta_{0},\tau)$
+\end_inset
+
+ is the effect size distribution.
+ The parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is the heterogeneity parameter.
+ The purpose of the effect size distribution is to model the fact that most
+ effect size estimates plugged into a meta-analysis do not appear to come
+ from exactly the same phenomenon.
+\end_layout
+
+\begin_layout Standard
+In the simplest of these models, only significant results are observed.
+ In this case,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+f(x;\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}+\tau}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}),\label{eq:selection for significance model}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{\alpha}=\Phi^{-1}(1-\alpha)$
+\end_inset
+
+ for some significance level 
+\begin_inset Formula $\alpha\in(0,1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This model was introduced by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hedges1984estimation"
+literal "false"
+
+\end_inset
+
+ in the context of 
+\begin_inset Formula $F$
+\end_inset
+
+-distributions.
+ It is the underlying model of the estimating 
+\emph on
+p
+\emph default
+-curve, popular in psychology.
+\end_layout
+
+\begin_layout Section
+Confidence sets of infinite diameter
+\end_layout
+
+\begin_layout Section
+Infinite diameters and Hedges' model
+\end_layout
+
+\begin_layout Standard
+Recall the simple publication bias model 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:selection for significance model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:simple publication bias"
+
+\end_inset
+
+ Assume 
+\begin_inset Formula $n$
+\end_inset
+
+ independent samples from the simple publication bias model 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:selection for significance model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Then, for any 
+\begin_inset Formula $n$
+\end_inset
+
+, any confidence set for 
+\begin_inset Formula $\theta_{0},\tau$
+\end_inset
+
+, or 
+\begin_inset Formula $(\theta_{0},\tau)$
+\end_inset
+
+ will have infinite diameter with positive probability.
+\end_layout
+
+\begin_layout Proof
+See the appendix, page 
+\end_layout
+
+\begin_layout Standard
+The next 
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:general publication bias"
+
+\end_inset
+
+ Assume 
+\begin_inset Formula $n$
+\end_inset
+
+ independent samples from the publication bias model 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:selection for significance model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, where the selection probability 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is unknown.
+ Then, for any 
+\begin_inset Formula $n$
+\end_inset
+
+, any confidence set for 
+\begin_inset Formula $\theta_{0},\tau$
+\end_inset
+
+, or 
+\begin_inset Formula $(\theta_{0},\tau)$
+\end_inset
+
+ will have infinite diameter with positive probability.
+\end_layout
+
+\begin_layout Section
+Appendix
+\end_layout
+
+\begin_layout Standard
+Fix some measurable space 
+\begin_inset Formula $(\Omega,\mathcal{F})$
+\end_inset
+
+, and let 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ be a family of dominated probability measures defined on this measurable
+ space, and 
+\begin_inset Formula $\mathcal{\Pi}$
+\end_inset
+
+ a partitioning of 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+.
+ Recall that a partioning of 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ is a collection of disjoint non-empty subsets of 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\bigcup_{\pi\in\Pi}\pi=\mathcal{P}$
+\end_inset
+
+.
+ When 
+\begin_inset Formula $P\in\mathcal{P}$
+\end_inset
+
+, we will use the standard notation 
+\begin_inset Formula $[P]$
+\end_inset
+
+ to denote the unique 
+\begin_inset Formula $\pi$
+\end_inset
+
+ containing 
+\begin_inset Formula $P$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:confidence set"
+
+\end_inset
+
+ A 
+\emph on
+confidence set
+\emph default
+ of level 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is a family of rejection sets 
+\begin_inset Formula $\{R(\pi)\},\pi\in\Pi$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Definition
+\begin_inset Formula 
+\begin{equation}
+\sup_{\pi\in\Pi}\sup_{P\in\pi}P(R(\pi))\leq\alpha.\label{eq:confidence set}
+\end{equation}
+
+\end_inset
+
+If the inequality is an equality, the confidence set has 
+\emph on
+size
+\emph default
+ 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+This definition of confidence sets might look slightly unfamiliar, but it
+ is a straight-forward generalization of the definitions in e.g.
+ Lehmann and Romano.
+ Often, a confidence set 
+\begin_inset Formula $C$
+\end_inset
+
+ is defined by 
+\begin_inset Formula 
+\begin{equation}
+\pi_{0}\in C\iff\omega\notin R(\pi_{0}),\label{eq:c-confidence set}
+\end{equation}
+
+\end_inset
+
+that is, 
+\begin_inset Formula $\pi_{0}\in C$
+\end_inset
+
+ if and only if accept the null-hypothesis 
+\begin_inset Formula $H_{0}:\pi=\pi_{0}$
+\end_inset
+
+, but we will only need the formulation using rejection sets in this paper.
+ Often when confidence sets are defined in terms of rejection sets, there
+ is no partition 
+\begin_inset Formula $\Pi$
+\end_inset
+
+ to take the supremum over, and the definition reduces to 
+\begin_inset Formula $\sup_{P\in\mathcal{P}}P(R(P))\leq\alpha$
+\end_inset
+
+.
+ The terminology 
+\emph on
+confidence interval
+\emph default
+ is far more common than confidence set, but this requires that 
+\begin_inset Formula $C$
+\end_inset
+
+ of equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:c-confidence set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is an interval.
+ 
+\end_layout
+
+\begin_layout Standard
+The following example should make Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:confidence set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ familiar.
+\end_layout
+
+\begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:t-test"
+
+\end_inset
+
+ Consider the usual 
+\emph on
+t
+\emph default
+-confidence interval with 
+\begin_inset Formula $n$
+\end_inset
+
+ observations.
+ Here 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ contains all measures 
+\begin_inset Formula $P_{\mu,\sigma}^{n}$
+\end_inset
+
+, where 
+\begin_inset Formula $P_{\mu,\sigma}$
+\end_inset
+
+ is the probability measure of a normal with mean 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and standard deviation 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
+\end_inset
+
+ contain all normal probability measures with mean 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and some positive standard deviation.
+ Then 
+\begin_inset Formula $\pi(\mu),\mu\in\mathbb{R}$
+\end_inset
+
+ defined a partition of 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+.
+ A 
+\emph on
+t
+\emph default
+-confidence interval is a confidence set of size 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ according to definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:confidence set"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now we must find out how to measure the size of confidence sets.
+ Let a size function be any positive function 
+\begin_inset Formula $\left\Vert \cdot\right\Vert :\Pi\to[0,\infty)$
+\end_inset
+
+.
+ In the 
+\emph on
+t
+\emph default
+-confidence interval example above, 
+\begin_inset Formula $\left\Vert \cdot\right\Vert $
+\end_inset
+
+ can be taken to be the absolute value of the unique 
+\begin_inset Formula $\mu$
+\end_inset
+
+ associated with each 
+\begin_inset Formula $\pi$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The diameter of a confidence set is the random variable
+\begin_inset Formula 
+\begin{equation}
+D(\omega)=\sup_{\pi\in\Pi}\{\left\Vert \pi\right\Vert \mid\omega\notin R(\pi)\}\label{eq:diameter}
+\end{equation}
+
+\end_inset
+
+That is, the diameter tells you the size of the largest accepted 
+\begin_inset Formula $\pi$
+\end_inset
+
+.
+ We will assume that 
+\begin_inset Formula $D$
+\end_inset
+
+ is Borel measurable.
+\end_layout
+
+\begin_layout Standard
+A confidence set has infinite diameter with 
+\begin_inset Formula $P$
+\end_inset
+
+-positive probability if 
+\begin_inset Formula $P(D=\infty)$
+\end_inset
+
+.
+ It has infinite diameter with positive probability if 
+\begin_inset Formula $P(D=\infty)>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $P\in\mathcal{P}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This theorem is a slight generalization of the Gleser–Hwang theorem.
+ 
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:Gleser--Hwang"
+
+\end_inset
+
+ Suppose there is a sequence 
+\begin_inset Formula $\{p_{i}\}$
+\end_inset
+
+ of densities from 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ satisfying the following: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+There is a function 
+\begin_inset Formula $p^{\star}$
+\end_inset
+
+ such that 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ converges to 
+\begin_inset Formula $p^{\star}$
+\end_inset
+
+ pointwise ,
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\supp p=\supp p^{\star}$
+\end_inset
+
+ for each 
+\begin_inset Formula $i$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+the size of 
+\begin_inset Formula $[p_{i}]$
+\end_inset
+
+ goes to infinity, 
+\begin_inset Formula $\left\Vert [p_{i}]\right\Vert \to\infty$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Theorem
+Then every confidence set with level 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ has infinite diameter with positive probability.
+\end_layout
+
+\begin_layout Proof
+See the appendix, page 
+\begin_inset CommandInset ref
+LatexCommand pageref
+reference "proof:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Appendix
+\end_layout
+
+\begin_layout Standard
+The following sandwich convergence theorem is used in the proof of the Gleser–Hw
+ang theorem.
+ 
+\end_layout
+
+\begin_layout Lemma
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Billingsley, 16.4(a)
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:Dominated covergence theorem"
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $a_{n},b_{n},f_{n}$
+\end_inset
+
+ converge to 
+\begin_inset Formula $a,b,f$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{n}\leq f_{n}\leq b_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\int a_{n}d\mu\to\int ad\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\int b_{n}d\mu\to\int bd\mu$
+\end_inset
+
+, then 
+\begin_inset Formula $\int f_{n}d\mu\to\int fd\mu$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Proof of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "proof:Gleser--Hwang"
+
+\end_inset
+
+We can assume without loss of generality that 
+\begin_inset Formula $\left\Vert [p_{i}]\right\Vert \geq n$
+\end_inset
+
+, as we can choose a subsequence if we have to.
+ Since 
+\begin_inset Formula $R^{c}([p_{n}])\subseteq\{D\geq n\}$
+\end_inset
+
+, we have that
+\begin_inset Formula 
+\begin{equation}
+1-\alpha\leq\int_{R^{c}([p_{n}])}p_{n}d\mu\leq\int_{D\geq n}p_{n}d\mu\label{eq:inequality with R^c}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ By Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:Dominated covergence theorem"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, with 
+\begin_inset Formula $a_{n}=p_{n}1_{D=\infty}$
+\end_inset
+
+, 
+\begin_inset Formula $b_{n}=p_{n}$
+\end_inset
+
+, and 
+\begin_inset Formula $f_{n}=1_{D\geq n}p_{n}$
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{equation}
+\int_{D\geq n}p_{n}d\mu\to\int_{D=\infty}p^{\star}d\mu.\label{eq:limit of pn}
+\end{equation}
+
+\end_inset
+
+Combining equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:inequality with R^c"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:limit of pn"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we get
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+\int_{D=\infty}p^{\star}d\mu\geq1-\alpha>0.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $P\in\mathcal{P}$
+\end_inset
+
+ be arbitrary, 
+\begin_inset Formula $p$
+\end_inset
+
+ be its density, and consider
+\begin_inset Formula 
+\[
+P(D=\infty)=\int_{D=\infty}\left(\frac{p}{p^{\star}}\right)p^{\star}d\mu.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\int_{D=\infty}p^{\star}d\mu>0$
+\end_inset
+
+ and 
+\begin_inset Formula $p/p^{\star}>0$
+\end_inset
+
+, we see that 
+\begin_inset Formula $\int_{D=\infty}(p/p^{\star})p^{\star}d\mu>0$
+\end_inset
+
+ too.
+ It follows that 
+\begin_inset Formula $P(D=\infty)>0$
+\end_inset
+
+, and, since 
+\begin_inset Formula $P$
+\end_inset
+
+ is aribtrary, 
+\begin_inset Formula $D$
+\end_inset
+
+ has infinite diameter with positive probability.
+\end_layout
+
+\begin_layout Standard
+Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:simple publication bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ follows Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and the following lemma.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:shifted exponential"
+
+\end_inset
+
+ [[fill in]]
+\end_layout
+
+\begin_layout Proof
+[[fill in]] 
+\end_layout
+
+\begin_deeper
+\begin_layout Proof
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Proof of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:simple publication bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "proof:simple publication bias"
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "infiniteci"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
