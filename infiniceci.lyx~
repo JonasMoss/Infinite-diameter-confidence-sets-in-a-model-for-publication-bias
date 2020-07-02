@@ -771,6 +771,344 @@ noprefix "false"
 .
 \end_layout
 
+\begin_layout Standard
+There are some possible candidates for 
+\begin_inset Formula $\Pi$
+\end_inset
+
+ in the publication bias model.
+ We will consider three of them.
+ First, the partitioning where 
+\begin_inset Formula $p,q\in\pi$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $p,q$
+\end_inset
+
+ have the same mean effect size parameter 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+.
+ We will equip this partitioning with the size function 
+\begin_inset Formula $\left\Vert \pi\right\Vert =|\theta_{0}|$
+\end_inset
+
+, and it corresponds to a confidence set for 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+.
+ Second, consider the partitioning where all 
+\begin_inset Formula $p,q\in\pi$
+\end_inset
+
+ have the same heterogeneity parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+, equipped with 
+\begin_inset Formula $\left\Vert \pi\right\Vert =\tau$
+\end_inset
+
+.
+ Finally, we will work with the partitioning where all 
+\begin_inset Formula $p,q\in\pi$
+\end_inset
+
+ have the same heterogeneity parameter 
+\begin_inset Formula $\tau$
+\end_inset
+
+ and population effect size 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+, and equip it with 
+\begin_inset Formula $\left\Vert \pi\right\Vert =\sqrt{\theta_{0}^{2}+\tau^{2}}$
+\end_inset
+
+.
+ This information is summarised in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Possible partitions"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for convenience.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Possible partitions"
+
+\end_inset
+
+The three partitions 
+\begin_inset Formula $\Pi$
+\end_inset
+
+ for the publication bias model
+\end_layout
+
+\end_inset
+
+
+\size small
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Symbol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Size 
+\begin_inset Formula $\left\Vert \cdot\right\Vert $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Confidence set
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Mean effect size
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset Formula $\left\Vert \pi\right\Vert =|\theta_{0}|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Confidence set for 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Heterogeneity parameter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset Formula $\tau$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset Formula $\left\Vert \pi\right\Vert =\tau$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Confidence set for 
+\begin_inset Formula $\tau$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset Formula $(\theta_{0},\tau)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset Formula $\left\Vert \pi\right\Vert =\sqrt{\theta_{0}^{2}+\tau^{2}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Joint confidence set for 
+\begin_inset Formula $(\theta,\tau)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Infinite diameters and Hedges' model
 \end_layout
@@ -1095,27 +1433,13 @@ Since
 \end_layout
 
 \begin_layout Standard
-Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "thm:simple publication bias"
-plural "false"
-caps "false"
-noprefix "false"
-
+The next lemma shows there is a 
+\begin_inset Formula $p_{n}$
 \end_inset
 
- follows Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "thm:Gleser--Hwang"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and the following lemma.
+ satisfying the conditions of the Gleser–Hwang theorem for the class of
+ truncated normal distributions.
+ 
 \end_layout
 
 \begin_layout Lemma
@@ -1142,7 +1466,11 @@ name "lem:generalized shifted exponential"
 \end_inset
 
  and standard deviation 
-\begin_inset Formula $\sigma_{n}=n^{1/2}$
+\begin_inset Formula $\sigma_{n}^{2}=n^{2}+c$
+\end_inset
+
+ for some 
+\begin_inset Formula $c\in\mathbb{R}$
 \end_inset
 
 .
@@ -1162,14 +1490,23 @@ name "lem:generalized shifted exponential"
 \end_layout
 
 \begin_layout Proof
-Using the well-known formula for the truncated normal, we find that
+Let 
+\begin_inset Formula $n^{2}>c$
+\end_inset
+
+, so that 
+\begin_inset Formula $\sigma_{n}^{2}>0$
+\end_inset
+
+.
+ Using the well-known formula for the truncated normal, we find that
 \end_layout
 
 \begin_layout Proof
 \begin_inset Formula 
 \begin{eqnarray*}
 f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\\
- & = & \frac{1}{\Phi[-(a+n)n^{-1/2}]-\Phi[-(b+n)n^{-1/2}]}\phi(x;-n,\sqrt{n})1[a,b](x).
+ & = & \frac{1}{\Phi[-(a+n)(n+c)^{-1/2}]-\Phi[-(b+n)(n+c)^{-1/2}]}\phi(x;-n,(n+c)^{1/2})1[a,b](x).
 \end{eqnarray*}
 
 \end_inset
@@ -1177,7 +1514,7 @@ f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\le
 The normal density part equals
 \begin_inset Formula 
 \[
-\phi(x;-n,\sqrt{n})=(2\pi)^{-1/2}n^{-1/2}\exp\left(-\frac{x^{2}+2nx+n^{2}}{2n}\right).
+\phi(x;-n,(n+c)^{1/2})=(2\pi)^{-1/2}(n+c)^{-1/2}\exp\left(-\frac{x^{2}+2nx+n^{2}}{2(n+c)}\right).
 \]
 
 \end_inset
@@ -1204,7 +1541,7 @@ When
 \noun off
 \color none
 
-\begin_inset Formula $x^{2}/2n$
+\begin_inset Formula $x^{2}/2(n+c)$
 \end_inset
 
 
@@ -1222,9 +1559,10 @@ When
 \color inherit
  is negligible, hence
 \begin_inset Formula 
-\[
-\phi(x;-n,\sqrt{n})\approx(2\pi)^{-1/2}n^{-1/2}\exp(-n/2)\exp(-x)=n^{-1/2}\phi(n^{1/2})\exp(-x).
-\]
+\begin{eqnarray*}
+\phi(x;-n,(n+c)^{1/2}) & \approx & (2\pi)^{-1/2}(n+c)^{-1/2}\exp(-n^{2}/2(n+c))\exp(-x),\\
+ & = & (n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x).
+\end{eqnarray*}
 
 \end_inset
 
@@ -1249,16 +1587,16 @@ literal "false"
 \end_inset
 
  grows.
- We get
+ The part involving the cumulative normal distributions become
 \begin_inset Formula 
 \begin{eqnarray*}
-\Phi[-(a+n)n^{-1/2}] & \approx & \frac{n^{1/2}}{a+n}\phi[-(a+n)n^{-1/2}],
+\Phi[-(a+n)(n+c)^{-1/2}] & \approx & \frac{(n+c)^{1/2}}{n+a}\phi[-(a+n)(n+c)^{-1/2}],
 \end{eqnarray*}
 
 \end_inset
 
 and using the same reasoning as above, we find that 
-\begin_inset Formula $\phi[-(a+n)/n^{1/2}]\approx\phi(n^{1/2})\exp(-a)$
+\begin_inset Formula $\phi[-(a+n)(n+c)^{-1/2}]\approx\phi((n+c)^{1/2})\exp(-a)$
 \end_inset
 
  as 
@@ -1269,7 +1607,7 @@ and using the same reasoning as above, we find that
  Therefore,
 \begin_inset Formula 
 \[
-\Phi[-(a+n)n^{-1/2}]\to\frac{n^{1/2}\phi(n^{1/2})}{a+n}\exp(-a).
+\Phi[-(a+n)(n+c)^{-1/2}]\to\frac{(n+c)^{1/2}\phi((n+c)^{1/2})\exp(-a)}{a+n}.
 \]
 
 \end_inset
@@ -1278,21 +1616,47 @@ Since this reasoning applies to
 \begin_inset Formula $b$
 \end_inset
 
- as well, we get 
+ as well, we get that 
+\begin_inset Formula $f$
+\end_inset
+
+ approaches, as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+,
 \begin_inset Formula 
 \begin{eqnarray*}
-\frac{\exp(-x)n^{-1/2}\phi(n^{1/2})}{\Phi[-(a+n)n^{-1/2}]-\Phi[-(b+n)n^{-1/2}]} & \approx & \frac{\exp(-x)n^{-1/2}\phi(n^{1/2})}{n^{1/2}\phi(n^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]},\\
- & = & \exp(-x)n^{-1}\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]^{-1},\\
- & \to & \exp(-x)\left[\exp(-a)-\exp(-b)\right]^{-1},
+ &  & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{\Phi[-(a+n)n^{-1/2}]-\Phi[-(b+n)n^{-1/2}]},\\
+ & \approx & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{(n+c)^{1/2}\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]},\\
+ & = & \frac{\phi(-n^{2}/2(n+c))\exp(-x)}{\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]}\\
+ & \approx & \exp(-x)n^{-1}\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]^{-1},\\
+ & \to & \exp(-x)\left[\exp(-a)-\exp(-b)\right]^{-1}.
 \end{eqnarray*}
 
 \end_inset
 
-which is the density of a truncated exponential.
- 
+Here the third line follows from 
+\begin_inset Formula $\phi(n/(n+c)^{1/2})/\phi((n+c)^{1/2})\to1$
+\end_inset
+
+.
 \end_layout
 
-\begin_deeper
+\begin_layout Standard
+We are noew ready to prove Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:simple publication bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Proof
 \begin_inset Argument 1
 status open
@@ -1320,19 +1684,112 @@ name "proof:simple publication bias"
 
 \end_inset
 
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
+Let 
+\begin_inset Formula $\Pi$
 \end_inset
 
+ be the partitioning of 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
 
+ where 
+\begin_inset Formula $p,q\in\pi$
+\end_inset
+
+ if and only if they share the same 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+, and let 
+\begin_inset Formula $||[p]||=|\theta_{0}|$
+\end_inset
+
+.
+ We are dealing with products of densities of the form 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:selection for significance model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, that is,
+\begin_inset Formula 
+\[
+p(x)=\prod_{i=1}^{N}\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}+\tau}}\right)^{-1}\phi(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+ are known parameters.
+ From Lemma 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "lem:generalized shifted exponential"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ converges to a product of truncated exponentials when 
+\begin_inset Formula $\theta_{n}=-n$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau_{n}^{2}=n$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $||[p_{n}]||=n$
+\end_inset
+
+, the three conditions of Theorem 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "thm:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ are satisfied.
+ The proofs for 
+\begin_inset Formula $||[p]||=\tau$
+\end_inset
+
+ and 
+\begin_inset Formula $||[p]||=\sqrt{\tau^{2}+\theta_{0}^{2}}$
+\end_inset
+
+ are similar and omitted.
 \end_layout
 
 \begin_layout Standard
-Let 
+The proof of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:general publication bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ is slightly more involved, as we will have to handle mixture.
+ Let 
 \begin_inset Formula $f^{1},f^{2},\ldots,f^{K}$
 \end_inset
 
@@ -1933,180 +2390,6 @@ noprefix "false"
 \end_inset
 
  and do the same reasoning as in the first part of this proof.
-\end_layout
-
-\begin_layout Part*
-Work
-\end_layout
-
-\begin_layout Proof
-Using the well-known formula for the truncated normal, we find that
-\end_layout
-
-\begin_layout Proof
-\begin_inset Formula 
-\begin{eqnarray*}
-f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\\
- & = & \frac{1}{\Phi[-(a+n)(n+c)^{-1/2}]-\Phi[-(b+n)(n+c)^{-1/2}]}\phi(x;-n,(n+c)^{1/2})1[a,b](x).
-\end{eqnarray*}
-
-\end_inset
-
-The normal density part equals
-\begin_inset Formula 
-\[
-\phi(x;-n,(n+c)^{1/2})=(2\pi)^{-1/2}(n+c)^{-1/2}\exp\left(-\frac{x^{2}+2nx+n^{2}}{2(n+c)}\right).
-\]
-
-\end_inset
-
-When 
-\begin_inset Formula $n$
-\end_inset
-
- is large compared to 
-\begin_inset Formula $x$
-\end_inset
-
-, the term 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $x^{2}/2(n+c)$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- is negligible, hence
-\begin_inset Formula 
-\[
-\phi(x;-n,\sqrt{n})\approx(2\pi)^{-1/2}(n+c)^{-1/2}\exp(-n^{2}/2(n+c))\exp(-x)
-\]
-
-\end_inset
-
-which equals
-\end_layout
-
-\begin_layout Proof
-\begin_inset Formula 
-\[
-(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)
-\]
-
-\end_inset
-
-As 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-, 
-\begin_inset Formula $\exp(-n^{2}/2(n+c))\approx\exp(-n^{2}/2),$
-\end_inset
-
- and
-\begin_inset Formula 
-\[
-\phi(x;-n,\sqrt{n})\approx\exp(-n^{2}/2(n+c))
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-From Equation 5 of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "borjesson1979simple"
-literal "false"
-
-\end_inset
-
-, we know that 
-\begin_inset Formula $\Phi(-x)\approx\phi(x)/x$
-\end_inset
-
- as 
-\begin_inset Formula $x$
-\end_inset
-
- grows.
- We get
-\begin_inset Formula 
-\begin{eqnarray*}
-\Phi[-(a+n)(n+c)^{-1/2}] & \approx & \frac{(n+c)^{1/2}}{n+a}\phi[-(a+n)(n+c)^{-1/2}],
-\end{eqnarray*}
-
-\end_inset
-
-and using the same reasoning as above, we find that 
-\begin_inset Formula $\phi[-(a+n)(n+c)^{-1/2}]\approx\phi((n+c)^{1/2})\exp(-a)$
-\end_inset
-
- as 
-\begin_inset Formula $n$
-\end_inset
-
- increase.
- Therefore,
-\begin_inset Formula 
-\[
-\Phi[-(a+n)(n+c)^{-1/2}]\to\frac{(n+c)^{1/2}\phi((n+c)^{1/2})\exp(-a)}{a+n}.
-\]
-
-\end_inset
-
-Since this reasoning applies to 
-\begin_inset Formula $b$
-\end_inset
-
- as well, we get that 
-\begin_inset Formula $f$
-\end_inset
-
- approaches, as 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-,
-\begin_inset Formula 
-\begin{eqnarray*}
-\frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{\Phi[-(a+n)n^{-1/2}]-\Phi[-(b+n)n^{-1/2}]} & \approx & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{(n+c)^{1/2}\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]},\\
- & = & \frac{\phi(-n^{2}/2(n+c))\exp(-x)}{\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]}\\
- & = & \exp(-x)n^{-1}\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]^{-1},\\
- & \to & \exp(-x)\left[\exp(-a)-\exp(-b)\right]^{-1}.
-\end{eqnarray*}
-
-\end_inset
-
-Here the third line follows from 
-\begin_inset Formula $\phi(n/(n+c)^{1/2})/\phi((n+c)^{1/2})\to1$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
