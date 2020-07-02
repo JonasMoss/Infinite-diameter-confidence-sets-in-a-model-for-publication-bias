@@ -208,9 +208,6 @@ th study.
 \begin_layout Standard
 In the simplest of these models, only significant results are observed.
  In this case,
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 f(x;\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}+\tau}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}),\label{eq:selection for significance model}
@@ -248,9 +245,6 @@ literal "false"
 p
 \emph default
 -curve, popular in psychology.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})\propto\phi(x_{i};\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})w(u)\label{eq:hedges model}
@@ -283,9 +277,6 @@ To model this, let
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho_{k}1_{(\alpha_{j-1},\alpha_{j}]}(u)\label{eq:step function}
@@ -311,9 +302,6 @@ p
 \emph default
 -values.
  This assumption allows us to write Hedges' model as a mixture model.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})=\sum_{k=1}^{K}\pi^{k}f^{k}(x_{i};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2}),\label{eq:mixture model formulation}
@@ -447,9 +435,6 @@ confidence set
 \end_inset
 
  such that
-\end_layout
-
-\begin_layout Definition
 \begin_inset Formula 
 \begin{equation}
 \sup_{\pi\in\Pi}\sup_{P\in\pi}P(R(\pi))\leq\alpha.\label{eq:confidence set}
@@ -477,7 +462,7 @@ This definition of confidence sets might look slightly unfamiliar, but it
 \begin_inset Formula $C$
 \end_inset
 
- is defined by 
+ is defined by
 \begin_inset Formula 
 \begin{equation}
 \pi_{0}\in C\iff\omega\notin R(\pi_{0}),\label{eq:c-confidence set}

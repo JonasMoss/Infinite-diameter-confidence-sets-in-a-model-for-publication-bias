@@ -197,28 +197,5 @@ Here
  
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula 
-\begin{eqnarray*}
-\sum_{k=1}^{K}\rho_{k}\phi(x;\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})1_{(\alpha_{k-1},\alpha_{k}]}(u) & =\\
-\min(\rho_{k})\phi(x;\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})+\sum_{k\neq}^{K}\phi(x;\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})1_{(\alpha_{k-1},\alpha_{k}]}(u)
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\rho_{1}\phi(x;\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})+\sum_{k=2}^{K}(\rho_{k}-\rho_{1})\phi(x;\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})1_{(\alpha_{k-1},\alpha_{k}]}(u)
-\]
-
-\end_inset
-
-
-\end_layout
-
 \end_body
 \end_document

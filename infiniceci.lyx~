@@ -208,9 +208,6 @@ th study.
 \begin_layout Standard
 In the simplest of these models, only significant results are observed.
  In this case,
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 f(x;\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}+\tau}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}),\label{eq:selection for significance model}
@@ -887,8 +884,6 @@ The three partitions
 
 \begin_layout Plain Layout
 
-\size small
-Name
 \end_layout
 
 \end_inset
@@ -1048,7 +1043,7 @@ Confidence set for
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Both parameters
 \end_layout
 
 \end_inset
