@@ -3,7 +3,7 @@
 ### ============================================================================
 
 set.seed(313)
-n = 300
+n = 40
 theta0 = 0
 tau = 0.1
 sigma = 1/sqrt(runif(n, 10, 80))
@@ -65,15 +65,16 @@ nlm(objective, p = c(1, 1))
 ### Contour plot
 ### ============================================================================
 
-X = seq(-60, 2, by = 1)
-Y = seq(0.01, 10, by = 1)
+X = seq(-50, 0, by = 0.1)
+Y = seq(0.01, 10, by = 0.1)
 FUN = Vectorize(function(theta0, tau) objective(c(theta0, tau)))
 Z = outer(X = X, Y = Y, FUN = FUN)
 
 
-contour(X, Y, Z)
-x = seq(from = -50, to = 0, by = 0.1)
-lines(x, sqrt(abs(x)), lty = 2, lwd = 2)
+filled.contour(X, Y, -Z, xlab = expression(theta[0]), ylab = expression(tau),
+               cex.lab = sqrt(2), main = "Likelihood of publication bias model")
+#x = seq(from = -50, to = 0, by = 0.1)
+#lines(x, sqrt(abs(x)), lty = 2, lwd = 2)
 
 library("rgl")
 plot3d(X, Y, Z)

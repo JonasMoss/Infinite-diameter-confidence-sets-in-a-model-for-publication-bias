@@ -359,6 +359,158 @@ noprefix "false"
  for their formula.
 \end_layout
 
+\begin_layout Standard
+Hedge's publication bias models 
+\emph on
+p
+\emph default
+-value based publication bias directly, there is no approximation involved.
+ If you believe in the random effects meta-analysis model and the 
+\emph on
+p
+\emph default
+-value based publication bias scenario described above, Hedge's publication
+ bias model is simply the correct model.
+ 
+\end_layout
+
+\begin_layout Standard
+This can not be said for the other statistical methods correcting for publicatio
+n bias in the literature.
+\end_layout
+
+\begin_layout Standard
+PET-PEESE
+\end_layout
+
+\begin_layout Standard
+Estimating 
+\emph on
+p
+\emph default
+-curve and 
+\emph on
+p
+\emph default
+-uniform
+\end_layout
+
+\begin_layout Standard
+Trim-and-fill
+\end_layout
+
+\begin_layout Standard
+Hedge's model has three downsides.
+ First, it doesn't model all sources of publication bias, for instance,
+ publication bias due to language (Egger) and seniority of the authors ??.
+ Second, it may not be the correct model for 
+\emph on
+p
+\emph default
+-hacking (explaing 
+\emph on
+p
+\emph default
+-hacking).
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "moss2019modelling"
+literal "false"
+
+\end_inset
+
+ propose a model that may be more successful at correcting for 
+\emph on
+p
+\emph default
+-hacking.
+ Third, estimation of the model is difficult.
+ 
+\end_layout
+
+\begin_layout Standard
+Estimation of the maximum likelihood using the 
+\begin_inset Formula $\texttt{nlm}$
+\end_inset
+
+ function in 
+\begin_inset Formula $\mathtt{R}$
+\end_inset
+
+ yielded the estimates 
+\begin_inset Formula $(\hat{\theta},\hat{\tau}).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The log-likelihood function has curves of constant likelihood as 
+\begin_inset Formula $|\theta|\to\infty$
+\end_inset
+
+, as can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:contour lines"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows what they look like.
+ In the terminology of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "berger1999integrated"
+literal "false"
+
+\end_inset
+
+, the problem is that the simple publication model is a member of the Gleser–Hwa
+ng class, which we will define in the next section.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:contour lines"
+
+\end_inset
+
+Counter lines for the log-likelihood for the simple publication model, 
+\begin_inset Formula $n=30$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Confidence sets of infinite diameter
 \end_layout
@@ -754,6 +906,301 @@ noprefix "false"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Following the terminology of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "berger1999integrated"
+literal "false"
+
+\end_inset
+
+, we will say that families 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ of probabilities satisfying the conclusion of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for some suitable partion 
+\begin_inset Formula $\Pi$
+\end_inset
+
+ belong to the Gleser–Hwang class.
+\end_layout
+
+\begin_layout Standard
+To make the Gleser–Hwang class more familiar, we will present two examples.
+\end_layout
+
+\begin_layout Standard
+Fieller's ratio of means problem is about confidence intervals for 
+\begin_inset Formula $\mu_{1}/\mu_{2}$
+\end_inset
+
+ when the data is observed from a bivariate normal with mean 
+\begin_inset Formula $(\mu_{1},\mu_{2})$
+\end_inset
+
+.
+ Fieller's proposed confidence interval is infamous for being wide, often
+ going off to either 
+\begin_inset Formula $\infty$
+\end_inset
+
+ or 
+\begin_inset Formula $+\infty$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Fieller's problem
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:Fieller's problem"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ be a family of bivariate distributions over 
+\begin_inset Formula $(X,Y)$
+\end_inset
+
+, all with the same support, and all with finite means 
+\begin_inset Formula $E(X)$
+\end_inset
+
+ and 
+\begin_inset Formula $E(Y)$
+\end_inset
+
+.
+ Moreover, assume 
+\begin_inset Formula $E(Y)=0$
+\end_inset
+
+ is attainable for some 
+\begin_inset Formula $p\in\mathcal{P}$
+\end_inset
+
+.
+ Define the partition 
+\begin_inset Formula $\Pi$
+\end_inset
+
+ by 
+\begin_inset Formula $p,q\in\Pi$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $E_{p}(X)/E_{p}(Y)=E_{q}(X)/E_{q}(Y)$
+\end_inset
+
+, and let 
+\begin_inset Formula $\left\Vert [p]\right\Vert =|E_{q}(X)/E_{q}(Y)|$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $p_{n}(x,y)=p(x,y)$
+\end_inset
+
+ have means 
+\begin_inset Formula $EX>0$
+\end_inset
+
+ and 
+\begin_inset Formula $EY=0$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\left\Vert [p]\right\Vert =\infty$
+\end_inset
+
+, the conditions of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ are satisfied, and every confidence set with level 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ has infinite diameter with positive probability.
+\end_layout
+
+\begin_layout Standard
+Let us consider a purely non-parametric problem too.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "bahadur1956nonexistence"
+literal "false"
+
+\end_inset
+
+; similar problems were considered by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "romano2004non"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Donoho1988-hg"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Bahadur–Savage
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:Bahadur--Savage"
+
+\end_inset
+
+Let 
+\begin_inset Formula $\mathcal{P}$
+\end_inset
+
+ be a family of densities over 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ that covers all finite means, has finite variances, and is closed under
+ compositions.
+ Define the partition 
+\begin_inset Formula $\Pi$
+\end_inset
+
+ by 
+\begin_inset Formula $p,q\in\Pi$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $E_{p}(X)=E_{q}(X)$
+\end_inset
+
+, and let 
+\begin_inset Formula $\left\Vert [p]\right\Vert =|E_{p}(X)|$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+p_{n}(x)=\left(1-\frac{1}{n}\right)q_{0}(x)+\frac{1}{n}q_{n^{2}}(x),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $p_{0}$
+\end_inset
+
+ has mean 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{n^{2}}$
+\end_inset
+
+ has mean 
+\begin_inset Formula $n^{2}$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\left\Vert [p_{n}]\right\Vert =n$
+\end_inset
+
+, the conditions of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ are satisfied, and every confidence set with level 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ has infinite diameter with positive probability.
+\end_layout
+
+\begin_layout Remark
+The result in Example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "exa:Bahadur--Savage"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be strengthened, as any confidence set for the mean with such a family
+ of distributions equals 
+\begin_inset Formula $(-\infty,\infty)$
+\end_inset
+
+ with probability 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ See page ?? of the appendix for details.
+ 
 \end_layout
 
 \begin_layout Standard
