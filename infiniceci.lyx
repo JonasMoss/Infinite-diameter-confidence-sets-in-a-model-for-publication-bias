@@ -97,66 +97,33 @@ figs-within-sections
 Infinite diameter confidence sets in Hedges’ publication bias model
 \end_layout
 
-\begin_layout Standard
-
-\series bold
-Introduction.
-
-\series default
- Talk about publication bias and why it is important.
- Add one paragraph about impossibility theorems in frequentist statistics.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Hedges' publication bias model.
-
-\series default
- Talk about this model specifically.
- Explain why it is exactly what we want.
- Name some applications.
- Make a plot showing how it can go bad.
- Show how this can affect estimates and confidence sets.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Confidence sets of infinite diameter.
- 
-\series default
-A technical section introducing the concepts.
- Connec the partitions to Hedges' model, and state the modified Gleser–Hwang
- theorem; include an example from Gleser–Hwang and from the Berger paper.
- 
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Infinite diameter in Hedges' model.
- 
-\series default
-Start with infinite diameters in the full selection for significance model.
- 
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Appendix.
- 
-\series default
-Proofs and so on.
+\begin_layout Section
+Introduction
 \end_layout
 
 \begin_layout Itemize
-Talk about one-sided selection and why (two sentences?)
+What is meta-analysis?
 \end_layout
 
-\begin_layout Section
-Introduction
+\begin_layout Itemize
+What is publication bias?
+\end_layout
+
+\begin_layout Itemize
+Why do we need to model it?
+\end_layout
+
+\begin_layout Itemize
+(Can maybe copy from another paper, e.g.
+ 
+\emph on
+p
+\emph default
+-hacking paper.)
+\end_layout
+
+\begin_layout Itemize
+Problems with frequentist estimation.
 \end_layout
 
 \begin_layout Section
@@ -165,13 +132,21 @@ Hedges' publication bias model
 
 \begin_layout Standard
 The most popular and well-known meta-analysis method is the random effects
- model with normal likelihoods (Borenstein).
+ model with normal likelihoods 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hedges1998fixed"
+literal "false"
+
+\end_inset
+
+.
  Written in hierarchical notation, it equals
 \begin_inset Formula 
-\begin{eqnarray*}
-\theta & \sim & N(\theta_{0},\tau),\\
-x_{i}\mid\theta,\sigma & \sim & N(\theta,\sqrt{\tau^{2}+\sigma_{i}^{2}}).
-\end{eqnarray*}
+\begin{eqnarray}
+\theta_{i} & \sim & N(\theta_{0},\tau),\nonumber \\
+x_{i}\mid\theta_{i},\sigma & \sim & N(\theta_{i},\sigma_{i}).\label{eq:conditional random effects density}
+\end{eqnarray}
 
 \end_inset
 
@@ -184,8 +159,11 @@ Here
 \end_inset
 
 th study.
- Following the convention in meta-analysis, we assume these parameters to
- be known.
+ Following the convention in meta-analysis, we assume all 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+s to be known.
  The mean parameter 
 \begin_inset Formula $\theta$
 \end_inset
@@ -203,31 +181,105 @@ th study.
  The purpose of the effect size distribution is to model the fact that most
  effect size estimates plugged into a meta-analysis do not appear to come
  from exactly the same phenomenon.
+ By integrating out 
+\begin_inset Formula $\theta_{i}$
+\end_inset
+
+, we find that the density of 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is
 \end_layout
 
 \begin_layout Standard
-In the simplest of these models, only significant results are observed.
- In this case,
 \begin_inset Formula 
 \begin{equation}
-f(x;\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}+\tau}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}),\label{eq:selection for significance model}
+f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}),\label{eq:random effects meta-analysis model}
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $c_{\alpha}=\Phi^{-1}(1-\alpha)$
+\begin_inset Formula $\phi$
 \end_inset
 
- for some significance level 
-\begin_inset Formula $\alpha\in(0,1)$
-\end_inset
-
-.
+ is the density of a normal random variable.
 \end_layout
 
 \begin_layout Standard
-This model was introduced by 
+We will assume that the random effects meta-analysis model is true in the
+ absence of publication bias, and that publication bias modifies the density
+ in a suitable way.
+ First we consider the case when only significant studies at som specified
+ level 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ are published.
+ Since 
+\begin_inset Formula $x_{i}/\sigma_{i}\mid\theta_{i}\sim N(\theta_{i},1)$
+\end_inset
+
+ by equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:conditional random effects density"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the one-sided 
+\emph on
+p
+\emph default
+-value is 
+\begin_inset Formula $u_{i}=1-\Phi(-x_{i}/\sigma_{i})$
+\end_inset
+
+.
+ We will only deal with with one-sided 
+\emph on
+p
+\emph default
+-values in this paper, ((find ref; maybe simonsohn?).
+ ((expand; remind the reader that 
+\begin_inset Formula $\alpha=0.025$
+\end_inset
+
+ is 
+\begin_inset Formula $1.96$
+\end_inset
+
+) 
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula $c_{\alpha}=\Phi^{-1}(1-\alpha)$
+\end_inset
+
+, the cut-off for significance at level 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ The 
+\emph on
+basic publication bias model
+\emph default
+ has density
+\begin_inset Formula 
+\begin{equation}
+f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}^{2}+\tau^{2}}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})1[x_{i}/\sigma_{i}>c_{\alpha}],\label{eq:selection for significance model}
+\end{equation}
+
+\end_inset
+
+which is a truncated normal.
+ This model for publication bias was introduced by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "hedges1984estimation"
@@ -244,23 +296,176 @@ literal "false"
 \emph on
 p
 \emph default
--curve, popular in psychology.
+-curve method of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Simonsohn2014-cn"
+literal "false"
+
+\end_inset
+
+ and 
+\emph on
+p
+\emph default
+-uniform of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Van_Aert2016-cu"
+literal "false"
+
+\end_inset
+
+, both popular in psychology.
+\end_layout
+
+\begin_layout Standard
+The basic publication bias model is unrealistic.
+ Most importantly, it requires that no non-significant studies are published.
+ But even in the fields most severely affected by publication bias, non-signific
+ant studies are published.
+ Moreover, it does not allow for different cut-offs for significance.
+ It appears likely that some editors will accept studies reaching a significance
+ at 
+\begin_inset Formula $\alpha=0.025$
+\end_inset
+
+, corresponding to 
+\begin_inset Formula $x_{i}/\sigma_{i}>1.64$
+\end_inset
+
+ but not at 
+\begin_inset Formula $\alpha=0.05$
+\end_inset
+
+, corresponding to 
+\begin_inset Formula $x_{i}/\sigma_{i}>1.96$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+These problems can are rectified by adopting the selection model for publication
+ bias of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "iyengar1988selection"
+literal "false"
+
+\end_inset
+
+, which models the following scenario.
+\end_layout
+
+\begin_layout Quote
+
+\series bold
+Publication bias scenario.
+
+\series default
+ Alice the editor receives a study with the 
+\emph on
+p
+\emph default
+-value 
+\begin_inset Formula $u$
+\end_inset
+
+.
+ Her publication decision is a random function of this 
+\emph on
+p
+\emph default
+-value.
+ That is, she will publish the study with some probability 
+\begin_inset Formula $w(u)$
+\end_inset
+
+ and reject it with probability 
+\begin_inset Formula $1-w(u)$
+\end_inset
+
+.
+ Every study you will ever read in Alice's journal has survived this selection
+ mechanism, the rest are lost forever.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $w(u_{i})$
+\end_inset
+
+ be a function of the 
+\emph on
+p
+\emph default
+-value 
+\begin_inset Formula $u_{i}=1-\Phi(-x_{i}/\sigma_{i})$
+\end_inset
+
+ taking values in 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $w(u_{i})$
+\end_inset
+
+ is a probability for every 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+, and the selection model
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})\propto\phi(x_{i};\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})w(u)\label{eq:hedges model}
+f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})\propto\phi(x_{i};\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})w(u)\label{eq:iyengar-greenhouse model}
 \end{equation}
 
 \end_inset
 
+models the publication bias scenario exactly.
+ This model can also be viewed as a rejection sampling procedure 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "flury1990acceptance,von1951various"
+literal "false"
 
+\end_inset
+
+, where 
+\begin_inset Formula $\phi$
+\end_inset
+
+ serves as proposal distribution for 
+\begin_inset Formula $f$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-To model this, let 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hedges1992modeling"
+literal "false"
+
+\end_inset
+
+ proposed to let 
+\begin_inset Formula $w$
+\end_inset
+
+ be a step function.
+ Let 
 \begin_inset Formula $\alpha$
 \end_inset
 
- be a vector with 
+ be a vector with elements 
 \begin_inset Formula $0=\alpha_{0}<\alpha_{1}<\ldots<\alpha_{K}=1$
 \end_inset
 
@@ -273,22 +478,78 @@ To model this, let
 \end_inset
 
 -ary non-negative, non-increasing vector satisfying 
-\begin_inset Formula $\rho_{K}=1$
+\begin_inset Formula $\rho_{1}=1$
 \end_inset
 
+.
+ Define the step function 
+\begin_inset Formula $w$
+\end_inset
 
+ based on 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho$
+\end_inset
+
+ as
 \begin_inset Formula 
 \begin{equation}
-w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho_{k}1_{(\alpha_{j-1},\alpha_{j}]}(u)\label{eq:step function}
+w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho_{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{eq:step function}
 \end{equation}
 
 \end_inset
 
-
+We will call the selection model with a step function 
+\emph on
+Hedges' publication bias model.
+ 
+\emph default
+Its density is
 \end_layout
 
 \begin_layout Standard
-The vector 
+\begin_inset Formula 
+\begin{equation}
+f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})\propto\sum_{k=1}^{K}\rho_{k}\phi(x_{i};\theta_{0},(\sigma_{i}^{2}+\tau^{2})^{1/2})1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
+\end{equation}
+
+\end_inset
+
+The interpretation of Hedges' publication bias model is simple.
+ When the editor receives a study with 
+\emph on
+p
+\emph default
+-value 
+\begin_inset Formula $u$
+\end_inset
+
+, she finds the 
+\begin_inset Formula $j$
+\end_inset
+
+ such that 
+\begin_inset Formula $u\in(\alpha_{j-1},\alpha_{j}]$
+\end_inset
+
+ and accepts with probability 
+\begin_inset Formula $\rho_{k}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\rho_{1}=1$
+\end_inset
+
+, she always accepts when 
+\begin_inset Formula $u\in[0,\alpha_{1}]$
+\end_inset
+
+.
+ The vector 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -301,7 +562,49 @@ p
 p
 \emph default
 -values.
- This assumption allows us to write Hedges' model as a mixture model.
+ The parameters 
+\begin_inset Formula $(\theta_{0},\tau,\rho)$
+\end_inset
+
+ of the model are identified when 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is fixed 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "moss2019modelling"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Hedges' publication bias models allows both for non-significant studies
+ to be published and allows the editor to act differently towards 
+\begin_inset Formula $\alpha=0.025$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha=0.05$
+\end_inset
+
+.
+ In addition, the model can approximate any selection function 
+\begin_inset Formula $w$
+\end_inset
+
+ by increasing the number of steps.
+\end_layout
+
+\begin_layout Standard
+That 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is non-increasing allows us to write Hedges' model as a mixture model.
 \begin_inset Formula 
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})=\sum_{k=1}^{K}\pi^{k}f^{k}(x_{i};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2}),\label{eq:mixture model formulation}
@@ -357,10 +660,11 @@ noprefix "false"
 \end_inset
 
  for their formula.
+ This representation will come in handy later on.
 \end_layout
 
 \begin_layout Standard
-Hedge's publication bias models 
+Hedges' publication bias model models 
 \emph on
 p
 \emph default
@@ -369,21 +673,17 @@ p
 \emph on
 p
 \emph default
--value based publication bias scenario described above, Hedge's publication
- bias model is simply the correct model.
- 
+-value based publication bias scenario, Hedge's publication bias model is
+ simply the correct model.
+ This can not be said for the other statistical methods correcting for publicati
+on bias in the literature.
 \end_layout
 
-\begin_layout Standard
-This can not be said for the other statistical methods correcting for publicatio
-n bias in the literature.
-\end_layout
-
-\begin_layout Standard
+\begin_layout Enumerate
 PET-PEESE
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 Estimating 
 \emph on
 p
@@ -395,14 +695,15 @@ p
 -uniform
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 Trim-and-fill
 \end_layout
 
 \begin_layout Standard
 Hedge's model has three downsides.
- First, it doesn't model all sources of publication bias, for instance,
- publication bias due to language (Egger) and seniority of the authors ??.
+ First, it doesn't model all sources of publication bias.
+ For instance, publication bias due to language (Egger) and seniority of
+ the authors ??.
  Second, it may not be the correct model for 
 \emph on
 p
@@ -425,7 +726,7 @@ literal "false"
 p
 \emph default
 -hacking.
- Third, estimation of the model is difficult.
+ But most importantly, estimation of the model is difficult.
  
 \end_layout
 
@@ -469,8 +770,8 @@ literal "false"
 
 \end_inset
 
-, the problem is that the simple publication model is a member of the Gleser–Hwa
-ng class, which we will define in the next section.
+, the simple publication model is a member of the Gleser–Hwang class, which
+ we will define in the next section.
 \end_layout
 
 \begin_layout Standard
@@ -608,21 +909,38 @@ size
 
 \begin_layout Standard
 This definition of confidence sets might look slightly unfamiliar, but it
- is a straight-forward generalization of the definitions in e.g.
- Lehmann and Romano.
- Often, a confidence set 
+ is a straight-forward generalization of the definitions in 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Definition 9.1.5"
+key "Casella2002-lg"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Section 3.5"
+key "lehmann2006testing"
+literal "false"
+
+\end_inset
+
+.
+ Usually, a confidence is defined as a set 
 \begin_inset Formula $C$
 \end_inset
 
- is defined by
+ adhering to the relation
 \begin_inset Formula 
 \begin{equation}
-\pi_{0}\in C\iff\omega\notin R(\pi_{0}),\label{eq:c-confidence set}
+\pi_{0}\in C\iff\omega\notin R(\pi_{0}).\label{eq:c-confidence set}
 \end{equation}
 
 \end_inset
 
-that is, 
+That is, 
 \begin_inset Formula $\pi_{0}\in C$
 \end_inset
 
@@ -659,8 +977,7 @@ noprefix "false"
 
 \end_inset
 
- is an interval.
- 
+ is an interval, which we will not require here.
 \end_layout
 
 \begin_layout Standard
@@ -727,7 +1044,7 @@ t
 \begin_inset Formula $\pi(\mu),\mu\in\mathbb{R}$
 \end_inset
 
- defined a partition of 
+ defines a partition of 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
@@ -768,7 +1085,11 @@ t
 \begin_inset Formula $\left\Vert \cdot\right\Vert $
 \end_inset
 
- can be taken to be the absolute value of the unique 
+ can be taken to be 
+\begin_inset Formula $\left\Vert \pi\right\Vert =|\mu|$
+\end_inset
+
+ for the unique 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -784,7 +1105,7 @@ t
 The diameter of a confidence set is the random variable
 \begin_inset Formula 
 \begin{equation}
-D(\omega)=\sup_{\pi\in\Pi}\{\left\Vert \pi\right\Vert \mid\omega\notin R(\pi)\}\label{eq:diameter}
+D(\omega)=\sup_{\pi\in\Pi}\{\left\Vert \pi\right\Vert \mid\omega\notin R(\pi)\}.\label{eq:diameter}
 \end{equation}
 
 \end_inset
@@ -801,13 +1122,19 @@ That is, the diameter tells you the size of the largest accepted
  is Borel measurable.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Definition
+\begin_inset CommandInset label
+LatexCommand label
+name "def:infinite diameter"
+
+\end_inset
+
 A confidence set has infinite diameter with 
 \begin_inset Formula $P$
 \end_inset
 
 -positive probability if 
-\begin_inset Formula $P(D=\infty)$
+\begin_inset Formula $P(D=\infty)>0$
 \end_inset
 
 .
@@ -823,11 +1150,21 @@ A confidence set has infinite diameter with
 \end_layout
 
 \begin_layout Standard
-This theorem is a slight generalization of the Gleser–Hwang theorem.
+This theorem is a slightly modified Gleser–Hwang theorem.
  
 \end_layout
 
 \begin_layout Theorem
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Modified Gleser–Hwang theorem
+\end_layout
+
+\end_inset
+
+
 \begin_inset CommandInset label
 LatexCommand label
 name "thm:Gleser--Hwang"
@@ -936,33 +1273,7 @@ noprefix "false"
 \end_inset
 
  belong to the Gleser–Hwang class.
-\end_layout
-
-\begin_layout Standard
-To make the Gleser–Hwang class more familiar, we will present two examples.
-\end_layout
-
-\begin_layout Standard
-Fieller's ratio of means problem is about confidence intervals for 
-\begin_inset Formula $\mu_{1}/\mu_{2}$
-\end_inset
-
- when the data is observed from a bivariate normal with mean 
-\begin_inset Formula $(\mu_{1},\mu_{2})$
-\end_inset
-
-.
- Fieller's proposed confidence interval is infamous for being wide, often
- going off to either 
-\begin_inset Formula $\infty$
-\end_inset
-
- or 
-\begin_inset Formula $+\infty$
-\end_inset
-
-.
- 
+ To make the Gleser–Hwang class more familiar, we will present two examples.
 \end_layout
 
 \begin_layout Example
@@ -982,7 +1293,26 @@ name "exa:Fieller's problem"
 
 \end_inset
 
-Let 
+ Fieller's ratio of means problem is about confidence intervals for 
+\begin_inset Formula $\mu_{1}/\mu_{2}$
+\end_inset
+
+ when the data is observed from a bivariate normal with mean 
+\begin_inset Formula $(\mu_{1},\mu_{2})$
+\end_inset
+
+.
+ Fieller's proposed confidence interval is infamous for being wide, often
+ going off to either 
+\begin_inset Formula $\infty$
+\end_inset
+
+ or 
+\begin_inset Formula $+\infty$
+\end_inset
+
+.
+ Let 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
@@ -1059,35 +1389,7 @@ noprefix "false"
  has infinite diameter with positive probability.
 \end_layout
 
-\begin_layout Standard
-Let us consider a purely non-parametric problem too.
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "bahadur1956nonexistence"
-literal "false"
-
-\end_inset
-
-; similar problems were considered by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "romano2004non"
-literal "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Donoho1988-hg"
-literal "false"
-
-\end_inset
-
-
-\end_layout
-
+\begin_deeper
 \begin_layout Example
 \begin_inset Argument 1
 status open
@@ -1105,7 +1407,15 @@ name "exa:Bahadur--Savage"
 
 \end_inset
 
-Let 
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "bahadur1956nonexistence"
+literal "false"
+
+\end_inset
+
+; Let 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
@@ -1178,6 +1488,7 @@ noprefix "false"
  has infinite diameter with positive probability.
 \end_layout
 
+\end_deeper
 \begin_layout Remark
 The result in Example 
 \begin_inset CommandInset ref
@@ -1203,12 +1514,73 @@ noprefix "false"
  
 \end_layout
 
+\begin_deeper
+\begin_layout Remark
+Let us consider a purely non-parametric problem too.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "bahadur1956nonexistence"
+literal "false"
+
+\end_inset
+
+; similar problems were considered by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "romano2004non"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Donoho1988-hg"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Consult 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gleser1987nonexistence"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "berger1999integrated"
+literal "false"
+
+\end_inset
+
+ for more examples of Gleser–Hwang classes.
+\end_layout
+
 \begin_layout Standard
 There are some possible candidates for 
 \begin_inset Formula $\Pi$
 \end_inset
 
- in the publication bias model.
+ in the selection function model 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:iyengar-greenhouse model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  We will consider three of them.
  First, the partitioning where 
 \begin_inset Formula $p,q\in\pi$
@@ -1298,7 +1670,7 @@ The three partitions
 \begin_inset Formula $\Pi$
 \end_inset
 
- for the publication bias model
+ for the selection function model
 \end_layout
 
 \end_inset
@@ -1539,10 +1911,6 @@ Joint confidence set for
 
 \end_layout
 
-\begin_layout Section
-Infinite diameters and Hedges' model
-\end_layout
-
 \begin_layout Standard
 Recall the simple publication bias model 
 \begin_inset CommandInset ref
@@ -1632,7 +2000,11 @@ noprefix "false"
 \begin_inset Formula $\rho$
 \end_inset
 
- is unknown.
+ is unknown and 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is known.
  Then any confidence set for 
 \begin_inset Formula $\theta_{0},\tau$
 \end_inset
@@ -1642,6 +2014,81 @@ noprefix "false"
 \end_inset
 
  will have infinite diameter with positive probability.
+\end_layout
+
+\begin_layout Proof
+See the appendix, page 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "proof:general publication bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Concluding remarks
+\end_layout
+
+\begin_layout Standard
+((Check out Berger again; maybe use a quote.))
+\end_layout
+
+\begin_layout Standard
+((Argue in favour of Bayesian estimation))
+\end_layout
+
+\begin_layout Standard
+It is easy to find uncontroverisal priors for 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+.
+ In almost any practical meta-analysis we know that 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+ cannot be very large, is likely to be quite close to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Since many effects can be understood as the aggregation of many small effects,
+ the central limit theorem justified using a normal prior.
+ As we want to remove prior mass from negative 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+s of large magnitude, 
+\begin_inset Formula $N(0,1)$
+\end_inset
+
+ is a decent standard prior.
+ Similarily, a half-normal is a reasonable prior for the heterogeneity parameter
+ 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "moss2019modelling"
+literal "false"
+
+\end_inset
+
+ employed these priors on several examples.
+ 
+\end_layout
+
+\begin_layout Standard
+Bayesian estimation would not help in the Bahadur–Savage example, as it
+ has no likelihood.
 \end_layout
 
 \begin_layout Section
