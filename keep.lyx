@@ -1,0 +1,291 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:mixture model representation"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+The density of an observation from the publication bias model with parameter
+ vector $(
+\backslash
+theta_{0},
+\backslash
+tau,
+\backslash
+sigma_{i},
+\backslash
+rho)$ can be written in a mixture form as 
+\backslash
+begin{equation} f(x;
+\backslash
+theta_{0},
+\backslash
+tau,
+\backslash
+sigma_{i})=
+\backslash
+sum_{j=1}^{N}
+\backslash
+pi_{j}f_j(x;
+\backslash
+theta_{0},(
+\backslash
+tau^{2}+
+\backslash
+sigma_{i}^{2})^{1/2}).
+\backslash
+label{eq:Random effects publication bias} 
+\backslash
+end{equation} Here $f_j$ is a normal truncated to ${[
+\backslash
+Phi^{-1}(1-
+\backslash
+alpha_{j}),
+\backslash
+Phi^{-1}(1-
+\backslash
+alpha_{j-1}))}$.
+ The mixture probabilities are 
+\backslash
+[ 
+\backslash
+pi_{j}=
+\backslash
+rho_{j}
+\backslash
+frac{
+\backslash
+Phi(c_{j-1}
+\backslash
+mid
+\backslash
+theta_{0},(
+\backslash
+tau^{2}+
+\backslash
+sigma_{i}^{2})^{1/2})-
+\backslash
+Phi(c_{j}
+\backslash
+mid
+\backslash
+theta_{0},(
+\backslash
+tau^{2}+
+\backslash
+sigma_{i}^{2})^{1/2})}{
+\backslash
+sum_{j=1}^{J}
+\backslash
+rho_{j}[
+\backslash
+Phi(c_{j-1}
+\backslash
+mid
+\backslash
+theta_{0},(
+\backslash
+tau^{2}+
+\backslash
+sigma_{i}^{2})^{1/2})-
+\backslash
+Phi(c_{j}
+\backslash
+mid
+\backslash
+theta_{0},(
+\backslash
+tau^{2}+
+\backslash
+sigma_{i}^{2})^{1/2})]}, 
+\backslash
+] where $c_i = 
+\backslash
+Phi^{-1}(1-
+\backslash
+alpha_{i})$.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Remark
+The mixture probability 
+\begin_inset Formula $\pi^{k}$
+\end_inset
+
+ is positive if and only if 
+\begin_inset Formula $\rho_{k}\neq0$
+\end_inset
+
+.
+ This allows us to parameterize the general publication bias model using
+ 
+\begin_inset Formula $\pi=(\pi^{1},\pi^{2},\ldots,\pi^{k})$
+\end_inset
+
+ instead of 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The mixture representation is used in the proof of the general 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Proof of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:general publication bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We are now ready to prove Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:simple publication bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Proof of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:simple publication bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

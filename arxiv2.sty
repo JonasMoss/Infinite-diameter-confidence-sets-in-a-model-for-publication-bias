@@ -1,17 +1,34 @@
+% Package with layout and packages I usually use.
+
 \NeedsTeXFormat{LaTeX2e}
 
 \ProcessOptions\relax
 
+% Preloaded packages
+%\usepackage[utf8]{inputenc}            % allow utf-8 input
+\usepackage[T1]{fontenc}               % use 8-bit T1 fonts
 \usepackage[colorlinks=true, citecolor = blue, backref=page]{hyperref} % hyperlinks
 \usepackage{url}                       % simple URL typesetting
-\usepackage[object=vectorian]{pgfornament}
+\usepackage{enumerate, enumitem}       % enumeration environments
+\usepackage{csquotes}                  % easy quotations
+\usepackage{import}                    % Used to import tables etc.
+\usepackage{microtype}                 % microtypography
+\usepackage{amsmath, amsthm, amsfonts} % must be imported.
+\usepackage{graphicx, type1cm, lettrine}                  % graphics and lettrine
+\usepackage{nicefrac, xfrac, wasysym}  % compact symbols for 1/2, etc.
+\usepackage{cleveref}
+\usepackage{subfigure}
 
-% orcid
-\def\orcid#1{\kern .08em\href{https://orcid.org/#1}{\includegraphics[keepaspectratio,width=0.7em]{orcid.jpg}}}
-
-% backrefs, 
+\usepackage[natbibapa]{apacite}        % Used for bibliography
 \renewcommand{\doiprefix}{}            % Makes DOIs into links.
 \newcommand{\doi}[1]{\url{https://doi.org/#1}}
+\bibliographystyle{apacite}
+
+%\usepackage[cmintegrals,cmbraces]{newtxmath}
+%\usepackage{ebgaramond-maths}
+
+\def\orcid#1{\kern .08em\href{https://orcid.org/#1}{\includegraphics[keepaspectratio,width=0.7em]{orcid.jpg}}}
+
 % backrefs
 \AtBeginDocument{%
     \renewcommand*{\PrintBackRefs}[1]{}%
@@ -19,26 +36,76 @@
 \AtBeginDocument{%
     \renewcommand*{\PrintBackRefs}[1]{\unskip}%
 }
+% Enclose the back references in the bibliography in square brackets
+% (Econometrica style):
+
 \let \backreforig \backref
 \renewcommand*{\backref}[1]{[\backreforig{#1}]}
 
-% fonts
-\renewcommand{\rmdefault}{ptm}
-\renewcommand{\sfdefault}{phv}
+% theorems
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}
+\theoremstyle{plain}
+\newtheorem{lem}{\protect\lemmaname}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{\protect\definitionname}
+\theoremstyle{definition}
+\newtheorem{rem}[thm]{\protect\remarkname}
+\theoremstyle{definition}
+\newtheorem{example}[thm]{\protect\examplename}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{\protect\corollaryname}
+\theoremstyle{plain}
+\newtheorem{prop}[thm]{\protect\propositionname}
+\theoremstyle{definition}
+\newtheorem{xca}[thm]{\protect\exercisename}
 
-% set page geometry
-\usepackage[verbose=true,letterpaper]{geometry}
-\widowpenalty=10000
-\clubpenalty=10000
-\flushbottom
-\sloppy
+\ifx\proof\undefined
+\newenvironment{proof}[1][\protect\proofname]{\par
+	\normalfont\topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\itemindent\parindent
+	\item[\hskip\labelsep\scshape #1]\ignorespaces
+}{%
+	\endtrivlist\@endpefalse
+}
+\providecommand{\proofname}{Proof}
+\fi
+
+\providecommand{\corollaryname}{Corollary}
+\providecommand{\definitionname}{Definition}
+\providecommand{\propositionname}{Proposition}
+\providecommand{\examplename}{Example}
+\providecommand{\exercisename}{Exercise}
+\providecommand{\remarkname}{Remark}
+\providecommand{\theoremname}{Theorem}
+\providecommand{\lemmaname}{Lemma}
+
+% section refs
+\def\sectionautorefname{section}
+
+% fonts
+%\renewcommand{\rmdefault}{ptm}
+%\renewcommand{\sfdefault}{phv}
+
+% linespacing
+\renewcommand{\baselinestretch}{1.1} 
 
 % tag
 \def\titletag#1{\gdef\@titletag{#1}}
 \def\titlerunning#1{\gdef\@titlerunning{#1}}
 \def\authorrunning#1{\gdef\@authorrunning{#1}}
 
+% for ornaments
+\usepackage[object=vectorian]{pgfornament}
 
+% set page geometry
+\usepackage[verbose=true,a4paper]{geometry}
+\geometry{textwidth=14cm, textheight=21.3cm, hmarginratio=1:1}
+\widowpenalty=10000
+\clubpenalty=10000
+\flushbottom
+\sloppy
 
 % headers
 \usepackage{fancyhdr}
@@ -49,7 +116,6 @@
 \fancyheadoffset{0pt}
 \fancyhead[LO]{\it\thepage \hspace{0.5cm} \@titlerunning}
 \fancyhead[RE]{\textsc{\@authorrunning} \hspace{0.5cm} \thepage}
-
 
 %Handling Keywords
 \def\keywordname{{\bfseries \emph Keywords}}%
@@ -83,40 +149,82 @@
 \renewcommand{\Huge}{\@setfontsize\Huge\@xxvpt{28}}
 
 % sections with less space
+% \providecommand{\section}{}
+% \renewcommand{\section}{%
+%   \@startsection{section}{1}{\z@}%
+%                 {-2.0ex \@plus -0.5ex \@minus -0.2ex}%
+%                 { 1.5ex \@plus  0.3ex \@minus  0.2ex}%
+%                 {\large\bf\raggedright}%
+% }
+% \providecommand{\subsection}{}
+% \renewcommand{\subsection}{%
+%   \@startsection{subsection}{2}{\z@}%
+%                 {-1.8ex \@plus -0.5ex \@minus -0.2ex}%
+%                 { 0.8ex \@plus  0.2ex}%
+%                 {\normalsize\bf\raggedright}%
+% }
+% \providecommand{\subsubsection}{}
+% \renewcommand{\subsubsection}{%
+%   \@startsection{subsubsection}{3}{\z@}%
+%                 {-1.5ex \@plus -0.5ex \@minus -0.2ex}%
+%                 { 0.5ex \@plus  0.2ex}%
+%                 {\normalsize\bf\raggedright}%
+% }
+% \providecommand{\paragraph}{}
+% \renewcommand{\paragraph}{%
+%   \@startsection{paragraph}{4}{\z@}%
+%                 {1.5ex \@plus 0.5ex \@minus 0.2ex}%
+%                 {-1em}%
+%                 {\normalsize\bf}%
+% }
+% \providecommand{\subparagraph}{}
+% \renewcommand{\subparagraph}{%
+%   \@startsection{subparagraph}{5}{\z@}%
+%                 {1.5ex \@plus 0.5ex \@minus 0.2ex}%
+%                 {-1em}%
+%                 {\normalsize\bf}%
+% }
+% \providecommand{\subsubsubsection}{}
+% \renewcommand{\subsubsubsection}{%
+%   \vskip5pt{\noindent\normalsize\rm\raggedright}%
+% }
+
 \providecommand{\section}{}
 \renewcommand{\section}{%
-  \@startsection{section}{1}{\z@}%
+  \@startsection{section}
+                {1}
+                {\z@}
                 {-2.0ex \@plus -0.5ex \@minus -0.2ex}%
-                { 1.5ex \@plus  0.3ex \@minus  0.2ex}%
-                {\large\bf\raggedright}%
+                {3pt}%
+                {\large\centering\scshape}%
 }
 \providecommand{\subsection}{}
 \renewcommand{\subsection}{%
   \@startsection{subsection}{2}{\z@}%
-                {-1.8ex \@plus -0.5ex \@minus -0.2ex}%
-                { 0.8ex \@plus  0.2ex}%
-                {\normalsize\bf\raggedright}%
+                {-9.7pt \@plus -2pt \@minus -2pt}
+                {3pt}
+                {\normalsize\it\centering}%
 }
 \providecommand{\subsubsection}{}
 \renewcommand{\subsubsection}{%
   \@startsection{subsubsection}{3}{\z@}%
                 {-1.5ex \@plus -0.5ex \@minus -0.2ex}%
                 { 0.5ex \@plus  0.2ex}%
-                {\normalsize\bf\raggedright}%
+                {\normalsize\it\centering}%
 }
 \providecommand{\paragraph}{}
 \renewcommand{\paragraph}{%
   \@startsection{paragraph}{4}{\z@}%
                 {1.5ex \@plus 0.5ex \@minus 0.2ex}%
                 {-1em}%
-                {\normalsize\bf}%
+                {\normalsize\it\centering}%
 }
 \providecommand{\subparagraph}{}
 \renewcommand{\subparagraph}{%
   \@startsection{subparagraph}{5}{\z@}%
                 {1.5ex \@plus 0.5ex \@minus 0.2ex}%
                 {-1em}%
-                {\normalsize\bf}%
+                {\normalsize\it\centering}%
 }
 \providecommand{\subsubsubsection}{}
 \renewcommand{\subsubsubsection}{%
@@ -210,7 +318,6 @@
   \let\thanks\relax
 }
 
-
 % rules for title box at top of first page
 \newcommand{\@toptitlebar}{
   \hrule height 2\p@
@@ -251,7 +358,6 @@
   }
 }
 
-
 % add conference notice to bottom of first page
 \newcommand{\ftype@noticebox}{8}
 \newcommand{\@notice}{%
@@ -266,7 +372,7 @@
 \renewenvironment{abstract}
 {
   \centerline
-  {\large \bfseries \scshape Abstract}
+  {\large \scshape Summary}
   \begin{quote}
 }
 {

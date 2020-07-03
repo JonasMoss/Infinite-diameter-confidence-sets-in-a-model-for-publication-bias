@@ -4,8 +4,16 @@
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass amsart
+\textclass article
 \begin_preamble
+\usepackage{arxiv}
+
+\titletag{An arXiv preprint, v2}
+\makeatletter
+\titlerunning{\@title}
+\makeatother
+\authorrunning{Jonas Moss}
+
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\Var}{Var}
@@ -21,6 +29,7 @@
 theorems-ams
 eqs-within-sections
 figs-within-sections
+natbibapa
 \end_modules
 \maintain_unincluded_children false
 \language english
@@ -61,7 +70,7 @@ figs-within-sections
 \use_package undertilde 1
 \cite_engine natbib
 \cite_engine_type authoryear
-\biblio_style apalike
+\biblio_style apacite
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -94,11 +103,59 @@ figs-within-sections
 \begin_body
 
 \begin_layout Title
-Infinite diameter confidence sets in Hedges’ publication bias model
+Infinite diameter confidence sets in Hedges' publication bias model
+\end_layout
+
+\begin_layout Author
+Jonas Moss 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+orcid{0000-0002-6876-6964}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Department of Mathematics, University of Oslo
+\begin_inset Newline newline
+\end_inset
+
+PB 1053, Blindern, NO-0316, Oslo, Norway
+\emph on
+
+\begin_inset Newline newline
+\end_inset
+
+jonasmgj@math.uio.no
+\end_layout
+
+\begin_layout Abstract
+Meta-analysis is the quantitative combination of results from different
+ studies.
+ The assumptions of classical meta-analysis models are not satisfied whenever
+ publication bias is present, which causes inconsistent parameter estimates.
+ A popular method to account for publication bias in meta-analysis is Hedges'
+ selection function model, but frequentist estimation of this model is problemat
+ic.
+ This paper shows there is no confidence set of guaranteed finite diameter
+ for the mean and heterogeneity parameters in the selection function model.
+ The proof is based on a generalization of the Gleser–Hwang theorem.
 \end_layout
 
 \begin_layout Section
 Introduction
+\end_layout
+
+\begin_layout Standard
+What good is a study all
 \end_layout
 
 \begin_layout Itemize
@@ -190,9 +247,6 @@ s to be known.
 \end_inset
 
  is
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}),\label{eq:random effects meta-analysis model}
@@ -236,7 +290,7 @@ noprefix "false"
 p
 \emph default
 -value is 
-\begin_inset Formula $u_{i}=1-\Phi(-x_{i}/\sigma_{i})$
+\begin_inset Formula $u_{i}=\Phi(-x_{i}/\sigma_{i})$
 \end_inset
 
 .
@@ -292,31 +346,6 @@ literal "false"
 \end_inset
 
 -distributions.
- It is the underlying model of the estimating 
-\emph on
-p
-\emph default
--curve method of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Simonsohn2014-cn"
-literal "false"
-
-\end_inset
-
- and 
-\emph on
-p
-\emph default
--uniform of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Van_Aert2016-cu"
-literal "false"
-
-\end_inset
-
-, both popular in psychology.
 \end_layout
 
 \begin_layout Standard
@@ -562,11 +591,7 @@ p
 p
 \emph default
 -values.
- Letting 
-\begin_inset Formula $K=1$
-\end_inset
-
-The parameters 
+ The parameters 
 \begin_inset Formula $(\theta_{0},\tau,\rho)$
 \end_inset
 
@@ -684,39 +709,122 @@ on bias in the literature.
 \end_layout
 
 \begin_layout Enumerate
-PET-PEESE
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Stanley2005-ng"
+literal "false"
+
+\end_inset
+
+ introduced a regression-based estimator the corrected effect size 
+\begin_inset Formula $\theta$
+\end_inset
+
+, calle PET.
+ It works by running the regrssion 
+\begin_inset Formula $x_{i}/\sigma_{i}\sim\theta+\beta\widehat{s}_{i}+\epsilon_{i},$
+\end_inset
+
+where 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is the adjusted effect size and 
+\begin_inset Formula $\beta\neq0$
+\end_inset
+
+ indicates the presence publication bias.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Stanley2005-ng"
+literal "false"
+
+\end_inset
+
+ called his and a related method is PET-PEESE 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Stanley2014-gx"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
-Estimating 
+The estimating 
 \emph on
 p
 \emph default
--curve and 
+-curve method of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Simonsohn2014-cn"
+literal "false"
+
+\end_inset
+
+ and 
 \emph on
 p
 \emph default
--uniform
+-uniform of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Van_Aert2016-cu"
+literal "false"
+
+\end_inset
+
+, are two methods for dealing with publication bias hailing from psychology.
+ Both are based on a variant of the basic publication bias model, but with
+ fixed instead of random effects, and both employ non-standard estimation
+ strategies 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "McShane2016-rb"
+literal "false"
+
+\end_inset
+
+.
+ Since there is ample evidence of heterogeneity in meta-analysis, restricting
+ oneself to the fixed effects meta-analysis is a mistake.
+ Moreover, these methods only make use significant results.
 \end_layout
 
 \begin_layout Enumerate
-Trim-and-fill
+Trim-and-fill 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Duval2000-ct"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Hedge's model has three downsides.
- First, it doesn't model all sources of publication bias.
+Hedges' model has some downsides.
+ It doesn't model all sources of publication bias.
  For instance, publication bias due to language (Egger) and seniority of
  the authors ??.
  Second, it may not be the correct model for 
 \emph on
 p
 \emph default
--hacking (explaing 
-\emph on
-p
-\emph default
--hacking).
+-hacking 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "simmons2011false"
+literal "false"
+
+\end_inset
+
+.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -730,12 +838,21 @@ literal "false"
 p
 \emph default
 -hacking.
- But most importantly, estimation of the model is difficult.
  
 \end_layout
 
 \begin_layout Standard
-Estimation of the maximum likelihood using the 
+Estimation of Hedges' model is difficult.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+after "Appendix A"
+key "McShane2016-rb"
+literal "false"
+
+\end_inset
+
+ Estimation of the maximum likelihood using the 
 \begin_inset Formula $\texttt{nlm}$
 \end_inset
 
@@ -1188,7 +1305,7 @@ name "thm:Gleser--Hwang"
 
 \begin_deeper
 \begin_layout Enumerate
-There is a function 
+There is a density 
 \begin_inset Formula $p^{\star}$
 \end_inset
 
@@ -1916,7 +2033,7 @@ Joint confidence set for
 \end_layout
 
 \begin_layout Standard
-Recall the simple publication bias model 
+Let us take a look at the basic publication bias model 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:selection for significance model"
@@ -1926,242 +2043,10 @@ noprefix "false"
 
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Theorem
-\begin_inset CommandInset label
-LatexCommand label
-name "thm:simple publication bias"
-
-\end_inset
-
- Assume 
-\begin_inset Formula $n$
-\end_inset
-
- independent samples from the simple publication bias model 
+ again.
+ To use Theorem 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:selection for significance model"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- Then, for any 
-\begin_inset Formula $n$
-\end_inset
-
-, any confidence set for 
-\begin_inset Formula $\theta_{0},\tau$
-\end_inset
-
-, or 
-\begin_inset Formula $(\theta_{0},\tau)$
-\end_inset
-
- with level 
-\begin_inset Formula $\alpha>0$
-\end_inset
-
- will have infinite diameter with positive probability.
- 
-\end_layout
-
-\begin_layout Proof
-See the appendix, page 
-\end_layout
-
-\begin_layout Standard
-The next 
-\end_layout
-
-\begin_layout Theorem
-\begin_inset CommandInset label
-LatexCommand label
-name "thm:general publication bias"
-
-\end_inset
-
- Assume 
-\begin_inset Formula $n$
-\end_inset
-
- independent samples from the publication bias model 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:selection for significance model"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, where the selection probability 
-\begin_inset Formula $\rho$
-\end_inset
-
- is unknown and 
-\begin_inset Formula $\alpha$
-\end_inset
-
- is known.
- Then any confidence set for 
-\begin_inset Formula $\theta_{0},\tau$
-\end_inset
-
-, or 
-\begin_inset Formula $(\theta_{0},\tau)$
-\end_inset
-
- will have infinite diameter with positive probability.
-\end_layout
-
-\begin_layout Proof
-See the appendix, page 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "proof:general publication bias"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Section
-Concluding remarks
-\end_layout
-
-\begin_layout Standard
-((Check out Berger again; maybe use a quote.))
-\end_layout
-
-\begin_layout Standard
-((Argue in favour of Bayesian estimation))
-\end_layout
-
-\begin_layout Standard
-It is easy to find uncontroverisal priors for 
-\begin_inset Formula $\theta_{0}$
-\end_inset
-
-.
- In almost any practical meta-analysis we know that 
-\begin_inset Formula $\theta_{0}$
-\end_inset
-
- cannot be very large, is likely to be quite close to 
-\begin_inset Formula $0$
-\end_inset
-
-.
- Since many effects can be understood as the aggregation of many small effects,
- the central limit theorem justified using a normal prior.
- As we want to remove prior mass from negative 
-\begin_inset Formula $\theta_{0}$
-\end_inset
-
-s of large magnitude, 
-\begin_inset Formula $N(0,1)$
-\end_inset
-
- is a decent standard prior.
- Similarily, a half-normal is a reasonable prior for the heterogeneity parameter
- 
-\begin_inset Formula $\tau$
-\end_inset
-
-.
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "moss2019modelling"
-literal "false"
-
-\end_inset
-
- employed these priors on several examples.
- 
-\end_layout
-
-\begin_layout Standard
-Bayesian estimation would not help in the Bahadur–Savage example, as it
- has no likelihood.
-\end_layout
-
-\begin_layout Section
-Appendix
-\end_layout
-
-\begin_layout Standard
-The following sandwich convergence theorem is used in the proof of the Gleser–Hw
-ang theorem.
- 
-\end_layout
-
-\begin_layout Lemma
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Billingsley, 16.4(a)
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "lem:Dominated covergence theorem"
-
-\end_inset
-
- Suppose 
-\begin_inset Formula $a_{n},b_{n},f_{n}$
-\end_inset
-
- converge to 
-\begin_inset Formula $a,b,f$
-\end_inset
-
- and 
-\begin_inset Formula $a_{n}\leq f_{n}\leq b_{n}$
-\end_inset
-
- for all 
-\begin_inset Formula $n$
-\end_inset
-
-.
- If 
-\begin_inset Formula $\int a_{n}d\mu\to\int ad\mu$
-\end_inset
-
- and 
-\begin_inset Formula $\int b_{n}d\mu\to\int bd\mu$
-\end_inset
-
-, then 
-\begin_inset Formula $\int f_{n}d\mu\to\int fd\mu$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Proof
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Proof of Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
 reference "thm:Gleser--Hwang"
 plural "false"
 caps "false"
@@ -2169,158 +2054,31 @@ noprefix "false"
 
 \end_inset
 
-
-\end_layout
-
+ we need a witnessing sequence of functions 
+\begin_inset Formula $p_{n}\to p$
 \end_inset
 
-
-\begin_inset CommandInset label
-LatexCommand label
-name "proof:Gleser--Hwang"
-
+ satisfying the conditions 
+\begin_inset Formula $(ii)$
 \end_inset
 
-We can assume without loss of generality that 
-\begin_inset Formula $\left\Vert [p_{i}]\right\Vert \geq n$
-\end_inset
-
-, as we can choose a subsequence if we have to.
- Since 
-\begin_inset Formula $R^{c}([p_{n}])\subseteq\{D\geq n\}$
-\end_inset
-
-, we have that
-\begin_inset Formula 
-\begin{equation}
-1-\alpha\leq\int_{R^{c}([p_{n}])}p_{n}d\mu\leq\int_{D\geq n}p_{n}d\mu\label{eq:inequality with R^c}
-\end{equation}
-
-\end_inset
-
-for all 
-\begin_inset Formula $n$
+ and 
+\begin_inset Formula $(iii)$
 \end_inset
 
 .
- By Lemma 
+ The next lemma shows how to make such a witness for the truncated normal.
+ Its proof is in the appendix, page page 
 \begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:Dominated covergence theorem"
+LatexCommand pageref
+reference "proof:generalized shifted exponential"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-, with 
-\begin_inset Formula $a_{n}=p_{n}1_{D=\infty}$
-\end_inset
-
-, 
-\begin_inset Formula $b_{n}=p_{n}$
-\end_inset
-
-, and 
-\begin_inset Formula $f_{n}=1_{D\geq n}p_{n}$
-\end_inset
-
-, 
-\begin_inset Formula 
-\begin{equation}
-\int_{D\geq n}p_{n}d\mu\to\int_{D=\infty}p^{\star}d\mu.\label{eq:limit of pn}
-\end{equation}
-
-\end_inset
-
-Combining equations 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:inequality with R^c"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:limit of pn"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, we get
-\begin_inset Formula 
-\[
-\int_{D=\infty}p^{\star}d\mu\geq1-\alpha>0.
-\]
-
-\end_inset
-
-Let 
-\begin_inset Formula $P\in\mathcal{P}$
-\end_inset
-
- be arbitrary, 
-\begin_inset Formula $p$
-\end_inset
-
- be its density, and consider
-\begin_inset Formula 
-\[
-P(D=\infty)=\int_{D=\infty}pd\mu\geq\int_{D=\infty\cap\supp p^{\star}}\left(\frac{p}{p^{\star}}\right)p^{\star}d\mu.
-\]
-
-\end_inset
-
-Since 
-\begin_inset Formula $\int_{D=\infty}p^{\star}d\mu>0$
-\end_inset
-
- and 
-\begin_inset Formula $p/p^{\star}>0$
-\end_inset
-
- on 
-\begin_inset Formula $\supp p^{\star}$
-\end_inset
-
- (since 
-\begin_inset Formula $\supp p\supseteq\supp p^{\star}$
-\end_inset
-
- by assumption), we see that 
-\begin_inset Formula $\int_{D=\infty\cap\supp p^{\star}}(p/p^{\star})p^{\star}d\mu>0$
-\end_inset
-
- too.
- It follows that 
-\begin_inset Formula $P(D=\infty)>0$
-\end_inset
-
-, and, since 
-\begin_inset Formula $P$
-\end_inset
-
- is aribtrary, 
-\begin_inset Formula $D$
-\end_inset
-
- has infinite diameter with positive probability.
-\end_layout
-
-\begin_layout Standard
-The next lemma shows there is a 
-\begin_inset Formula $p_{n}$
-\end_inset
-
- satisfying the conditions of the Gleser–Hwang theorem for the class of
- truncated normal distributions.
- 
+.
 \end_layout
 
 \begin_layout Lemma
@@ -2370,165 +2128,36 @@ name "lem:generalized shifted exponential"
 .
 \end_layout
 
-\begin_layout Proof
-Let 
-\begin_inset Formula $n^{2}>c$
-\end_inset
-
-, so that 
-\begin_inset Formula $\sigma_{n}^{2}>0$
-\end_inset
-
-.
- Using the well-known formula for the truncated normal, we find that
-\end_layout
-
-\begin_layout Proof
-\begin_inset Formula 
-\begin{eqnarray*}
-f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\\
- & = & \frac{1}{\Phi[-(a+n)(n+c)^{-1/2}]-\Phi[-(b+n)(n+c)^{-1/2}]}\phi(x;-n,(n+c)^{1/2})1[a,b](x).
-\end{eqnarray*}
-
-\end_inset
-
-The normal density part equals
-\begin_inset Formula 
-\[
-\phi(x;-n,(n+c)^{1/2})=(2\pi)^{-1/2}(n+c)^{-1/2}\exp\left(-\frac{x^{2}+2nx+n^{2}}{2(n+c)}\right).
-\]
-
-\end_inset
-
-When 
-\begin_inset Formula $n$
-\end_inset
-
- is large compared to 
-\begin_inset Formula $x$
-\end_inset
-
-, the term 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $x^{2}/2(n+c)$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- is negligible, hence
-\begin_inset Formula 
-\begin{eqnarray*}
-\phi(x;-n,(n+c)^{1/2}) & \approx & (2\pi)^{-1/2}(n+c)^{-1/2}\exp(-n^{2}/2(n+c))\exp(-x),\\
- & = & (n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x).
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-From Equation 5 of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "borjesson1979simple"
-literal "false"
-
-\end_inset
-
-, we know that 
-\begin_inset Formula $\Phi(-x)\approx\phi(x)/x$
-\end_inset
-
- as 
-\begin_inset Formula $x$
-\end_inset
-
- grows.
- The part involving the cumulative normal distributions become
-\begin_inset Formula 
-\begin{eqnarray*}
-\Phi[-(a+n)(n+c)^{-1/2}] & \approx & \frac{(n+c)^{1/2}}{n+a}\phi[-(a+n)(n+c)^{-1/2}],
-\end{eqnarray*}
-
-\end_inset
-
-and using the same reasoning as above, we find that 
-\begin_inset Formula $\phi[-(a+n)(n+c)^{-1/2}]\approx\phi((n+c)^{1/2})\exp(-a)$
-\end_inset
-
- as 
-\begin_inset Formula $n$
-\end_inset
-
- increase.
- Therefore,
-\begin_inset Formula 
-\[
-\Phi[-(a+n)(n+c)^{-1/2}]\to\frac{(n+c)^{1/2}\phi((n+c)^{1/2})\exp(-a)}{a+n}.
-\]
-
-\end_inset
-
-Since this reasoning applies to 
-\begin_inset Formula $b$
-\end_inset
-
- as well, we get that 
-\begin_inset Formula $f$
-\end_inset
-
- approaches, as 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-,
-\begin_inset Formula 
-\begin{eqnarray*}
- &  & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{\Phi[-(a+n)n^{-1/2}]-\Phi[-(b+n)n^{-1/2}]},\\
- & \approx & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{(n+c)^{1/2}\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]},\\
- & = & \frac{\phi(-n^{2}/2(n+c))\exp(-x)}{\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]}\\
- & \approx & \exp(-x)n^{-1}\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]^{-1},\\
- & \to & \exp(-x)\left[\exp(-a)-\exp(-b)\right]^{-1}.
-\end{eqnarray*}
-
-\end_inset
-
-Here the third line follows from 
-\begin_inset Formula $\phi(n/(n+c)^{1/2})/\phi((n+c)^{1/2})\to1$
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Standard
-We are noew ready to prove Theorem 
+Using Lemma 
 \begin_inset CommandInset ref
-LatexCommand ref
-reference "thm:simple publication bias"
+LatexCommand pageref
+reference "lem:generalized shifted exponential"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ it is not hard to show that the basic publication bias model is of the
+ Gleser–Hwang class.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:simple publication bias"
+
+\end_inset
+
+ Assume 
+\begin_inset Formula $n$
+\end_inset
+
+ independent samples from the simple publication bias model 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:selection for significance model"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2536,29 +2165,27 @@ noprefix "false"
 \end_inset
 
 .
+ Then, for any 
+\begin_inset Formula $n$
+\end_inset
+
+, any confidence set for 
+\begin_inset Formula $\theta_{0},\tau$
+\end_inset
+
+, or 
+\begin_inset Formula $(\theta_{0},\tau)$
+\end_inset
+
+ with level 
+\begin_inset Formula $\alpha>0$
+\end_inset
+
+ will have infinite diameter with positive probability.
+ 
 \end_layout
 
 \begin_layout Proof
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Proof of Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "thm:simple publication bias"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset CommandInset label
 LatexCommand label
 name "proof:simple publication bias"
@@ -2659,18 +2286,43 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-The proof of Theorem 
+Proving the analogue of Theorem 
 \begin_inset CommandInset ref
-LatexCommand ref
-reference "thm:general publication bias"
+LatexCommand eqref
+reference "thm:simple publication bias"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- is slightly more involved, as we will have to handle mixture.
- Let 
+ for Hedges' publication is somewhat more involved.
+ We will use the mixture representation of 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:mixture model formulation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and a lemma generalizing Theorem 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "thm:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ to mixtures.
+ 
+\end_layout
+
+\begin_layout Standard
+Let 
 \begin_inset Formula $f^{1},f^{2},\ldots,f^{K}$
 \end_inset
 
@@ -2678,15 +2330,11 @@ noprefix "false"
 \begin_inset Formula $\pi=(\pi_{1},\pi_{2},\ldots,\pi_{K})$
 \end_inset
 
- a probability vector, and
-\begin_inset Formula 
-\[
-p=\sum_{k\leq K}\pi^{k}f^{k}
-\]
-
+ a probability vector, and 
+\begin_inset Formula $p=\sum_{k\leq K}\pi^{k}f^{k}$
 \end_inset
 
-a mixture distribution.
+ a mixture distribution.
  We will assume that the size of 
 \begin_inset Formula $[p]$
 \end_inset
@@ -2734,7 +2382,7 @@ s mixture components have the same mean, the mean of
  
 \end_layout
 
-\begin_layout Proposition
+\begin_layout Lemma
 \begin_inset CommandInset label
 LatexCommand label
 name "prop:Mixture model corollary"
@@ -2767,7 +2415,7 @@ For all
 \begin_inset Formula $k\in K'$
 \end_inset
 
-, there is a function 
+, there is a density 
 \begin_inset Formula $f^{k\star}$
 \end_inset
 
@@ -2831,7 +2479,7 @@ For all
 \end_layout
 
 \end_deeper
-\begin_layout Proposition
+\begin_layout Lemma
 Then every confidence set with level 
 \begin_inset Formula $\alpha>0$
 \end_inset
@@ -2877,239 +2525,48 @@ noprefix "false"
  
 \end_layout
 
-\begin_layout Standard
-To prove Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "thm:general publication bias"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- we will use the mixture representation in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:mixture model formulation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- For convenience, we show the formula for the mixture probabilities 
-\begin_inset Formula $\pi_{i}$
-\end_inset
-
- here.
- Let 
-\begin_inset Formula $c_{j}=\Phi^{-1}(1-\alpha_{j})$
-\end_inset
-
- and define 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-c=\sum_{k=1}^{K}\rho_{k}[\Phi(c_{j-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
-\]
-
-\end_inset
-
-Then 
-\begin_inset Formula $\pi_{K}=\rho_{K}c^{-1}$
-\end_inset
-
- and
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\pi_{k}=c^{-1}(\rho_{k}-\rho_{K})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]\label{eq:pi_i formula}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Lemma
+\begin_layout Theorem
 \begin_inset CommandInset label
 LatexCommand label
-name "lem:mixture model representation"
+name "thm:general publication bias"
 
 \end_inset
 
- 
-\begin_inset ERT
-status open
+ Assume 
+\begin_inset Formula $n$
+\end_inset
 
-\begin_layout Plain Layout
-
-The density of an observation from the publication bias model with parameter
- vector $(
-\backslash
-theta_{0},
-\backslash
-tau,
-\backslash
-sigma_{i},
-\backslash
-rho)$ can be written in a mixture form as 
-\backslash
-begin{equation} f(x;
-\backslash
-theta_{0},
-\backslash
-tau,
-\backslash
-sigma_{i})=
-\backslash
-sum_{j=1}^{N}
-\backslash
-pi_{j}f_j(x;
-\backslash
-theta_{0},(
-\backslash
-tau^{2}+
-\backslash
-sigma_{i}^{2})^{1/2}).
-\backslash
-label{eq:Random effects publication bias} 
-\backslash
-end{equation} Here $f_j$ is a normal truncated to ${[
-\backslash
-Phi^{-1}(1-
-\backslash
-alpha_{j}),
-\backslash
-Phi^{-1}(1-
-\backslash
-alpha_{j-1}))}$.
- The mixture probabilities are 
-\backslash
-[ 
-\backslash
-pi_{j}=
-\backslash
-rho_{j}
-\backslash
-frac{
-\backslash
-Phi(c_{j-1}
-\backslash
-mid
-\backslash
-theta_{0},(
-\backslash
-tau^{2}+
-\backslash
-sigma_{i}^{2})^{1/2})-
-\backslash
-Phi(c_{j}
-\backslash
-mid
-\backslash
-theta_{0},(
-\backslash
-tau^{2}+
-\backslash
-sigma_{i}^{2})^{1/2})}{
-\backslash
-sum_{j=1}^{J}
-\backslash
-rho_{j}[
-\backslash
-Phi(c_{j-1}
-\backslash
-mid
-\backslash
-theta_{0},(
-\backslash
-tau^{2}+
-\backslash
-sigma_{i}^{2})^{1/2})-
-\backslash
-Phi(c_{j}
-\backslash
-mid
-\backslash
-theta_{0},(
-\backslash
-tau^{2}+
-\backslash
-sigma_{i}^{2})^{1/2})]}, 
-\backslash
-] where $c_i = 
-\backslash
-Phi^{-1}(1-
-\backslash
-alpha_{i})$.
-\end_layout
+ independent samples from the publication bias model 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:selection for significance model"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Remark
-The mixture probability 
-\begin_inset Formula $\pi^{k}$
-\end_inset
-
- is positive if and only if 
-\begin_inset Formula $\rho_{k}\neq0$
-\end_inset
-
-.
- This allows us to parameterize the general publication bias model using
- 
-\begin_inset Formula $\pi=(\pi^{1},\pi^{2},\ldots,\pi^{k})$
-\end_inset
-
- instead of 
+, where the selection probability 
 \begin_inset Formula $\rho$
 \end_inset
 
-.
-\end_layout
+ is unknown and 
+\begin_inset Formula $\alpha$
+\end_inset
 
-\begin_layout Standard
-The mixture representation is used in the proof of the general 
+ is known.
+ Then any confidence set for 
+\begin_inset Formula $\theta_{0},\tau$
+\end_inset
+
+, or 
+\begin_inset Formula $(\theta_{0},\tau)$
+\end_inset
+
+ will have infinite diameter with positive probability.
 \end_layout
 
 \begin_layout Proof
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Proof of Theorem 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "thm:general publication bias"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset CommandInset label
 LatexCommand label
 name "proof:general publication bias"
@@ -3273,12 +2730,597 @@ noprefix "false"
  and do the same reasoning as in the first part of this proof.
 \end_layout
 
+\begin_layout Section
+Concluding remarks
+\end_layout
+
+\begin_layout Standard
+((Check out Berger again; maybe use a quote.))
+\end_layout
+
+\begin_layout Standard
+((Argue in favour of Bayesian estimation))
+\end_layout
+
+\begin_layout Standard
+It is easy to find uncontroverisal priors for 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+.
+ In almost any practical meta-analysis we know that 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+ cannot be very large, is likely to be quite close to 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Since many effects can be understood as the aggregation of many small effects,
+ the central limit theorem justified using a normal prior.
+ As we want to remove prior mass from negative 
+\begin_inset Formula $\theta_{0}$
+\end_inset
+
+s of large magnitude, 
+\begin_inset Formula $N(0,1)$
+\end_inset
+
+ is a decent standard prior.
+ Similarily, a half-normal is a reasonable prior for the heterogeneity parameter
+ 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "moss2019modelling"
+literal "false"
+
+\end_inset
+
+ employed these priors on several examples.
+ 
+\end_layout
+
+\begin_layout Standard
+Bayesian estimation would not help in the Bahadur–Savage example, as it
+ has no likelihood.
+\end_layout
+
+\begin_layout Section*
+Appendix
+\end_layout
+
+\begin_layout Standard
+The following sandwich convergence theorem is used in the proof of the Gleser–Hw
+ang theorem.
+ 
+\end_layout
+
+\begin_layout Lemma
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Exercise 16.4(a)"
+key "billingsley1995probability"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:Dominated covergence theorem"
+
+\end_inset
+
+ Suppose 
+\begin_inset Formula $a_{n},b_{n},f_{n}$
+\end_inset
+
+ converge to 
+\begin_inset Formula $a,b,f$
+\end_inset
+
+ and 
+\begin_inset Formula $a_{n}\leq f_{n}\leq b_{n}$
+\end_inset
+
+ for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\int a_{n}d\mu\to\int ad\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\int b_{n}d\mu\to\int bd\mu$
+\end_inset
+
+, then 
+\begin_inset Formula $\int f_{n}d\mu\to\int fd\mu$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This next proof follows the proof 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Theorem 1"
+key "gleser1987nonexistence"
+literal "false"
+
+\end_inset
+
+ closely.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Proof of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "proof:Gleser--Hwang"
+
+\end_inset
+
+This proof follows the proof 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Theorem 1"
+key "gleser1987nonexistence"
+literal "false"
+
+\end_inset
+
+ very closely.
+ We can assume without loss of generality that 
+\begin_inset Formula $\left\Vert [p_{n}]\right\Vert \geq n$
+\end_inset
+
+, as we can choose a subsequence if we have to.
+ By definition of 
+\begin_inset Formula $D$
+\end_inset
+
+ (equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:diameter"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), we see that
+\begin_inset Formula 
+\[
+\{D\geq n\}=\{\omega\in\Omega\mid\textrm{there is a }\pi\textrm{ such that}\left\Vert \pi\right\Vert \geq n\textrm{ and }\omega\in R^{c}(\pi)\},
+\]
+
+\end_inset
+
+and if 
+\begin_inset Formula $||[p_{n}]||\geq n$
+\end_inset
+
+, then 
+\begin_inset Formula $R^{c}([p_{n}])\subseteq\{D\geq n\}$
+\end_inset
+
+.
+ Since we assume that 
+\begin_inset Formula $\left\Vert [p_{n}]\right\Vert \geq n$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+1-\alpha\leq P_{n}(R^{c}([p_{n}]))=\int_{R^{c}([p_{n}])}p_{n}d\mu
+\]
+
+\end_inset
+
+by definition of a confidence set, we have that
+\begin_inset Formula 
+\begin{equation}
+0<1-\alpha\leq\int_{R^{c}([p_{n}])}p_{n}d\mu\leq\int_{D\geq n}p_{n}d\mu\label{eq:inequality with R^c}
+\end{equation}
+
+\end_inset
+
+for all 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ and 
+\begin_inset Formula $p^{\star}$
+\end_inset
+
+ are densities,
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\int p_{n}d\mu=1=\int p^{\star}d\mu=\int\lim_{n\to\infty}p_{n}d\mu.
+\]
+
+\end_inset
+
+This allows us to use Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:Dominated covergence theorem"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ with 
+\begin_inset Formula $a_{n}=0$
+\end_inset
+
+, 
+\begin_inset Formula $b_{n}=p_{n}$
+\end_inset
+
+, and 
+\begin_inset Formula $f_{n}=1_{D\geq n}p_{n}$
+\end_inset
+
+ and conclude that
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{equation}
+\int_{D\geq n}p_{n}d\mu\to\int_{D=\infty}p^{\star}d\mu.\label{eq:limit of pn}
+\end{equation}
+
+\end_inset
+
+Combining equations 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:inequality with R^c"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:limit of pn"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we get
+\begin_inset Formula 
+\[
+0<1-\alpha\leq\int_{D=\infty}p^{\star}d\mu.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $P\in\mathcal{P}$
+\end_inset
+
+ be arbitrary, 
+\begin_inset Formula $p$
+\end_inset
+
+ be its density, and consider
+\begin_inset Formula 
+\[
+P(D=\infty)=\int_{D=\infty}pd\mu\geq\int_{D=\infty\cap\supp p^{\star}}\left(\frac{p}{p^{\star}}\right)p^{\star}d\mu.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\int_{D=\infty}p^{\star}d\mu>0$
+\end_inset
+
+ and 
+\begin_inset Formula $p/p^{\star}>0$
+\end_inset
+
+ on 
+\begin_inset Formula $\supp p^{\star}$
+\end_inset
+
+ (since 
+\begin_inset Formula $\supp p\supseteq\supp p^{\star}$
+\end_inset
+
+ by assumption), we see that 
+\begin_inset Formula $\int_{D=\infty\cap\supp p^{\star}}(p/p^{\star})p^{\star}d\mu>0$
+\end_inset
+
+ too.
+ It follows that 
+\begin_inset Formula $P(D=\infty)>0$
+\end_inset
+
+, and, since 
+\begin_inset Formula $P$
+\end_inset
+
+ is aribtrary, 
+\begin_inset Formula $D$
+\end_inset
+
+ has infinite diameter with positive probability.
+\end_layout
+
+\begin_layout Standard
+The next lemma shows there is a 
+\begin_inset Formula $p_{n}$
+\end_inset
+
+ satisfying the conditions of the Gleser–Hwang theorem for the class of
+ truncated normal distributions.
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Proof of Lemma 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "lem:generalized shifted exponential"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "proof:generalized shifted exponential"
+
+\end_inset
+
+Let 
+\begin_inset Formula $n^{2}>c$
+\end_inset
+
+, so that 
+\begin_inset Formula $\sigma_{n}^{2}>0$
+\end_inset
+
+.
+ Using the well-known formula for the truncated normal, we find that
+\begin_inset Formula 
+\begin{eqnarray*}
+f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\\
+ & = & \frac{\phi(x;-n,(n+c)^{1/2})1[a,b](x)}{\Phi[-(a+n)(n+c)^{-1/2}]-\Phi[-(b+n)(n+c)^{-1/2}]}.
+\end{eqnarray*}
+
+\end_inset
+
+The normal density part equals
+\begin_inset Formula 
+\[
+\phi(x;-n,(n+c)^{1/2})=(2\pi)^{-1/2}(n+c)^{-1/2}\exp\left(-\frac{x^{2}+2nx+n^{2}}{2(n+c)}\right).
+\]
+
+\end_inset
+
+When 
+\begin_inset Formula $n$
+\end_inset
+
+ is large compared to 
+\begin_inset Formula $x$
+\end_inset
+
+, the term 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $x^{2}/2(n+c)$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ is negligible, hence
+\begin_inset Formula 
+\begin{eqnarray*}
+\phi(x;-n,(n+c)^{1/2}) & \approx & (2\pi)^{-1/2}(n+c)^{-1/2}\exp(-n^{2}/2(n+c))\exp(-x),\\
+ & = & (n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x).
+\end{eqnarray*}
+
+\end_inset
+
+From Equation 5 of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "borjesson1979simple"
+literal "false"
+
+\end_inset
+
+, we know that 
+\begin_inset Formula $\Phi(-x)\approx\phi(x)/x$
+\end_inset
+
+ as 
+\begin_inset Formula $x$
+\end_inset
+
+ grows.
+ The part involving the cumulative normal distributions become
+\begin_inset Formula 
+\begin{eqnarray*}
+\Phi[-(a+n)(n+c)^{-1/2}] & \approx & \frac{(n+c)^{1/2}}{n+a}\phi[-(a+n)(n+c)^{-1/2}],
+\end{eqnarray*}
+
+\end_inset
+
+and using the same reasoning as above, we find that 
+\begin_inset Formula $\phi[-(a+n)(n+c)^{-1/2}]\approx\phi((n+c)^{1/2})\exp(-a)$
+\end_inset
+
+ as 
+\begin_inset Formula $n$
+\end_inset
+
+ increase.
+ Therefore,
+\begin_inset Formula 
+\[
+\Phi[-(a+n)(n+c)^{-1/2}]\to\frac{(n+c)^{1/2}\phi((n+c)^{1/2})\exp(-a)}{a+n}.
+\]
+
+\end_inset
+
+Since this reasoning applies to 
+\begin_inset Formula $b$
+\end_inset
+
+ as well, we get that 
+\begin_inset Formula $f$
+\end_inset
+
+ approaches, as 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+,
+\begin_inset Formula 
+\begin{eqnarray*}
+ &  & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{\Phi[-(a+n)n^{-1/2}]-\Phi[-(b+n)n^{-1/2}]},\\
+ & \approx & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{(n+c)^{1/2}\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]},\\
+ & = & \frac{\phi(-n^{2}/2(n+c))\exp(-x)}{\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]},\\
+ & \approx & \exp(-x)n^{-1}\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]^{-1},\\
+ & \to & \exp(-x)\left[\exp(-a)-\exp(-b)\right]^{-1}.
+\end{eqnarray*}
+
+\end_inset
+
+Here the third line follows from 
+\begin_inset Formula $\phi(n/(n+c)^{1/2})/\phi((n+c)^{1/2})\to1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For convenience, we show the formula for the mixture probabilities 
+\begin_inset Formula $\pi_{i}$
+\end_inset
+
+ here.
+ Let 
+\begin_inset Formula $c_{j}=\Phi^{-1}(1-\alpha_{j})$
+\end_inset
+
+ and define 
+\begin_inset Formula 
+\[
+c=\sum_{k=1}^{K}\rho_{k}[\Phi(c_{j-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
+\]
+
+\end_inset
+
+Then 
+\begin_inset Formula $\pi_{K}=\rho_{K}c^{-1}$
+\end_inset
+
+ and
+\begin_inset Formula 
+\begin{equation}
+\pi_{k}=c^{-1}(\rho_{k}-\rho_{K})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]\label{eq:pi_i formula}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 btprint "btPrintCited"
 bibfiles "infiniteci"
-options "plain"
+options "apacite"
 
 \end_inset
 
