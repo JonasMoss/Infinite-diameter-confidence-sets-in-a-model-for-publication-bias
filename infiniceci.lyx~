@@ -154,6 +154,10 @@ ic.
 Introduction
 \end_layout
 
+\begin_layout Standard
+What good is a study alone? 
+\end_layout
+
 \begin_layout Itemize
 What is meta-analysis?
 \end_layout
@@ -294,16 +298,22 @@ p
 \emph on
 p
 \emph default
--values in this paper, ((find ref; maybe simonsohn?).
- ((expand; remind the reader that 
-\begin_inset Formula $\alpha=0.025$
+-values in this paper, as there is usually, but not always, just one direction
+ that is interesting.
+ A one-sided 
+\emph on
+p
+\emph default
+-value can also be used if the researchers reported a two-sided value, since
+ 
+\begin_inset Formula $p=0.05$
 \end_inset
 
- is 
-\begin_inset Formula $1.96$
+ for a two-sided hypothesis corresponds to 
+\begin_inset Formula $p=0.025$
 \end_inset
 
-) 
+ for a one-sided hypothesis, et cetera.
 \end_layout
 
 \begin_layout Standard
@@ -712,13 +722,12 @@ literal "false"
 
 \end_inset
 
- introduced a regression-based estimator the corrected effect size 
+ discusses a regression-based estimator the corrected effect size 
 \begin_inset Formula $\theta$
 \end_inset
 
-, calle PET.
- It works by running the regrssion 
-\begin_inset Formula $x_{i}/\sigma_{i}\sim\theta+\beta\widehat{s}_{i}+\epsilon_{i},$
+ based the regression 
+\begin_inset Formula $x_{i}/s_{i}\sim\theta+\beta/s_{i}+\epsilon_{i},$
 \end_inset
 
 where 
@@ -733,20 +742,14 @@ where
  
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Stanley2005-ng"
-literal "false"
-
-\end_inset
-
- called his and a related method is PET-PEESE 
-\begin_inset CommandInset citation
-LatexCommand citep
 key "Stanley2014-gx"
 literal "false"
 
 \end_inset
 
-
+ discusses a related regression-based estimator of the fixed effects basic
+ publication bias model motived by Taylor expansions.
+ 
 \end_layout
 
 \begin_layout Enumerate
@@ -788,11 +791,18 @@ literal "false"
 .
  Since there is ample evidence of heterogeneity in meta-analysis, restricting
  oneself to the fixed effects meta-analysis is a mistake.
- Moreover, these methods only make use significant results.
 \end_layout
 
 \begin_layout Enumerate
-Trim-and-fill 
+The funnel funnel plot of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Egger1997-rd"
+literal "false"
+
+\end_inset
+
+ is a graphical method, while the trim-and-fill method of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Duval2000-ct"
@@ -800,15 +810,25 @@ literal "false"
 
 \end_inset
 
-
+ is a non-parametric method based on making the funnel plot symmetric.
 \end_layout
 
 \begin_layout Standard
 Hedges' model has some downsides.
- It doesn't model all sources of publication bias.
- For instance, publication bias due to language (Egger) and seniority of
- the authors ??.
- Second, it may not be the correct model for 
+ It models only bias due to selection of 
+\emph on
+p
+\emph default
+-values, not every source of bias, such as language bias 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Egger1998-kj"
+literal "false"
+
+\end_inset
+
+.
+ Second, it may not be best model for 
 \emph on
 p
 \emph default
@@ -841,14 +861,31 @@ p
 Estimation of Hedges' model is difficult.
  
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
+after "Section 6.3"
+key "Stanley2005-ng"
+literal "false"
+
+\end_inset
+
+ discusses three problematic cases in economics when maximum likelihood
+ was used to estimate Hedges publication bias model.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
 after "Appendix A"
 key "McShane2016-rb"
 literal "false"
 
 \end_inset
 
- Estimation of the maximum likelihood using the 
+ notes that while estimation of the basic publication bias model is hard,
+ introduction of the heterogeneity parameter only exacerbates the problem.
+ 
+\end_layout
+
+\begin_layout Standard
+e 
 \begin_inset Formula $\texttt{nlm}$
 \end_inset
 

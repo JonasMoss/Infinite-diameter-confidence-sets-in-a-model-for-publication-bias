@@ -1,0 +1,897 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{arxiv}
+
+\titletag{An arXiv preprint, v2}
+\makeatletter
+\titlerunning{\@title}
+\makeatother
+\authorrunning{Jonas Moss}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\sd}{sd}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Cor}{Cor}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\diag}{diag} 
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\supp}{supp}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+natbibapa
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style apacite
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Comments on the PET and PET-PEESE
+\end_layout
+
+\begin_layout Author
+Jonas Moss 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+orcid{0000-0002-6876-6964}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Department of Mathematics, University of Oslo
+\begin_inset Newline newline
+\end_inset
+
+PB 1053, Blindern, NO-0316, Oslo, Norway
+\emph on
+
+\begin_inset Newline newline
+\end_inset
+
+jonasmgj@math.uio.no
+\end_layout
+
+\begin_layout Abstract
+The meta-regression methods PET and PET-PEESE are two popular methods for
+ correcting for publication bias.
+ In the last couple of years, several simulation studies have shown that
+ PET and PET-PEESE do not perform the correct very well.
+ There are good mathematical reasons why this should not be considered a
+ surprise, and this note lays them out.
+\end_layout
+
+\begin_layout Section
+The Basic Publication Bias Model and Regression
+\end_layout
+
+\begin_layout Standard
+Assume we have 
+\begin_inset Formula $n$
+\end_inset
+
+ pairs 
+\begin_inset Formula $(x_{i},\sigma_{i})$
+\end_inset
+
+ of estimated effects and estimated standard errors.
+ 
+\end_layout
+
+\begin_layout Standard
+Assume the basis publication bias model with fixed effects:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(x_{i};\theta_{0},\sigma_{i})=\Phi([\theta_{0}-c_{\alpha}]/\sigma_{i})^{-1}\phi(x;\theta_{0},\sigma_{i})1[x_{i}/\sigma_{i}>a],
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This model is due to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hedges1984estimation"
+literal "false"
+
+\end_inset
+
+, and is the model underlying the estimation 
+\emph on
+p
+\emph default
+-curve method of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Simonsohn2014-cn"
+literal "false"
+
+\end_inset
+
+ and the 
+\emph on
+p
+\emph default
+-uniform method of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Van_Aert2016-cu"
+literal "false"
+
+\end_inset
+
+, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "McShane2016-rb"
+literal "false"
+
+\end_inset
+
+ for details.
+ Its expectation is, letting 
+\begin_inset Formula $t_{i}=x_{i}/\sigma_{i}$
+\end_inset
+
+, we can the expectation and standard deviation of 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+ are
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray}
+E(t_{i}) & = & \mu+\sigma_{i}^{-1}\lambda(c),\label{eq:ti-expectation}\\
+\sd t_{i} & = & \sigma_{i}\eta(c),\label{eq:ti-standard deviation}
+\end{eqnarray}
+
+\end_inset
+
+for some functions 
+\begin_inset Formula $\phi$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ that are, importantly, not constant in 
+\begin_inset Formula $c=a-\mu/\sigma_{i}$
+\end_inset
+
+.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+As acknowledged by 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "p. 61"
+key "Stanley2014-gx"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+Unfortunately, 
+\begin_inset Formula $λ(c)$
+\end_inset
+
+ is not generally constant with respect to 
+\begin_inset Formula $μ$
+\end_inset
+
+ and 
+\begin_inset Formula $σ_{i}$
+\end_inset
+
+, and this complication causes additional difficulty in providing an unbiased
+ corrected estimate.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Figure X plots 
+\begin_inset Formula $\phi,f$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ when 
+\begin_inset Formula $\mu=0.2$
+\end_inset
+
+ and 
+\begin_inset Formula $a=0.025$
+\end_inset
+
+.
+ See Box for details
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+The functions 
+\begin_inset Formula $\phi$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ equals bla bla, where bla bla.
+ See the appendix, page X, for derivations.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we can write the regression equation
+\begin_inset Formula 
+\begin{equation}
+t_{i}\sim\theta_{0}+\sigma_{i}^{-1}\phi(\theta,\sigma_{i},c_{\alpha})+\sigma_{i}f(\theta,\sigma_{i},c_{\alpha})\epsilon_{i},\label{eq:ti-true regression}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\epsilon_{i}$
+\end_inset
+
+ are independent error terms with zero mean.
+ 
+\end_layout
+
+\begin_layout Subsection
+Making assumptions
+\end_layout
+
+\begin_layout Standard
+Now let us make an unwarranted assumption.
+ Assume that 
+\begin_inset Formula $\phi(\theta,\sigma_{i},c_{\alpha})$
+\end_inset
+
+ is roughly constant, which is evidently not true by Figure X.
+ Denote 
+\begin_inset Formula $\phi(\theta,\sigma_{i},c_{\alpha})=\phi$
+\end_inset
+
+, and use write the regression equation
+\begin_inset Formula 
+\[
+t_{i}\sim\theta_{0}+\phi n_{i}^{-1/2}+\epsilon_{i}.
+\]
+
+\end_inset
+
+This the regression equation PET is based on 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Stanley2005-ng"
+literal "false"
+
+\end_inset
+
+.
+ Assuming the basic publication bias model, the expectation equals
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E(t_{i})=\theta_{0}+\phi n_{i}^{-1/2}
+\]
+
+\end_inset
+
+and the variance equals
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Var t_{i}=...
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Taylor expansions
+\end_layout
+
+\begin_layout Section
+Making comparisons
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of estimators
+\end_layout
+
+\end_inset
+
+
+\size small
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Method name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Method description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Reference
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+*Biased 
+\begin_inset Formula $\mu$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+PET
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Approximating non-linear regression by a linear regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Stanley2005-ng"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+PET-PEESE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Approximating non-linear regression by a linear regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "stanley2014meta"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\emph on
+p
+\emph default
+-curve
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Minimizing the Kolmogorov–Smirnov distance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Simonsohn2014-cn"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+No
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\emph on
+p-
+\emph default
+uniform
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Minimizing the Anderson–Darling distance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Van_Aert2016-cu"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+No
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Maximum likelihood
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Minimizing Kullback-Leibler divergence, maximizing likelihood
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hedges1984estimation"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+No
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Bayesian
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Application Bayes' theorem
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "moss2019modelling"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+No
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+medskip
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+
+\size footnotesize
+*Biased 
+\begin_inset Formula $\mu$
+\end_inset
+
+ means that 
+\begin_inset Formula $\hat{\mu}$
+\end_inset
+
+is biased in the limit, i.e., 
+\begin_inset Formula $\hat{\mu}$
+\end_inset
+
+is inconsistent.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "infiniteci"
+options "apacite"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
