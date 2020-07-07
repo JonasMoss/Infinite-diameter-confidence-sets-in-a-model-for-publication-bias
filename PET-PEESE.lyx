@@ -171,7 +171,7 @@ Assume the basis publication bias model with fixed effects:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-f(x_{i};\theta_{0},\sigma_{i})=\Phi([\theta_{0}-c_{\alpha}]/\sigma_{i})^{-1}\phi(x;\theta_{0},\sigma_{i})1[x_{i}/\sigma_{i}>a],
+f(x_{i};\mu,\sigma_{i})=\Phi([\mu-c_{\alpha}]/\sigma_{i})^{-1}\phi(x;\mu,\sigma_{i})1[x_{i}/\sigma_{i}>a],
 \]
 
 \end_inset
@@ -235,8 +235,8 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{eqnarray}
-E(t_{i}) & = & \mu+\sigma_{i}^{-1}\lambda(c),\label{eq:ti-expectation}\\
-\sd t_{i} & = & \sigma_{i}\eta(c),\label{eq:ti-standard deviation}
+E(t_{i}) & = & \mu+\lambda(c),\label{eq:ti-expectation}\\
+\sd t_{i} & = & \eta(c),\label{eq:ti-standard deviation}
 \end{eqnarray}
 
 \end_inset
@@ -415,6 +415,48 @@ The functions
 
  equals bla bla, where bla bla.
  See the appendix, page X, for derivations.
+\end_layout
+
+\begin_layout Plain Layout
+The mean of a normal with mean 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and standard deviation 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ truncated at 
+\begin_inset Formula $a$
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\mu+\sigma\frac{\phi\left(\frac{\mu-a}{\sigma}\right)}{\Phi\left(\frac{\mu-a}{\sigma}\right)}
+\]
+
+\end_inset
+
+hence the mean is
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\mu+\sigma\frac{\phi\left(\frac{\mu}{\sigma}-a\right)}{\Phi\left(\frac{\mu}{\sigma}-a\right)}=\mu+\sigma\lambda(a-\mu/\sigma),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is the inverse Mills ratio.
 \end_layout
 
 \end_inset
@@ -947,6 +989,171 @@ is biased in the limit, i.e.,
 
 is inconsistent.
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Appendix
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int(f(x)-g(x))^{2}p(x)dx=\int f(x)^{2}p(x)dx-2\int f(x)g(x)p(x)+\int g(x)^{2}p(x)dx
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ is known, we only need to work with 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+2\int f(x)g(x)p(x)+\int g(x)^{2}p(x)dx
+\]
+
+\end_inset
+
+Now
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int(\alpha+\beta\sigma-\mu+\sigma\lambda(a-\mu/\sigma))^{2}p(\sigma)d\sigma
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+-2\int(\alpha+\beta\sigma)[\mu+\sigma\lambda(a-\mu/\sigma)]p(\sigma)d\sigma+\int(\alpha+\beta\sigma)^{2}p(\sigma)dx
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The term 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int(\alpha+\beta\sigma)^{2}p(\sigma)dx=\alpha^{2}+2\alpha\beta E(\sigma)+\beta^{2}E(\sigma^{2})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+-2\int(\alpha+\beta\sigma)[\mu+\sigma\lambda(a-\mu/\sigma)]p(\sigma)d\sigma=-2\alpha\mu-2\alpha E[\sigma\lambda(a-\mu/\sigma)]-2\beta\mu E(\sigma)-2\beta E[\sigma^{2}\lambda(a-\mu/\sigma)]
+\]
+
+\end_inset
+
+Now differentiate
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{d}{d\alpha}F & = & 2\alpha+2\beta E(\sigma)-2\mu-2E[\sigma\lambda(a-\mu/\sigma)]=0\\
+\frac{d}{d\beta}F & = & 2\alpha E(\sigma)+2\beta E(\sigma^{2})-2\mu E(\sigma)-2E[\sigma^{2}\lambda(a-\mu/\sigma)]=0
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\alpha+\beta E(\sigma) & = & \mu+E(\sigma\lambda)\\
+\alpha+\beta\frac{E(\sigma^{2})}{E(\sigma)} & = & \mu+\frac{E(\sigma^{2}\lambda)}{E(\sigma)}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\alpha=\mu+E(\sigma\lambda)-\beta E(\sigma)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta=\frac{\frac{E(\sigma^{2}\lambda)}{E(\sigma)}-E(\sigma\lambda)}{\frac{E(\sigma^{2})}{E(\sigma)}-E(\sigma)}=\frac{E(\sigma^{2}\lambda)-E(\sigma\lambda)E(\sigma)}{E(\sigma^{2})-E(\sigma)^{2}}=\frac{E(\sigma^{2}\lambda)-E(\sigma\lambda)E(\sigma)}{\Var\sigma}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $\mu=\alpha$
+\end_inset
+
+ to hold, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta E(\sigma)=E(\sigma\lambda),
+\]
+
+\end_inset
+
+i.e.,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+[E(\sigma^{2}\lambda)-E(\sigma\lambda)E(\sigma)]E(\sigma)=E(\sigma\lambda)\Var\sigma
+\]
+
+\end_inset
+
+if and only if
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{E(\sigma^{2}\lambda)}{E(\sigma\lambda)}=\frac{E(\sigma^{2})}{E(\sigma)}
+\]
 
 \end_inset
 
