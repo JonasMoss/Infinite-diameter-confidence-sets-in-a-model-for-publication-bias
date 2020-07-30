@@ -1,0 +1,1519 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{arxiv}
+
+\titletag{An arXiv preprint, v2}
+\makeatletter
+\titlerunning{\@title}
+\makeatother
+\authorrunning{Jonas Moss}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\sd}{sd}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Cor}{Cor}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\diag}{diag} 
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\supp}{supp}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+natbibapa
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style apacite
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Why PET, PEESE, and PET-PEESE are inconsistent
+\end_layout
+
+\begin_layout Author
+Jonas Moss 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+orcid{0000-0002-6876-6964}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Department of Mathematics, University of Oslo
+\begin_inset Newline newline
+\end_inset
+
+PB 1053, Blindern, NO-0316, Oslo, Norway
+\emph on
+
+\begin_inset Newline newline
+\end_inset
+
+jonasmgj@math.uio.no
+\end_layout
+
+\begin_layout Abstract
+The meta-regression methods PET and PET-PEESE are two popular methods for
+ correcting for publication bias.
+ In the last couple of years, several simulation studies have shown that
+ PET and PET-PEESE do not perform the correction well.
+ There are good mathematical reasons why this should not be considered a
+ surprise, and this note lays them out.
+\end_layout
+
+\begin_layout Section
+The Basic Publication Bias Model and Regression
+\end_layout
+
+\begin_layout Standard
+Assume we have 
+\begin_inset Formula $n$
+\end_inset
+
+ pairs 
+\begin_inset Formula $(x_{i},\sigma_{i})$
+\end_inset
+
+ of estimated effects and estimated standard errors.
+ 
+\end_layout
+
+\begin_layout Standard
+Assume the basis publication bias model with fixed effects:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+<<<<<<< HEAD
+f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sigma_{i}}\right){}^{-1}\phi(x;\theta_{0},\sigma_{i})1[x_{i}/\sigma_{i}>a],
+=======
+f(x_{i};\mu,\sigma_{i})=\Phi([\mu-c_{\alpha}]/\sigma_{i})^{-1}\phi(x;\mu,\sigma_{i})1[x_{i}/\sigma_{i}>a],
+>>>>>>> 2bc52b7da8c519aaa83c979b07622bfa9784cce5
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is the model is due to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hedges1984estimation"
+literal "false"
+
+\end_inset
+
+ is the model underlying the estimation 
+\emph on
+p
+\emph default
+-curve method of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Simonsohn2014-cn"
+literal "false"
+
+\end_inset
+
+ and the 
+\emph on
+p
+\emph default
+-uniform method of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Van_Aert2016-cu"
+literal "false"
+
+\end_inset
+
+, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "McShane2016-rb"
+literal "false"
+
+\end_inset
+
+ for details.
+ Its expectation is, letting 
+\begin_inset Formula $t_{i}=x_{i}/\sigma_{i}$
+\end_inset
+
+, we can the expectation and standard deviation of 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+ are
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray}
+E(t_{i}) & = & \mu+\lambda(c),\label{eq:ti-expectation}\\
+\sd t_{i} & = & \eta(c),\label{eq:ti-standard deviation}
+\end{eqnarray}
+
+\end_inset
+
+for some functions 
+\begin_inset Formula $\phi$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ that are, importantly, not constant in 
+\begin_inset Formula $c=a-\mu/\sigma_{i}$
+\end_inset
+
+.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+As acknowledged by 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "p. 61"
+key "Stanley2014-gx"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+Unfortunately, 
+\begin_inset Formula $λ(c)$
+\end_inset
+
+ is not generally constant with respect to 
+\begin_inset Formula $μ$
+\end_inset
+
+ and 
+\begin_inset Formula $σ_{i}$
+\end_inset
+
+, and this complication causes additional difficulty in providing an unbiased
+ corrected estimate.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Figure X plots 
+\begin_inset Formula $\phi,f$
+\end_inset
+
+ as a function of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ when 
+\begin_inset Formula $\mu=0.2$
+\end_inset
+
+ and 
+\begin_inset Formula $a=0.025$
+\end_inset
+
+.
+ See Box for details
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\series bold
+(left)
+\series default
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta$
+\end_inset
+
+ as functions of 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ when 
+\begin_inset Formula $\alpha=0.025$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu=0.2$
+\end_inset
+
+.
+ 
+\series bold
+(right)
+\series default
+ Regions of equal density when 
+\begin_inset Formula $\alpha=0.025$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu=0.2$
+\end_inset
+
+, with 
+\begin_inset Formula $n=100$
+\end_inset
+
+ studies randomly sampled.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+The functions 
+\begin_inset Formula $\phi$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ equals bla bla, where bla bla.
+ See the appendix, page X, for derivations.
+\end_layout
+
+\begin_layout Plain Layout
+The mean of a normal with mean 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and standard deviation 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ truncated at 
+\begin_inset Formula $a$
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\mu+\sigma\frac{\phi\left(\frac{\mu-a}{\sigma}\right)}{\Phi\left(\frac{\mu-a}{\sigma}\right)}
+\]
+
+\end_inset
+
+hence the mean is
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\mu+\sigma\frac{\phi\left(\frac{\mu}{\sigma}-a\right)}{\Phi\left(\frac{\mu}{\sigma}-a\right)}=\mu+\sigma\lambda(a-\mu/\sigma),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is the inverse Mills ratio.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we can write the regression equation
+\begin_inset Formula 
+\begin{equation}
+t_{i}\mid\sigma_{i}\sim\theta_{0}+\sigma_{i}^{-1}\phi(\theta,\sigma_{i},c_{\alpha})+\sigma_{i}f(\theta,\sigma_{i},c_{\alpha})\epsilon_{i},\label{eq:ti-true regression}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\epsilon_{i}$
+\end_inset
+
+ are independent error terms with zero mean.
+ 
+\end_layout
+
+\begin_layout Subsection
+Making assumptions
+\end_layout
+
+\begin_layout Standard
+Now let us make an unwarranted assumption.
+ Assume that 
+\begin_inset Formula $\phi(\theta,\sigma_{i},c_{\alpha})$
+\end_inset
+
+ is roughly constant, which is evidently not true by Figure X.
+ Denote 
+\begin_inset Formula $\phi(\theta,\sigma_{i},c_{\alpha})=\phi$
+\end_inset
+
+, and use write the regression equation
+\begin_inset Formula 
+\[
+t_{i}\sim\theta_{0}+\phi n_{i}^{-1/2}+\epsilon_{i}.
+\]
+
+\end_inset
+
+This the regression equation PET is based on 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Stanley2005-ng"
+literal "false"
+
+\end_inset
+
+.
+ Assuming the basic publication bias model, the expectation equals
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E(t_{i})=\theta_{0}+\phi n_{i}^{-1/2}
+\]
+
+\end_inset
+
+and the variance equals
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Var t_{i}=...
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Taylor expansions
+\end_layout
+
+\begin_layout Section
+What are we estimating?
+\end_layout
+
+\begin_layout Standard
+Estimating the parameters of a linear regression is the same as estimating
+ the linear function itself.
+ 
+\end_layout
+
+\begin_layout Standard
+A simple linear regression finds the parameters 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+ that minimize the expression
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E[Y-(\alpha+\beta X)]^{2}\label{eq:minimand}
+\end{equation}
+
+\end_inset
+
+When 
+\begin_inset Formula $Y\mid X=\alpha+\beta X+\epsilon$
+\end_inset
+
+ for some 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+, and 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ uncorrelated with 
+\begin_inset Formula $X$
+\end_inset
+
+, the optimal 
+\begin_inset Formula $\alpha+\beta X$
+\end_inset
+
+ depends on the distribution of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:linear regresison approximation"
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y=X^{2}$
+\end_inset
+
+, so that 
+\begin_inset Formula $Y$
+\end_inset
+
+ is completely determined from 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\[
+E[X^{2}-(a+bX)]^{2}=a^{2}+2ab-2aE(X^{2})+b^{2}E(X^{2})-2bE(X^{3})+E(X^{4})
+\]
+
+\end_inset
+
+Taking derivatives yield
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\begin{eqnarray*}
+aE(X)+bE(X^{2})-E(X^{3}) & = & 0\\
+a+bE(X)-E(X^{2}) & = & 0
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\begin{eqnarray*}
+[E(X^{2})-bE(X)]E(X)+bE(X^{2})-E(X^{3}) & = & E(X^{2})E(X)+b\Var X-E(X^{3})\\
+b & = & \frac{E(X^{3})-E(X^{2})E(X)}{\Var X}\\
+a & = & E(X^{2})-bE(X)
+\end{eqnarray*}
+
+\end_inset
+
+Assuming 
+\begin_inset Formula $E(X)=0$
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{eqnarray*}
+bE(X^{2})-E(X^{3}) & = & E(X^{3})/E(X^{2})\\
+a & = & E(X^{2})
+\end{eqnarray*}
+
+\end_inset
+
+For instance, if 
+\begin_inset Formula $X$
+\end_inset
+
+ is standard normal, 
+\begin_inset Formula $E(X^{3})=0$
+\end_inset
+
+ and 
+\begin_inset Formula $E(X^{2})=1$
+\end_inset
+
+, hence 
+\begin_inset Formula $a=1$
+\end_inset
+
+ and 
+\begin_inset Formula $b=0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $X$
+\end_inset
+
+ is standard exponential, that is.
+ then 
+\begin_inset Formula $E(X^{3})=3!=6$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\[
+b=\frac{6-2}{\Var X}=4
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+a=2
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the publication bias model, 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ takes on the role of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $a,b$
+\end_inset
+
+ are independent of 
+\begin_inset Formula $X$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $Y\mid X=a+bX+\epsilon$
+\end_inset
+
+, where 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is uncorrelated with 
+\begin_inset Formula $X$
+\end_inset
+
+ and has zero mean.
+\end_layout
+
+\begin_layout Standard
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+E(XY) & = & bE(X^{2})+aE(Y)\\
+E(Y) & = & a+bE(X^{2})
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Stuff
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E[Y-(a+bX)]^{2}=a^{2}+2abE(X)-2aE(Y)+b^{2}E(X^{2})-2bE(XY)+E(Y^{2})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{d}{da}m & = & 2a+2bE(X)-2E(Y)\\
+\frac{d}{db}m & = & 2aE(X)+2bE(X^{2})-2E(XY)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proposition
+The minimizers 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+ of bla are independent of the distribution of 
+\begin_inset Formula $X$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $Y\mid X=a+bX+\epsilon$
+\end_inset
+
+, where 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is uncorrelated with 
+\begin_inset Formula $X$
+\end_inset
+
+ and has zero mean.
+\end_layout
+
+\begin_layout Proof
+Probably quite easy, move to Appendix.
+\end_layout
+
+\begin_layout Proposition
+The minimizer 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are independent of the distribution of 
+\begin_inset Formula $X$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $Y\mid X=\beta^{T}X+\epsilon$
+\end_inset
+
+, where 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is uncorrelated with 
+\begin_inset Formula $X$
+\end_inset
+
+ and has zero mean.
+\end_layout
+
+\begin_layout Proof
+Probably quite easy, move to Appendix.
+\end_layout
+
+\begin_layout Section
+Making comparisons
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of estimators
+\end_layout
+
+\end_inset
+
+
+\size small
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Method name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Method description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Reference
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+*Bias
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+PET
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Approximation by linear regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Stanley2005-ng"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+PEESE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Approximation by linear regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+PET-PEESE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Approximation by linear regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "stanley2014meta"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\emph on
+p
+\emph default
+-curve
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Minimizing the Kolmogorov–Smirnov distance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Simonsohn2014-cn"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+No
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\emph on
+p-
+\emph default
+uniform
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Minimizing the Anderson–Darling distance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Van_Aert2016-cu"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+No
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Maximum likelihood
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Minimizing Kullback-Leibler divergence
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hedges1984estimation"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+No
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Bayesian
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Application Bayes' theorem
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+\begin_inset CommandInset citation
+LatexCommand citet
+key "moss2019modelling"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+No
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+medskip
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+
+\size footnotesize
+*The estimator 
+\begin_inset Formula $\hat{\mu}$
+\end_inset
+
+is biased in the limit, i.e., 
+\begin_inset Formula $\hat{\mu}$
+\end_inset
+
+is inconsistent.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Appendix
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int(f(x)-g(x))^{2}p(x)dx=\int f(x)^{2}p(x)dx-2\int f(x)g(x)p(x)+\int g(x)^{2}p(x)dx
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ is known, we only need to work with 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+2\int f(x)g(x)p(x)+\int g(x)^{2}p(x)dx
+\]
+
+\end_inset
+
+Now
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int(\alpha+\beta\sigma-\mu+\sigma\lambda(a-\mu/\sigma))^{2}p(\sigma)d\sigma
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+-2\int(\alpha+\beta\sigma)[\mu+\sigma\lambda(a-\mu/\sigma)]p(\sigma)d\sigma+\int(\alpha+\beta\sigma)^{2}p(\sigma)dx
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The term 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int(\alpha+\beta\sigma)^{2}p(\sigma)dx=\alpha^{2}+2\alpha\beta E(\sigma)+\beta^{2}E(\sigma^{2})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+-2\int(\alpha+\beta\sigma)[\mu+\sigma\lambda(a-\mu/\sigma)]p(\sigma)d\sigma=-2\alpha\mu-2\alpha E[\sigma\lambda(a-\mu/\sigma)]-2\beta\mu E(\sigma)-2\beta E[\sigma^{2}\lambda(a-\mu/\sigma)]
+\]
+
+\end_inset
+
+Now differentiate
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{d}{d\alpha}F & = & 2\alpha+2\beta E(\sigma)-2\mu-2E[\sigma\lambda(a-\mu/\sigma)]=0\\
+\frac{d}{d\beta}F & = & 2\alpha E(\sigma)+2\beta E(\sigma^{2})-2\mu E(\sigma)-2E[\sigma^{2}\lambda(a-\mu/\sigma)]=0
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\alpha+\beta E(\sigma) & = & \mu+E(\sigma\lambda)\\
+\alpha+\beta\frac{E(\sigma^{2})}{E(\sigma)} & = & \mu+\frac{E(\sigma^{2}\lambda)}{E(\sigma)}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\alpha=\mu+E(\sigma\lambda)-\beta E(\sigma)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta=\frac{\frac{E(\sigma^{2}\lambda)}{E(\sigma)}-E(\sigma\lambda)}{\frac{E(\sigma^{2})}{E(\sigma)}-E(\sigma)}=\frac{E(\sigma^{2}\lambda)-E(\sigma\lambda)E(\sigma)}{E(\sigma^{2})-E(\sigma)^{2}}=\frac{E(\sigma^{2}\lambda)-E(\sigma\lambda)E(\sigma)}{\Var\sigma}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $\mu=\alpha$
+\end_inset
+
+ to hold, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta E(\sigma)=E(\sigma\lambda),
+\]
+
+\end_inset
+
+i.e.,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+[E(\sigma^{2}\lambda)-E(\sigma\lambda)E(\sigma)]E(\sigma)=E(\sigma\lambda)\Var\sigma
+\]
+
+\end_inset
+
+if and only if
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{E(\sigma^{2}\lambda)}{E(\sigma\lambda)}=\frac{E(\sigma^{2})}{E(\sigma)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "infiniteci"
+options "apacite"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
