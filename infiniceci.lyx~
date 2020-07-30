@@ -138,16 +138,18 @@ jonasmgj@math.uio.no
 \end_layout
 
 \begin_layout Abstract
-Meta-analysis is the quantitative combination of results from different
- studies.
- The assumptions of classical meta-analysis models are not satisfied whenever
- publication bias is present, which causes inconsistent parameter estimates.
- A popular method to account for publication bias in meta-analysis is Hedges'
- selection function model, but frequentist estimation of this model is problemat
-ic.
- This paper shows there is no confidence set of guaranteed finite diameter
- for the mean and heterogeneity parameters in the selection function model.
- The proof is based on a generalization of the Gleser–Hwang theorem.
+Meta-analysis, the statistical analysis of results from separate studies,
+ is one of the fundamental building blocks of science.
+ But the assumptions of classical meta-analysis models are not satisfied
+ whenever publication bias is present, which causes inconsistent parameter
+ estimates.
+ Hedges' selection function model takes publication bias into account, but
+ estimating and infering with this model is hard and sometimes yields unbelievab
+le results.
+ Using a generalized Gleser–Hwang theorem, we show there is no confidence
+ set of guaranteed finite diameter for the parameters of Hedges' selection
+ model.
+ 
 \end_layout
 
 \begin_layout Section
@@ -155,32 +157,129 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-What good is a study alone? 
+A meta-analysis is a statistical analysis that quantitavely combines results
+ from separate scientific studies.
+ When the studies measure the same phenomenon, pooling of information allows
+ us to predict the common effect size with larger precision than we could
+ have done with one study alone.
+ Meta-analyses are ubiquitous in the empirical sciences and is a key compontent
+ of most systematic reviews such as Cochrane's reviews 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Higgins2019-vv"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Itemize
-What is meta-analysis?
-\end_layout
-
-\begin_layout Itemize
-What is publication bias?
-\end_layout
-
-\begin_layout Itemize
-Why do we need to model it?
-\end_layout
-
-\begin_layout Itemize
-(Can maybe copy from another paper, e.g.
+\begin_layout Standard
+Most meta-analytic techniques assumes honest and unbiased reporting of results.
+ But there is ample evidence that the scientific literature is not unbiased,
+ as studies with
+\emph on
  
+\emph default
+significant 
 \emph on
 p
 \emph default
--hacking paper.)
+-values tend to be published with a greater probability than other studies
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Easterbrook1991-ph"
+literal "false"
+
+\end_inset
+
+.
+ This phenomenon is called publication bias 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "sterling1959publication"
+literal "false"
+
+\end_inset
+
+.
+ When publication bias is present, there is no reason to trust the results
+ of meta-analytic methods that do not account for it, as even light publication
+ bias can severely bias studies 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Carter2019-rw"
+literal "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
-\begin_layout Itemize
-Problems with frequentist estimation.
+\begin_layout Standard
+Hedges' 
+\begin_inset CommandInset citation
+LatexCommand citeyearpar
+key "hedges1992modeling"
+literal "false"
+
+\end_inset
+
+ publication bias model takes publication explicity into account using a
+ selection model, and is arguably the most appropriate model for publication
+ bias 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "moss2019modelling,Carter2019-rw"
+literal "false"
+
+\end_inset
+
+.
+ Still, this model has not yet taken off.
+ Its maximum likelihood estimation methods are numerically unstable and
+ its estimates are off even when they converge 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Coburn2019-ec,Stanley2005-ng"
+literal "false"
+
+\end_inset
+
+.
+ The mean effect size can be negative and of large magnitude, and does not
+ appear to be accurate.
+ It turns out there are ridges in the likelihood function that cause this
+ behaviour 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "McShane2016-rb"
+literal "false"
+
+\end_inset
+
+, but it has not been stated in clear terms exactly what the problem is.
+ The purpose of this note is to show there is no confidence set for the
+ mean effect size that has finite diameter with probability 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ In the terminology of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "berger1999integrated"
+literal "false"
+
+\end_inset
+
+, Hedges' publication bias model belongs to the 
+\emph on
+Gleser–Hwang
+\emph default
+ class.
 \end_layout
 
 \begin_layout Section
@@ -225,12 +324,11 @@ s to be known.
 \begin_inset Formula $\theta$
 \end_inset
 
- is the population effect size, and 
+ is the population effect size, 
 \begin_inset Formula $N(\theta_{0},\tau)$
 \end_inset
 
- is the effect size distribution.
- The parameter 
+ is the effect size distribution, and 
 \begin_inset Formula $\tau$
 \end_inset
 
@@ -249,7 +347,7 @@ s to be known.
  is
 \begin_inset Formula 
 \begin{equation}
-f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}),\label{eq:random effects meta-analysis model}
+f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi\left(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}\right),\label{eq:random effects meta-analysis model}
 \end{equation}
 
 \end_inset
@@ -263,37 +361,28 @@ where
 
 \begin_layout Standard
 We will assume that the random effects meta-analysis model is true in the
- absence of publication bias, and that publication bias modifies the density
- in a suitable way.
+ absence of publication bias.
+ The mechanisms that cause publication bias modify the density in a suitable
+ way.
  First we consider the case when only significant studies at som specified
  level 
 \begin_inset Formula $\alpha$
 \end_inset
 
  are published.
- Since 
-\begin_inset Formula $x_{i}/\sigma_{i}\mid\theta_{i}\sim N(\theta_{i},1)$
-\end_inset
-
- by equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:conditional random effects density"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, the one-sided 
+ Assuming one-sided tests, the 
 \emph on
 p
 \emph default
--value is 
+-values are 
 \begin_inset Formula $u_{i}=\Phi(-x_{i}/\sigma_{i})$
 \end_inset
 
-.
+, or normal one-sided 
+\emph on
+p
+\emph default
+-values.
  We will only deal with with one-sided 
 \emph on
 p
@@ -381,7 +470,7 @@ ant studies are published.
 \end_layout
 
 \begin_layout Standard
-These problems can are rectified by adopting the selection model for publication
+These problems can be rectified by adopting the selection model for publication
  bias of 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -710,50 +799,49 @@ p
 \emph default
 -value based publication bias scenario, Hedge's publication bias model is
  simply the correct model.
- This can not be said for the other statistical methods correcting for publicati
-on bias in the literature.
-\end_layout
+ Most statistical methods correcting for publication bias in the literature
+ are either do not make use an explicit satistical model or do not estimated
+ the parameters 
+\begin_inset Formula $\theta_{0}$
+\end_inset
 
-\begin_layout Enumerate
+ and 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ For instance, The funnel funnel plot of 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Stanley2005-ng"
+key "Egger1997-rd"
 literal "false"
 
 \end_inset
 
- discusses a regression-based estimator the corrected effect size 
-\begin_inset Formula $\theta$
-\end_inset
-
- based the regression 
-\begin_inset Formula $x_{i}/s_{i}\sim\theta+\beta/s_{i}+\epsilon_{i},$
-\end_inset
-
-where 
-\begin_inset Formula $\theta$
-\end_inset
-
- is the adjusted effect size and 
-\begin_inset Formula $\beta\neq0$
-\end_inset
-
- indicates the presence publication bias.
- 
+ is a graphical method, while the trim-and-fill method of 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Stanley2014-gx"
+key "Duval2000-ct"
 literal "false"
 
 \end_inset
 
- discusses a related regression-based estimator of the fixed effects basic
- publication bias model motived by Taylor expansions.
+ is a non-parametric method based on making the funnel plot symmetric.
  
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Stanley2005-ng,stanley2014meta"
+literal "false"
 
-\begin_layout Enumerate
-The estimating 
+\end_inset
+
+ discuss misspecified regression-based estimator of the corrected effect
+ size 
+\begin_inset Formula $\theta$
+\end_inset
+
+ based on the fixed effect Hedges' publication bias model.
+ The estimating 
 \emph on
 p
 \emph default
@@ -779,8 +867,8 @@ literal "false"
 
 , are two methods for dealing with publication bias hailing from psychology.
  Both are based on a variant of the basic publication bias model, but with
- fixed instead of random effects, and both employ non-standard estimation
- strategies 
+ fixed instead of random effects, and both employ somewhat unusual estimation
+ methods 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "McShane2016-rb"
@@ -791,26 +879,6 @@ literal "false"
 .
  Since there is ample evidence of heterogeneity in meta-analysis, restricting
  oneself to the fixed effects meta-analysis is a mistake.
-\end_layout
-
-\begin_layout Enumerate
-The funnel funnel plot of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Egger1997-rd"
-literal "false"
-
-\end_inset
-
- is a graphical method, while the trim-and-fill method of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Duval2000-ct"
-literal "false"
-
-\end_inset
-
- is a non-parametric method based on making the funnel plot symmetric.
 \end_layout
 
 \begin_layout Standard
@@ -881,7 +949,7 @@ literal "false"
 
  notes that while estimation of the basic publication bias model is hard,
  introduction of the heterogeneity parameter only exacerbates the problem.
- 
+ To illustrate the problems
 \end_layout
 
 \begin_layout Standard
@@ -1447,22 +1515,72 @@ name "exa:Fieller's problem"
 
 \end_inset
 
- Fieller's ratio of means problem is about confidence intervals for 
-\begin_inset Formula $\mu_{1}/\mu_{2}$
+ Let 
+\begin_inset Formula $X_{1},X_{2}$
 \end_inset
 
- when the data is observed from a bivariate normal with mean 
-\begin_inset Formula $(\mu_{1},\mu_{2})$
+ be an observation from a bivariate normal 
+\begin_inset Formula $N([\mu_{1},\mu_{2}],I\sigma^{2})$
+\end_inset
+
+, where 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ is known.
+ We want to form a confidence set for ratio 
+\begin_inset Formula $\mu_{2}/\mu_{1}$
 \end_inset
 
 .
- Fieller's proposed confidence interval is infamous for being wide, often
- going off to either 
-\begin_inset Formula $\infty$
+ Fieller's 
+\begin_inset CommandInset citation
+LatexCommand citeyearpar
+key "Fieller1940-lg"
+literal "false"
+
 \end_inset
 
- or 
-\begin_inset Formula $+\infty$
+ solution proposed solution is
+\end_layout
+
+\begin_layout Example
+Fieller's confidence set can be finite, the whole real line, or the union
+ of two disjoint semi-infinite intervals.
+ It is evidently not finite with probability 
+\begin_inset Formula $1$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Koschat1987-dk"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gleser1987nonexistence"
+literal "false"
+
+\end_inset
+
+ showed that every confidence set for 
+\begin_inset Formula $\mu_{2}/\mu_{1}$
+\end_inset
+
+ must be infinite with positive probability, independently of the distribution
+ of 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $X_{2}$
 \end_inset
 
 .
@@ -1508,7 +1626,7 @@ name "exa:Fieller's problem"
 \begin_inset Formula $\left\Vert [p]\right\Vert =|E_{q}(X)/E_{q}(Y)|$
 \end_inset
 
-.
+, i.e., the ratio of means.
  Let 
 \begin_inset Formula $p_{n}(x,y)=p(x,y)$
 \end_inset
@@ -1549,7 +1667,14 @@ noprefix "false"
 status open
 
 \begin_layout Plain Layout
-Bahadur–Savage
+\begin_inset CommandInset citation
+LatexCommand citet
+key "bahadur1956nonexistence"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1561,7 +1686,7 @@ name "exa:Bahadur--Savage"
 
 \end_inset
 
-
+ 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "bahadur1956nonexistence"
@@ -1569,16 +1694,40 @@ literal "false"
 
 \end_inset
 
-; Let 
+ studied non-parametric testing of the mean, and concluded the mean is untestabl
+e.
+ Their setting is a family 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
- be a family of densities over 
+ of densities over 
 \begin_inset Formula $\mathbb{R}$
 \end_inset
 
  that covers all finite means, has finite variances, and is closed under
- compositions.
+ convex combinations.
+ Similar problems were considered by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "romano2004non"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Donoho1988-hg"
+literal "false"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+Using the Gleswer–Hwang theorem, it is easy to verify there is no confidence
+ set of guarateed finite diameter.
  Define the partition 
 \begin_inset Formula $\Pi$
 \end_inset
@@ -1642,64 +1791,7 @@ noprefix "false"
  has infinite diameter with positive probability.
 \end_layout
 
-\end_deeper
 \begin_layout Remark
-The result in Example 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "exa:Bahadur--Savage"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- can be strengthened, as any confidence set for the mean with such a family
- of distributions equals 
-\begin_inset Formula $(-\infty,\infty)$
-\end_inset
-
- with probability 
-\begin_inset Formula $1$
-\end_inset
-
-.
- See page ?? of the appendix for details.
- 
-\end_layout
-
-\begin_deeper
-\begin_layout Remark
-Let us consider a purely non-parametric problem too.
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "bahadur1956nonexistence"
-literal "false"
-
-\end_inset
-
-; similar problems were considered by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "romano2004non"
-literal "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Donoho1988-hg"
-literal "false"
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Standard
 Consult 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1719,8 +1811,9 @@ literal "false"
  for more examples of Gleser–Hwang classes.
 \end_layout
 
+\end_deeper
 \begin_layout Standard
-There are some possible candidates for 
+There are severak candidates for 
 \begin_inset Formula $\Pi$
 \end_inset
 
@@ -2764,34 +2857,34 @@ noprefix "false"
 \end_layout
 
 \begin_layout Section
-Concluding remarks
+Remarks
 \end_layout
 
 \begin_layout Standard
-((Check out Berger again; maybe use a quote.))
-\end_layout
-
-\begin_layout Standard
-((Argue in favour of Bayesian estimation))
-\end_layout
-
-\begin_layout Standard
-It is easy to find uncontroverisal priors for 
+Well-behaved confidence sets for Hedges publication bias model do not exist,
+ but well-behaved credibility sets do.
+ Bayesian estimation of Hedges model can be made routine, as it is easy
+ to find uncontroverisal priors for 
 \begin_inset Formula $\theta_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau$
 \end_inset
 
 .
- In almost any practical meta-analysis we know that 
+ In practical meta-analyses we know that 
 \begin_inset Formula $\theta_{0}$
 \end_inset
 
- cannot be very large, is likely to be quite close to 
+ cannot be large, ad is likely to be close to 
 \begin_inset Formula $0$
 \end_inset
 
 .
- Since many effects can be understood as the aggregation of many small effects,
- the central limit theorem justified using a normal prior.
+ Moreover, since since many effects can be understood as the aggregation
+ of many small effects, the central limit theorem justifies using a normal
+ prior.
  As we want to remove prior mass from negative 
 \begin_inset Formula $\theta_{0}$
 \end_inset
@@ -2817,11 +2910,6 @@ literal "false"
 
  employed these priors on several examples.
  
-\end_layout
-
-\begin_layout Standard
-Bayesian estimation would not help in the Bahadur–Savage example, as it
- has no likelihood.
 \end_layout
 
 \begin_layout Section*
@@ -2891,20 +2979,6 @@ name "lem:Dominated covergence theorem"
 .
 \end_layout
 
-\begin_layout Standard
-This next proof follows the proof 
-\begin_inset CommandInset citation
-LatexCommand citet
-after "Theorem 1"
-key "gleser1987nonexistence"
-literal "false"
-
-\end_inset
-
- closely.
- 
-\end_layout
-
 \begin_layout Proof
 \begin_inset Argument 1
 status open
@@ -2941,7 +3015,7 @@ literal "false"
 
 \end_inset
 
- very closely.
+ closely.
  We can assume without loss of generality that 
 \begin_inset Formula $\left\Vert [p_{n}]\right\Vert \geq n$
 \end_inset
@@ -2951,9 +3025,9 @@ literal "false"
 \begin_inset Formula $D$
 \end_inset
 
- (equation 
+ 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "eq:diameter"
 plural "false"
 caps "false"
@@ -2961,7 +3035,7 @@ noprefix "false"
 
 \end_inset
 
-), we see that
+ we see that
 \begin_inset Formula 
 \[
 \{D\geq n\}=\{\omega\in\Omega\mid\textrm{there is a }\pi\textrm{ such that}\left\Vert \pi\right\Vert \geq n\textrm{ and }\omega\in R^{c}(\pi)\},
@@ -3178,12 +3252,12 @@ Let
 \end_inset
 
 .
- Using the well-known formula for the truncated normal, we find that
+ Using the well-known formula for the truncated normal,
 \begin_inset Formula 
-\begin{eqnarray*}
-f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\\
- & = & \frac{\phi(x;-n,(n+c)^{1/2})1[a,b](x)}{\Phi[-(a+n)(n+c)^{-1/2}]-\Phi[-(b+n)(n+c)^{-1/2}]}.
-\end{eqnarray*}
+\begin{eqnarray}
+f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\label{eq:truncated}\\
+ & = & \frac{\phi(x;-n,(n+c)^{1/2})1[a,b](x)}{\Phi[-(a+n)(n+c)^{-1/2}]-\Phi[-(b+n)(n+c)^{-1/2}]}.\nonumber 
+\end{eqnarray}
 
 \end_inset
 
@@ -3259,7 +3333,17 @@ literal "false"
 \end_inset
 
  grows.
- The part involving the cumulative normal distributions become
+ The part of 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:truncated"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ involving cumulative normal distributions become
 \begin_inset Formula 
 \begin{eqnarray*}
 \Phi[-(a+n)(n+c)^{-1/2}] & \approx & \frac{(n+c)^{1/2}}{n+a}\phi[-(a+n)(n+c)^{-1/2}],
@@ -3292,11 +3376,7 @@ Since this reasoning applies to
 \begin_inset Formula $f$
 \end_inset
 
- approaches, as 
-\begin_inset Formula $n\to\infty$
-\end_inset
-
-,
+ approaches
 \begin_inset Formula 
 \begin{eqnarray*}
  &  & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{\Phi[-(a+n)n^{-1/2}]-\Phi[-(b+n)n^{-1/2}]},\\

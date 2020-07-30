@@ -265,11 +265,10 @@ literal "false"
 \end_inset
 
 .
- The estimate of the mean effect size may be negative and of unrealistically
- large magnitude, and the estimated heterogeneity parameter might be improbably
- large.
- It turns out there are ridges in the likelihood function that can be linked
- to this behaviour 
+ The mean effect size can be negative and of large magnitude, and does not
+ appear to be accurate.
+ It turns out there are ridges in the likelihood function that cause this
+ behaviour 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "McShane2016-rb"

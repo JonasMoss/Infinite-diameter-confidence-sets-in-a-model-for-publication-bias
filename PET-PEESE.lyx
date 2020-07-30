@@ -104,7 +104,7 @@ natbibapa
 \begin_body
 
 \begin_layout Title
-Comments on the PET and PET-PEESE
+Why PET, PEESE, and PET-PEESE are inconsistent
 \end_layout
 
 \begin_layout Author
@@ -142,7 +142,7 @@ jonasmgj@math.uio.no
 The meta-regression methods PET and PET-PEESE are two popular methods for
  correcting for publication bias.
  In the last couple of years, several simulation studies have shown that
- PET and PET-PEESE do not perform the correct very well.
+ PET and PET-PEESE do not perform the correction well.
  There are good mathematical reasons why this should not be considered a
  surprise, and this note lays them out.
 \end_layout
@@ -171,7 +171,7 @@ Assume the basis publication bias model with fixed effects:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-f(x_{i};\theta_{0},\sigma_{i})=\Phi([\theta_{0}-c_{\alpha}]/\sigma_{i})^{-1}\phi(x;\theta_{0},\sigma_{i})1[x_{i}/\sigma_{i}>a],
+f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sigma_{i}}\right){}^{-1}\phi(x;\theta_{0},\sigma_{i})1[x_{i}/\sigma_{i}>a],
 \]
 
 \end_inset
@@ -180,7 +180,7 @@ f(x_{i};\theta_{0},\sigma_{i})=\Phi([\theta_{0}-c_{\alpha}]/\sigma_{i})^{-1}\phi
 \end_layout
 
 \begin_layout Standard
-This model is due to 
+This is the model is due to 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "hedges1984estimation"
@@ -188,7 +188,7 @@ literal "false"
 
 \end_inset
 
-, and is the model underlying the estimation 
+ is the model underlying the estimation 
 \emph on
 p
 \emph default
@@ -426,7 +426,7 @@ The functions
 Now we can write the regression equation
 \begin_inset Formula 
 \begin{equation}
-t_{i}\sim\theta_{0}+\sigma_{i}^{-1}\phi(\theta,\sigma_{i},c_{\alpha})+\sigma_{i}f(\theta,\sigma_{i},c_{\alpha})\epsilon_{i},\label{eq:ti-true regression}
+t_{i}\mid\sigma_{i}\sim\theta_{0}+\sigma_{i}^{-1}\phi(\theta,\sigma_{i},c_{\alpha})+\sigma_{i}f(\theta,\sigma_{i},c_{\alpha})\epsilon_{i},\label{eq:ti-true regression}
 \end{equation}
 
 \end_inset
@@ -501,6 +501,309 @@ Taylor expansions
 \end_layout
 
 \begin_layout Section
+What are we estimating?
+\end_layout
+
+\begin_layout Standard
+Estimating the parameters of a linear regression is the same as estimating
+ the linear function itself.
+ 
+\end_layout
+
+\begin_layout Standard
+A simple linear regression finds the parameters 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+ that minimize the expression
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E[Y-(\alpha+\beta X)]^{2}\label{eq:minimand}
+\end{equation}
+
+\end_inset
+
+When 
+\begin_inset Formula $Y\mid X=\alpha+\beta X+\epsilon$
+\end_inset
+
+ for some 
+\begin_inset Formula $\alpha,\beta$
+\end_inset
+
+, and 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ uncorrelated with 
+\begin_inset Formula $X$
+\end_inset
+
+, the optimal 
+\begin_inset Formula $\alpha+\beta X$
+\end_inset
+
+ depends on the distribution of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example
+\begin_inset CommandInset label
+LatexCommand label
+name "exa:linear regresison approximation"
+
+\end_inset
+
+Let 
+\begin_inset Formula $Y=X^{2}$
+\end_inset
+
+, so that 
+\begin_inset Formula $Y$
+\end_inset
+
+ is completely determined from 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\[
+E[X^{2}-(a+bX)]^{2}=a^{2}+2ab-2aE(X^{2})+b^{2}E(X^{2})-2bE(X^{3})+E(X^{4})
+\]
+
+\end_inset
+
+Taking derivatives yield
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\begin{eqnarray*}
+aE(X)+bE(X^{2})-E(X^{3}) & = & 0\\
+a+bE(X)-E(X^{2}) & = & 0
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\begin{eqnarray*}
+[E(X^{2})-bE(X)]E(X)+bE(X^{2})-E(X^{3}) & = & E(X^{2})E(X)+b\Var X-E(X^{3})\\
+b & = & \frac{E(X^{3})-E(X^{2})E(X)}{\Var X}\\
+a & = & E(X^{2})-bE(X)
+\end{eqnarray*}
+
+\end_inset
+
+Assuming 
+\begin_inset Formula $E(X)=0$
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{eqnarray*}
+bE(X^{2})-E(X^{3}) & = & E(X^{3})/E(X^{2})\\
+a & = & E(X^{2})
+\end{eqnarray*}
+
+\end_inset
+
+For instance, if 
+\begin_inset Formula $X$
+\end_inset
+
+ is standard normal, 
+\begin_inset Formula $E(X^{3})=0$
+\end_inset
+
+ and 
+\begin_inset Formula $E(X^{2})=1$
+\end_inset
+
+, hence 
+\begin_inset Formula $a=1$
+\end_inset
+
+ and 
+\begin_inset Formula $b=0$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $X$
+\end_inset
+
+ is standard exponential, that is.
+ then 
+\begin_inset Formula $E(X^{3})=3!=6$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\[
+b=\frac{6-2}{\Var X}=4
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+a=2
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the publication bias model, 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ takes on the role of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $a,b$
+\end_inset
+
+ are independent of 
+\begin_inset Formula $X$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $Y\mid X=a+bX+\epsilon$
+\end_inset
+
+, where 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is uncorrelated with 
+\begin_inset Formula $X$
+\end_inset
+
+ and has zero mean.
+\end_layout
+
+\begin_layout Standard
+Then 
+\begin_inset Formula 
+\begin{eqnarray*}
+E(XY) & = & bE(X^{2})+aE(Y)\\
+E(Y) & = & a+bE(X^{2})
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Stuff
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E[Y-(a+bX)]^{2}=a^{2}+2abE(X)-2aE(Y)+b^{2}E(X^{2})-2bE(XY)+E(Y^{2})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{d}{da}m & = & 2a+2bE(X)-2E(Y)\\
+\frac{d}{db}m & = & 2aE(X)+2bE(X^{2})-2E(XY)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proposition
+The minimizers 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+ of bla are independent of the distribution of 
+\begin_inset Formula $X$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $Y\mid X=a+bX+\epsilon$
+\end_inset
+
+, where 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is uncorrelated with 
+\begin_inset Formula $X$
+\end_inset
+
+ and has zero mean.
+\end_layout
+
+\begin_layout Proof
+Probably quite easy, move to Appendix.
+\end_layout
+
+\begin_layout Proposition
+The minimizer 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are independent of the distribution of 
+\begin_inset Formula $X$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $Y\mid X=\beta^{T}X+\epsilon$
+\end_inset
+
+, where 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is uncorrelated with 
+\begin_inset Formula $X$
+\end_inset
+
+ and has zero mean.
+\end_layout
+
+\begin_layout Proof
+Probably quite easy, move to Appendix.
+\end_layout
+
+\begin_layout Section
 Making comparisons
 \end_layout
 
@@ -525,14 +828,14 @@ Comparison of estimators
 \size small
 
 \begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="4">
+<lyxtabular version="3" rows="8" columns="4">
 <features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -543,7 +846,7 @@ Method name
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -554,7 +857,7 @@ Method description
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -565,24 +868,20 @@ Reference
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
 \size small
-*Biased 
-\begin_inset Formula $\mu$
-\end_inset
-
-
+*Bias
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -593,18 +892,18 @@ PET
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
 \size small
-Approximating non-linear regression by a linear regression
+Approximation by linear regression
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -622,7 +921,7 @@ literal "false"
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -635,7 +934,51 @@ Yes
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+PEESE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Approximation by linear regression
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size small
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -646,18 +989,18 @@ PET-PEESE
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
 \size small
-Approximating non-linear regression by a linear regression
+Approximation by linear regression
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -675,7 +1018,7 @@ literal "false"
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -688,7 +1031,7 @@ Yes
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -702,7 +1045,7 @@ p
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -713,7 +1056,7 @@ Minimizing the Kolmogorov–Smirnov distance
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -731,7 +1074,7 @@ literal "false"
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -744,7 +1087,7 @@ No
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -758,7 +1101,7 @@ uniform
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -769,7 +1112,7 @@ Minimizing the Anderson–Darling distance
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -787,7 +1130,7 @@ literal "false"
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -800,7 +1143,7 @@ No
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -811,18 +1154,18 @@ Maximum likelihood
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
 \size small
-Minimizing Kullback-Leibler divergence, maximizing likelihood
+Minimizing Kullback-Leibler divergence
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -840,7 +1183,7 @@ literal "false"
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -853,7 +1196,7 @@ No
 </cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -864,7 +1207,7 @@ Bayesian
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -875,7 +1218,7 @@ Application Bayes' theorem
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -893,7 +1236,7 @@ literal "false"
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -933,11 +1276,7 @@ medskip
 \align center
 
 \size footnotesize
-*Biased 
-\begin_inset Formula $\mu$
-\end_inset
-
- means that 
+*The estimator 
 \begin_inset Formula $\hat{\mu}$
 \end_inset
 
