@@ -238,9 +238,25 @@ literal "false"
 \end_inset
 
 .
- Still, this model has not yet taken off.
+ Despite there being an 
+\begin_inset Formula $\mathtt{R}$
+\end_inset
+
+ package for maximum likelihood estimation of this model, called 
+\begin_inset Formula $\texttt{weightr}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Coburn2019-ec"
+literal "false"
+
+\end_inset
+
+, it has not yet taken off.
  Its maximum likelihood estimation methods are numerically unstable and
- its estimates are off even when they converge 
+ its estimates can be off even when they converge 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Coburn2019-ec,Stanley2005-ng"
@@ -249,10 +265,11 @@ literal "false"
 \end_inset
 
 .
- The mean effect size can be negative and of large magnitude, and does not
- appear to be accurate.
- It turns out there are ridges in the likelihood function that cause this
- behaviour 
+ The estimate of the mean effect size may be negative and of unrealistically
+ large magnitude, and the estimated heterogeneity parameter might be improbably
+ large.
+ It turns out there are ridges in the likelihood function that can be linked
+ to this behaviour 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "McShane2016-rb"
