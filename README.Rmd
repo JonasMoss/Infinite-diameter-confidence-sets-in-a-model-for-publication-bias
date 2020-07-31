@@ -1,0 +1,25 @@
+---
+output:
+  github_document:
+    html_preview: true
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
+```
+
+# Infinite diameter confidence sets in Hedges' publication bias model
+
+Repository for the arXiv version of the paper [Infinite diameter confidence sets in Hedges' publication bias model](https://arxiv.org/abs/1912.09180).
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(out.width='750px', dpi=200)
+```
+
