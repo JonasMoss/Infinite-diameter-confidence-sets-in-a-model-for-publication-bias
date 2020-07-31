@@ -41,3 +41,5 @@ inst/doc
 vignettes/*.R
 docs/
 README_cache/
+*.lyx~
+*.lyx#
