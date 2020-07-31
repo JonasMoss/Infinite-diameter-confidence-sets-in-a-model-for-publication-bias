@@ -6,7 +6,7 @@
 \origin unavailable
 \textclass article
 \begin_preamble
-\usepackage{arxiv}
+\usepackage{infiniteci}
 
 \titletag{An arXiv preprint, v2}
 \makeatletter
