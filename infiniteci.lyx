@@ -14,6 +14,7 @@
 \makeatother
 \authorrunning{Jonas Moss}
 
+\renewcommand{\sqrt}[1]{{(#1)^{1/2}}}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\Var}{Var}
@@ -23,6 +24,9 @@
 \DeclareMathOperator{\diag}{diag} 
 \DeclareMathOperator{\argmax}{argmax}
 \DeclareMathOperator{\supp}{supp}
+
+\usepackage{enumitem}
+\setlist[enumerate]{label = (\roman*)}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -103,7 +107,7 @@ natbibapa
 \begin_body
 
 \begin_layout Title
-Infinite diameter confidence sets in Hedges' publication bias model
+Infinite Diameter Confidence Sets in Hedges' Publication Bias Model
 \end_layout
 
 \begin_layout Author
@@ -226,7 +230,7 @@ literal "false"
 
 \end_inset
 
- publication bias model takes publication explicitly into account using
+ publication bias model takes publication bias explicitly into account using
  a selection model, and is arguably the most appropriate model for publication
  bias 
 \begin_inset CommandInset citation
@@ -239,6 +243,14 @@ literal "false"
 .
  Despite there being an 
 \begin_inset Formula $\mathtt{R}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Team2013-tt"
+literal "false"
+
 \end_inset
 
  package for maximum likelihood estimation of this model, called 
@@ -315,10 +327,10 @@ literal "false"
 .
  Written in hierarchical notation, it equals
 \begin_inset Formula 
-\begin{eqnarray}
-\theta_{i} & \sim & N(\theta_{0},\tau),\nonumber \\
-x_{i}\mid\theta_{i},\sigma & \sim & N(\theta_{i},\sigma_{i}).\label{eq:conditional random effects density}
-\end{eqnarray}
+\begin{eqnarray*}
+\theta_{i} & \sim & N(\theta_{0},\tau),\\
+x_{i}\mid\theta_{i},\sigma & \sim & N(\theta_{i},\sigma_{i}).
+\end{eqnarray*}
 
 \end_inset
 
@@ -362,9 +374,9 @@ s to be known.
 
 ,
 \begin_inset Formula 
-\begin{equation}
-f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi\left(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}\right),\label{eq:random effects meta-analysis model}
-\end{equation}
+\[
+f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}),
+\]
 
 \end_inset
 
@@ -438,7 +450,7 @@ basic publication bias model
  has density
 \begin_inset Formula 
 \begin{equation}
-f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}^{2}+\tau^{2}}}\right)^{-1}\phi\left(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}\right)1[x_{i}/\sigma_{i}>c_{\alpha}],\label{eq:selection for significance model}
+f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}^{2}+\tau^{2}}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})1[x_{i}/\sigma_{i}>c_{\alpha}],\label{eq:selection for significance model}
 \end{equation}
 
 \end_inset
@@ -573,7 +585,7 @@ p
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-f\left(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}\right)\propto\phi\left(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}\right)w(u)\label{eq:iyengar-greenhouse model}
+f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})\propto\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})w(u)\label{eq:iyengar-greenhouse model}
 \end{equation}
 
 \end_inset
@@ -593,6 +605,17 @@ literal "false"
 
  serves as proposal distribution for 
 \begin_inset Formula $f$
+\end_inset
+
+.
+ Variants of this model, with and without covariates, has been studied by
+ e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Vevea1995-on,Vevea2005-xp,citkowicz2017parsimonious"
+literal "false"
+
 \end_inset
 
 .
@@ -658,12 +681,9 @@ Hedges' publication bias model.
  
 \emph default
 Its density is
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-f\left(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}\right)\propto\sum_{k=1}^{K}\rho_{k}\phi\left(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}\right)1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
+f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho_{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
 \end{equation}
 
 \end_inset
@@ -758,7 +778,7 @@ That
  the form
 \begin_inset Formula 
 \begin{equation}
-f\left(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}\right)=\sum_{k=1}^{K}\pi^{k}f^{k}\left(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}\right).\label{eq:mixture model formulation}
+f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})=\sum_{k=1}^{K}\pi^{k}f^{k}(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}).\label{eq:mixture model formulation}
 \end{equation}
 
 \end_inset
@@ -816,7 +836,17 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Hedges' publication bias model models 
+Hedges' publication bias model 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:hedges model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ models 
 \emph on
 p
 \emph default
@@ -888,7 +918,7 @@ p
 -uniform of 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Van_Aert2016-cu"
+key "Van_Assen2015-qs,Van_Aert2016-cu"
 literal "false"
 
 \end_inset
@@ -1002,7 +1032,7 @@ literal "false"
 
  where the selection probabilities of the step function 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "eq:step function"
 plural "false"
 caps "false"
@@ -1171,9 +1201,9 @@ confidence set
 
  such that
 \begin_inset Formula 
-\begin{equation}
-\sup_{\pi\in\Pi}\sup_{P\in\pi}P(R(\pi))\leq\alpha.\label{eq:confidence set}
-\end{equation}
+\[
+\sup_{\pi\in\Pi}\sup_{P\in\pi}P(R(\pi))\leq\alpha.
+\]
 
 \end_inset
 
@@ -1226,13 +1256,13 @@ That is,
 \begin_inset Formula $\pi_{0}\in C$
 \end_inset
 
- if and only if accept the null-hypothesis 
+ if and only if we accept the null-hypothesis 
 \begin_inset Formula $H_{0}:\pi=\pi_{0}$
 \end_inset
 
-, but we will only need the formulation using rejection sets in this paper.
- Often when confidence sets are defined in terms of rejection sets, there
- is no partition 
+, but will only need the formulation using rejection sets in this paper.
+ When confidence sets are defined in terms of rejection sets, there is often
+ no partition 
 \begin_inset Formula $\Pi$
 \end_inset
 
@@ -1436,7 +1466,7 @@ A confidence set has infinite diameter with
 \end_layout
 
 \begin_layout Standard
-This theorem is a modified Gleser–Hwang theorem 
+This is a modified Gleser–Hwang theorem 
 \begin_inset CommandInset citation
 LatexCommand citep
 after "Theorem 1"
@@ -1445,7 +1475,7 @@ literal "false"
 
 \end_inset
 
-.
+ formulated in terms of partitions.
 \end_layout
 
 \begin_layout Theorem
@@ -1453,7 +1483,7 @@ literal "false"
 status open
 
 \begin_layout Plain Layout
-Modified Gleser–Hwang theorem
+Gleser–Hwang theorem
 \end_layout
 
 \end_inset
@@ -2235,7 +2265,7 @@ noprefix "false"
  again.
  To use Theorem 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "thm:Gleser--Hwang"
 plural "false"
 caps "false"
@@ -2425,7 +2455,7 @@ noprefix "false"
 , that is,
 \begin_inset Formula 
 \[
-p(x)=\prod_{i=1}^{N}\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}+\tau}}\right)^{-1}\phi\left(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}\right),
+p(x)=\prod_{i=1}^{N}\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}+\tau}}\right)^{-1}\phi(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}),
 \]
 
 \end_inset
@@ -2437,7 +2467,7 @@ where
  are known parameters.
  From Lemma 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "lem:generalized shifted exponential"
 plural "false"
 caps "false"
@@ -2464,7 +2494,7 @@ noprefix "false"
 
 , the three conditions of Theorem 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "thm:Gleser--Hwang"
 plural "false"
 caps "false"
@@ -2487,7 +2517,7 @@ noprefix "false"
 \begin_layout Standard
 Proving the analogue of Theorem 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "thm:simple publication bias"
 plural "false"
 caps "false"
@@ -2508,7 +2538,7 @@ noprefix "false"
 
  and a lemma generalizing Theorem 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "thm:Gleser--Hwang"
 plural "false"
 caps "false"
@@ -2808,7 +2838,7 @@ name "proof:general publication bias"
 
  from the mixture representation 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "eq:mixture model formulation"
 plural "false"
 caps "false"
@@ -2918,7 +2948,7 @@ noprefix "false"
 , so this does not matter.
  Now expand the expression in 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "eq:product mixture"
 plural "false"
 caps "false"
@@ -3490,11 +3520,18 @@ Then
 \begin_inset Formula $\pi_{K}=\rho_{K}c^{-1}$
 \end_inset
 
- and
+ and 
+\begin_inset CommandInset label
+LatexCommand label
+name "eq:pi_i formula"
+
+\end_inset
+
+
 \begin_inset Formula 
-\begin{equation}
-\pi_{k}=c^{-1}(\rho_{k}-\rho_{K})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]\label{eq:pi_i formula}
-\end{equation}
+\[
+\pi_{k}=c^{-1}(\rho_{k}-\rho_{K})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]
+\]
 
 \end_inset
 
