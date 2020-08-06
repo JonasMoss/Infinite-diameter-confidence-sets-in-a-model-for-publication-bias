@@ -148,12 +148,38 @@ Meta-analysis, the statistical analysis of results from separate studies,
  whenever publication bias is present, which causes inconsistent parameter
  estimates.
  Hedges' selection function model takes publication bias into account, but
- estimating and infering with this model is hard and sometimes yields unbelievab
-le results.
+ estimating and infering with this model is tough.
  Using a generalized Gleser–Hwang theorem, we show there is no confidence
  set of guaranteed finite diameter for the parameters of Hedges' selection
  model.
- 
+ This result provides a partial explanation for why inference with Hedges'
+ selection model is fraught with difficulties.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+keywords{meta-analysis 
+\backslash
+and confidence intervals 
+\backslash
+and file-drawer  problem 
+\backslash
+and publication bias 
+\backslash
+and selection models 
+\backslash
+and weigth function models}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -198,10 +224,18 @@ literal "false"
 
 \end_inset
 
-, a phenomenon called publication bias 
+, a phenomenon called publication bias by 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "sterling1959publication"
+literal "false"
+
+\end_inset
+
+ and the file-drawer problem by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rosenthal1979-pm"
 literal "false"
 
 \end_inset
@@ -235,7 +269,7 @@ literal "false"
  bias 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "moss2019modelling,Carter2019-rw"
+key "Carter2019-rw"
 literal "false"
 
 \end_inset
@@ -265,7 +299,7 @@ literal "false"
 
 \end_inset
 
-, it has not yet taken off.
+, the model has not yet taken off.
  Its maximum likelihood estimation methods are numerically unstable and
  its estimates can be off even when they converge 
 \begin_inset CommandInset citation
@@ -288,10 +322,11 @@ literal "false"
 
 \end_inset
 
-, but it has not been stated in clear terms exactly what the problem is.
+, but it has not been stated in clear terms exactly what the consequences
+ are for inferential procedures.
  The purpose of this note is to show there is no confidence set for the
- mean effect size that has finite diameter with probability 
-\begin_inset Formula $1$
+ mean effect size that has infinite diameter with probability 
+\begin_inset Formula $0$
 \end_inset
 
 .
@@ -385,6 +420,7 @@ where
 \end_inset
 
  is the density of a normal random variable.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -392,8 +428,8 @@ We will assume that the random effects meta-analysis model is true in the
  absence of publication bias.
  The mechanisms that cause publication bias modify the density in a suitable
  way.
- First we consider the case when only significant studies at some specified
- level 
+ Consider the case when only significant studies at some specified level
+ 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -416,7 +452,7 @@ p
 p
 \emph default
 -values in this paper, as there is usually, but not always, just one direction
- that is interesting.
+ that is interesting to researchers, reviewers, and editors.
  A one-sided 
 \emph on
 p
@@ -438,7 +474,7 @@ Define
 \begin_inset Formula $c_{\alpha}=\Phi^{-1}(1-\alpha)$
 \end_inset
 
-, the cut-off for significance at level 
+, the cutoff for significance at level 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -447,7 +483,7 @@ Define
 \emph on
 basic publication bias model
 \emph default
- has density
+ is a truncated normal model with density
 \begin_inset Formula 
 \begin{equation}
 f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}^{2}+\tau^{2}}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})1[x_{i}/\sigma_{i}>c_{\alpha}],\label{eq:selection for significance model}
@@ -455,8 +491,7 @@ f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sig
 
 \end_inset
 
-which is a truncated normal.
- This model for publication bias was introduced by 
+This model for publication bias was introduced by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "hedges1984estimation"
@@ -486,7 +521,7 @@ literal "false"
 
 .
  Moreover, the basic publication bias model does not allow for different
- cut-offs for significance.
+ cutoffs for significance.
  For instance, it is likely that some editors will accept studies reaching
  a significance at 
 \begin_inset Formula $\alpha=0.025$
@@ -613,7 +648,7 @@ literal "false"
  
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Vevea1995-on,Vevea2005-xp,citkowicz2017parsimonious"
+key "Dear1992-gw,Vevea1995-on,Vevea2005-xp,citkowicz2017parsimonious"
 literal "false"
 
 \end_inset
@@ -633,7 +668,7 @@ literal "false"
 \begin_inset Formula $w$
 \end_inset
 
- is a step function.
+ is a step function with fixed steps.
  Let 
 \begin_inset Formula $\alpha$
 \end_inset
@@ -650,7 +685,8 @@ literal "false"
 \begin_inset Formula $K$
 \end_inset
 
--ary non-negative, non-increasing vector satisfying 
+-ary non-negative, non-increasing vector having its first element equal
+ to 
 \begin_inset Formula $\rho_{1}=1$
 \end_inset
 
@@ -675,7 +711,7 @@ w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho_{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{e
 
 \end_inset
 
-We will call the selection model with a step function 
+We call the selection model with a step function 
 \emph on
 Hedges' publication bias model.
  
@@ -688,7 +724,7 @@ f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho_{k}\
 
 \end_inset
 
-The interpretation of Hedges' publication bias model is simple.
+Interpretating Hedges' publication bias model is easy.
  When the editor receives a study with 
 \emph on
 p
@@ -706,7 +742,7 @@ p
 \end_inset
 
  and accepts with probability 
-\begin_inset Formula $\rho_{k}$
+\begin_inset Formula $\rho_{j}$
 \end_inset
 
 .
@@ -727,7 +763,7 @@ p
 \emph on
 p
 \emph default
--values should always act favorably towards higher 
+-values should always act favorably towards lower 
 \emph on
 p
 \emph default
@@ -743,6 +779,7 @@ p
  is fixed 
 \begin_inset CommandInset citation
 LatexCommand citep
+after "Web Appendix A"
 key "moss2019modelling"
 literal "false"
 
@@ -753,7 +790,8 @@ literal "false"
 
 \begin_layout Standard
 Hedges' publication bias models allows both for non-significant studies
- to be published and allows the editor to act differently towards 
+ to be published and allows the editor to act differently towards different
+ cutoffs such as 
 \begin_inset Formula $\alpha=0.025$
 \end_inset
 
@@ -762,7 +800,8 @@ Hedges' publication bias models allows both for non-significant studies
 \end_inset
 
 .
- In addition, the model can approximate any selection function 
+ In addition, the model can approximate any non-increasing selection function
+ 
 \begin_inset Formula $w$
 \end_inset
 
@@ -770,12 +809,7 @@ Hedges' publication bias models allows both for non-significant studies
 \end_layout
 
 \begin_layout Standard
-That 
-\begin_inset Formula $\rho$
-\end_inset
-
- is non-increasing allows us to write Hedges' model as a mixture model on
- the form
+We can write Hedges' model as a mixture model on the form
 \begin_inset Formula 
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})=\sum_{k=1}^{K}\pi^{k}f^{k}(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}).\label{eq:mixture model formulation}
@@ -832,11 +866,10 @@ noprefix "false"
 \end_inset
 
 ) for their formula.
- This representation will come in handy later on.
 \end_layout
 
 \begin_layout Standard
-Hedges' publication bias model 
+The main benefit of Hedges' publication bias model 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:hedges model"
@@ -846,11 +879,11 @@ noprefix "false"
 
 \end_inset
 
- models 
+ is how it models 
 \emph on
 p
 \emph default
--value based publication bias directly, there is no approximation involved.
+-values based publication bias directly, there is no approximation involved.
  If you believe in the random effects meta-analysis model and the 
 \emph on
 p
@@ -893,8 +926,8 @@ literal "false"
 
 \end_inset
 
- discuss misspecified regression-based estimators of the corrected effect
- size 
+ discuss various misspecified regression-based estimators of the corrected
+ effect size 
 \begin_inset Formula $\theta$
 \end_inset
 
@@ -954,7 +987,8 @@ literal "false"
 \end_inset
 
 .
- Second, it may not be best model for 
+ Second, it may not be best model for biases with other causes than the
+ publication process, such as 
 \emph on
 p
 \emph default
@@ -975,7 +1009,7 @@ literal "false"
 
 \end_inset
 
- propose a model that may be more successful at correcting for 
+ propose a related model that may be more successful at correcting for 
 \emph on
 p
 \emph default
@@ -995,7 +1029,7 @@ literal "false"
 \end_inset
 
  discusses three problematic cases in economics when maximum likelihood
- was used to estimate Hedges publication bias model.
+ was used to estimate Hedges' publication bias model.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1006,7 +1040,7 @@ literal "false"
 \end_inset
 
  notes that while estimation of the basic publication bias model is hard,
- introduction of the heterogeneity parameter exacerbates the problem.
+ introducing the heterogeneity parameter exacerbates the problem.
  The likelihood function has ridges following approximately 
 \begin_inset Formula $\tau\propto\sqrt{|\theta|}$
 \end_inset
@@ -1045,7 +1079,12 @@ noprefix "false"
 \end_inset
 
 .
- Such ridges are discussed by 
+ Recall that most likelihood theory is based on quadratic approximations
+ around the maximum.
+ Such methods will be unreliable when the likelihood fails to be locally
+ quadratic.
+ Models with likelihood ridges and their associated difficulties are discussed
+ by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "berger1999integrated"
@@ -1053,8 +1092,7 @@ literal "false"
 
 \end_inset
 
-, and in their terminology Hedges' publication model is a member of the
- Gleser–Hwang class, which we will define in the next section.
+.
 \end_layout
 
 \begin_layout Standard
@@ -1085,8 +1123,8 @@ name "fig:contour lines"
 
 \end_inset
 
-Contour lines for the log-likelihood for the simple publication model for
- the power posing data of 
+Contour lines for the log-likelihood for the simple publication model using
+ power posing data of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Cuddy2018-kp"
@@ -1121,7 +1159,7 @@ Fix some measurable space
 \begin_inset Formula $(\Omega,\mathcal{F})$
 \end_inset
 
-, and let 
+, let 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
@@ -1139,7 +1177,11 @@ Fix some measurable space
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
- is a collection of disjoint non-empty subsets of 
+ is a collection of disjoint non-empty subsets 
+\begin_inset Formula $\pi$
+\end_inset
+
+ of 
 \begin_inset Formula $\mathcal{P}$
 \end_inset
 
@@ -1149,11 +1191,15 @@ Fix some measurable space
 
 .
  When 
+\begin_inset Formula $p$
+\end_inset
+
+ is a density associated with a 
 \begin_inset Formula $P\in\mathcal{P}$
 \end_inset
 
 , we will use the standard notation 
-\begin_inset Formula $[P]$
+\begin_inset Formula $[p]$
 \end_inset
 
  to denote the unique 
@@ -1165,19 +1211,7 @@ Fix some measurable space
 \end_inset
 
 .
- We will also use the notation 
-\begin_inset Formula $[p]$
-\end_inset
-
- when 
-\begin_inset Formula $p$
-\end_inset
-
- is a density derived from 
-\begin_inset Formula $P$
-\end_inset
-
-.
+ 
 \end_layout
 
 \begin_layout Definition
@@ -1261,7 +1295,7 @@ That is,
 \end_inset
 
 , but will only need the formulation using rejection sets in this paper.
- When confidence sets are defined in terms of rejection sets, there is often
+ When confidence sets are defined in terms of rejection sets, there is sometimes
  no partition 
 \begin_inset Formula $\Pi$
 \end_inset
@@ -1271,9 +1305,9 @@ That is,
 \end_inset
 
 .
- The terminology 
+ The term
 \emph on
-confidence interval
+ confidence interval
 \emph default
  is far more common than confidence set, but this requires that 
 \begin_inset Formula $C$
@@ -1343,6 +1377,31 @@ t
 \end_inset
 
 .
+ Furthermore, when 
+\begin_inset Formula $Q$
+\end_inset
+
+ is a probability measure, 
+\begin_inset Formula $Q^{n}$
+\end_inset
+
+ denotes the 
+\begin_inset Formula $n$
+\end_inset
+
+-fold product measure of 
+\begin_inset Formula $Q$
+\end_inset
+
+, corresponding to 
+\begin_inset Formula $n$
+\end_inset
+
+ independent samples from 
+\begin_inset Formula $Q$
+\end_inset
+
+.
  Let 
 \begin_inset Formula $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
 \end_inset
@@ -1361,12 +1420,16 @@ t
 \end_inset
 
 .
- A 
+ A two-sided 
 \emph on
 t
 \emph default
 -confidence interval is a confidence set of size 
 \begin_inset Formula $\alpha$
+\end_inset
+
+ with partition 
+\begin_inset Formula $\{\pi(\mu)\},\mu\in\mathbb{R}$
 \end_inset
 
  according to definition 
@@ -1476,6 +1539,18 @@ literal "false"
 \end_inset
 
  formulated in terms of partitions.
+ Its proof is in the appendix (p.
+ 
+\begin_inset CommandInset ref
+LatexCommand pageref
+reference "proof:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Theorem
@@ -1520,7 +1595,7 @@ There is a density
 \begin_inset Formula $p^{\star}$
 \end_inset
 
- pointwise ,
+ pointwise,
 \end_layout
 
 \begin_layout Enumerate
@@ -1553,20 +1628,6 @@ Then every confidence set with level
 \end_inset
 
  has infinite diameter with positive probability.
-\end_layout
-
-\begin_layout Proof
-See the appendix, page 
-\begin_inset CommandInset ref
-LatexCommand pageref
-reference "proof:Gleser--Hwang"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -1662,12 +1723,7 @@ literal "false"
 
 .
  His confidence set can be finite, the whole real line, or the union of
- two disjoint semi-infinite intervals.
- It is evidently not finite with probability 
-\begin_inset Formula $1$
-\end_inset
-
- 
+ two disjoint semi-infinite intervals 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Koschat1987-dk"
@@ -1675,17 +1731,17 @@ literal "false"
 
 \end_inset
 
-.
- 
+, all with positive probability.
 \end_layout
 
 \begin_layout Example
-The Gleser–Hwang theorem can be used to show that every confidence set for
- 
+But it is not only Fieller's confidence set that might be infinitely long.
+ The Gleser–Hwang theorem can be used to show that every confidence set
+ for 
 \begin_inset Formula $\mu_{2}/\mu_{1}$
 \end_inset
 
- must be infinite with positive probability.
+ must be infinitily long with positive probability.
  This result is almost independent of the distribution of 
 \begin_inset Formula $X$
 \end_inset
@@ -1704,18 +1760,18 @@ The Gleser–Hwang theorem can be used to show that every confidence set for
 \end_inset
 
 .
- Both all of these distributions have the same support, and all of them
- have finite means 
-\begin_inset Formula $E(X)$
+ All of these distributions have the same support, and all of them have
+ finite means 
+\begin_inset Formula $E_{p}(X)$
 \end_inset
 
  and 
-\begin_inset Formula $E(Y)$
+\begin_inset Formula $E_{p}(Y)$
 \end_inset
 
 .
  Moreover, assume 
-\begin_inset Formula $E(X)=0$
+\begin_inset Formula $E_{p}(X)=0$
 \end_inset
 
  is attainable for some 
@@ -1728,7 +1784,7 @@ The Gleser–Hwang theorem can be used to show that every confidence set for
 \end_inset
 
  by 
-\begin_inset Formula $p,q\in\Pi$
+\begin_inset Formula $p,q\in\pi$
 \end_inset
 
  if and only if 
@@ -1740,16 +1796,20 @@ The Gleser–Hwang theorem can be used to show that every confidence set for
 \end_inset
 
 , i.e., the ratio of means.
- Let 
+ Choose a sequence 
 \begin_inset Formula $p_{n}(x,y)=p(x,y)$
 \end_inset
 
- have means 
-\begin_inset Formula $EX>0$
+, where 
+\begin_inset Formula $p(x,y)$
+\end_inset
+
+ is density with means 
+\begin_inset Formula $E_{p}X>0$
 \end_inset
 
  and 
-\begin_inset Formula $EY=0$
+\begin_inset Formula $E_{p}Y=0$
 \end_inset
 
 .
@@ -1780,14 +1840,7 @@ noprefix "false"
 status open
 
 \begin_layout Plain Layout
-\begin_inset CommandInset citation
-LatexCommand citet
-key "bahadur1956nonexistence"
-literal "false"
-
-\end_inset
-
-
+Bahadur–Savage
 \end_layout
 
 \end_inset
@@ -1839,8 +1892,8 @@ literal "false"
 \end_layout
 
 \begin_layout Example
-Using the Gleswer–Hwang theorem, it is easy to verify there is no confidence
- set of guarateed finite diameter.
+Using the Gleswer–Hwang theorem, it is easy to verify every confidence set
+ has infinite diameter with positive probability.
  Define the partition 
 \begin_inset Formula $\Pi$
 \end_inset
@@ -1906,14 +1959,14 @@ noprefix "false"
 
 \end_deeper
 \begin_layout Standard
-There are several candidates for 
+There are several natural candidates for 
 \begin_inset Formula $\Pi$
 \end_inset
 
- in the selection function model 
+ when working with Hedges' selection function model 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:iyengar-greenhouse model"
+reference "eq:hedges model"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2278,11 +2331,11 @@ noprefix "false"
 \end_inset
 
  satisfying the conditions 
-\begin_inset Formula $(ii)$
+\begin_inset Formula $\text{(ii)}$
 \end_inset
 
  and 
-\begin_inset Formula $(iii)$
+\begin_inset Formula $\text{(iii)}$
 \end_inset
 
 .
@@ -2369,7 +2422,7 @@ noprefix "false"
 
 \end_inset
 
- is of the Gleser–Hwang class.
+ is a member of the Gleser–Hwang class.
 \end_layout
 
 \begin_layout Theorem
@@ -2383,7 +2436,7 @@ name "thm:simple publication bias"
 \begin_inset Formula $n$
 \end_inset
 
- independent samples from the simple publication bias model 
+ independent samples from the basic publication bias model 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:selection for significance model"
@@ -2525,7 +2578,7 @@ noprefix "false"
 
 \end_inset
 
- for Hedges' publication is somewhat more involved.
+ for Hedges' publication is only somewhat more involved.
  We will use the mixture representation of 
 \begin_inset CommandInset ref
 LatexCommand eqref
@@ -2546,7 +2599,7 @@ noprefix "false"
 
 \end_inset
 
- to mixtures.
+ to a certain kind of mixtures.
  
 \end_layout
 
@@ -2626,7 +2679,11 @@ name "prop:Mixture model corollary"
 \begin_inset Formula $K$
 \end_inset
 
--ary mixture distributions.
+-ary mixture distributions and 
+\begin_inset Formula $||[p]||$
+\end_inset
+
+ be the assumption above.
  Assume there is a sequence 
 \begin_inset Formula $p_{i}=\sum_{k\leq K}\pi_{i}^{k}f_{i}^{k}$
 \end_inset
@@ -2692,16 +2749,12 @@ For all
 \end_layout
 
 \begin_layout Enumerate
-For all 
-\begin_inset Formula $k\in K'$
+The density concentrates on the components indexed by 
+\begin_inset Formula $K'$
 \end_inset
 
-, the limit 
-\begin_inset Formula $\lim_{i\to\infty}\pi_{i}^{k}$
-\end_inset
-
- exists and is greater than 
-\begin_inset Formula $0$
+, 
+\begin_inset Formula $\lim_{i\to\infty}\sum_{k\in K'}\pi_{i}^{k}=1$
 \end_inset
 
 .
@@ -2728,11 +2781,11 @@ noprefix "false"
 \end_inset
 
 .
- By (i), 
+ By (i) and (iv), 
 \begin_inset Formula $p_{i}$
 \end_inset
 
- converges pointwise to the function 
+ converges pointwise to the density 
 \begin_inset Formula $\sum_{k\in K'}\pi_{i}^{k\star}f_{i}^{k\star}=p^{\star}$
 \end_inset
 
@@ -2742,7 +2795,7 @@ noprefix "false"
 \end_inset
 
  follows from (ii) and (iv).
- Finally, by the assumption about the size, 
+ Finally, from the assumption that
 \begin_inset Formula $\left\Vert [p]\right\Vert =\left\Vert [f_{k}]\right\Vert $
 \end_inset
 
@@ -2884,11 +2937,11 @@ noprefix "false"
 \end_inset
 
 .
- The 
-\begin_inset Formula $\pi$
+ The mixture probabilities for 
+\begin_inset Formula $k\neq K$
 \end_inset
 
-s can be fixed at e.g.
+ can be fixed at e.g.
  
 \begin_inset Formula $\pi=1/(K-1)$
 \end_inset
@@ -2903,60 +2956,15 @@ s can be fixed at e.g.
 \end_inset
 
  are similar and omitted.
-\end_layout
-
-\begin_layout Proof
-When 
+ When 
 \begin_inset Formula $n>1$
 \end_inset
 
-, we are dealing with
-\begin_inset Formula 
-\begin{equation}
-\prod_{j=1}^{n}\sum_{k\leq K}\pi_{i}^{k}(\sigma_{j})f_{i}^{k}(\sigma_{j}),\label{eq:product mixture}
-\end{equation}
-
+, expand the expression 
+\begin_inset Formula $\prod_{j=1}^{n}\sum_{k\leq K}\pi_{i}^{k}(\sigma_{j})f_{i}^{k}(\sigma_{j}),$
 \end_inset
 
-and we cannot choose the same 
-\begin_inset Formula $\sqrt{\tau^{2}+\sigma_{i}^{2}}=n^{1/2}$
-\end_inset
-
- for all of the mixture components simultaneously whenever some 
-\begin_inset Formula $\sigma_{i}$
-\end_inset
-
-s aren't equal, which is usually the case.
- But it is clear that Lemma 
-\begin_inset CommandInset ref
-LatexCommand pageref
-reference "lem:generalized shifted exponential"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- also works for 
-\begin_inset Formula $\tau^{2}=n+c$
-\end_inset
-
- for any constant 
-\begin_inset Formula $c$
-\end_inset
-
-, so this does not matter.
- Now expand the expression in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:product mixture"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and do the same reasoning as in the first part of this proof.
+and use the same reasoning as in the first part of this proof.
 \end_layout
 
 \begin_layout Section
@@ -2966,7 +2974,7 @@ Remarks
 \begin_layout Standard
 Well-behaved confidence sets for Hedges publication bias model do not exist,
  but well-behaved credibility sets do.
- Bayesian estimation of Hedges model can be made routine, as it is easy
+ Bayesian estimation of Hedges' model can be made routine, as it is easy
  to find uncontroverisal priors for 
 \begin_inset Formula $\theta_{0}$
 \end_inset
@@ -2980,14 +2988,14 @@ Well-behaved confidence sets for Hedges publication bias model do not exist,
 \begin_inset Formula $\theta_{0}$
 \end_inset
 
- cannot be large, ad is likely to be close to 
+ cannot be large, and is likely to be close to 
 \begin_inset Formula $0$
 \end_inset
 
 .
- Moreover, since since many effects can be understood as the aggregation
- of many small effects, the central limit theorem justifies using a normal
- prior.
+ Moreover, since it is common effects in meta-analyses to be intepreted
+ as the aggregation of many small effects, the central limit theorem justifies
+ using a normal prior.
  As we want to remove prior mass from negative 
 \begin_inset Formula $\theta_{0}$
 \end_inset
@@ -3082,6 +3090,30 @@ name "lem:Dominated covergence theorem"
 .
 \end_layout
 
+\begin_layout Standard
+The proof of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:Gleser--Hwang"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ follows the proof of 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Theorem 1"
+key "gleser1987nonexistence"
+literal "false"
+
+\end_inset
+
+ closely.
+ 
+\end_layout
+
 \begin_layout Proof
 \begin_inset Argument 1
 status open
@@ -3109,22 +3141,12 @@ name "proof:Gleser--Hwang"
 
 \end_inset
 
-This proof follows the proof 
-\begin_inset CommandInset citation
-LatexCommand citet
-after "Theorem 1"
-key "gleser1987nonexistence"
-literal "false"
-
-\end_inset
-
- closely.
- We can assume without loss of generality that 
+We can assume without loss of generality that 
 \begin_inset Formula $\left\Vert [p_{n}]\right\Vert \geq n$
 \end_inset
 
 , as we can choose a subsequence if we have to.
- By definition of 
+ By definition of the diameter 
 \begin_inset Formula $D$
 \end_inset
 
@@ -3310,13 +3332,17 @@ Since
 \end_layout
 
 \begin_layout Standard
-The next lemma shows there is a 
-\begin_inset Formula $p_{n}$
+Now we prove Lemma 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "lem:generalized shifted exponential"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- satisfying the conditions of the Gleser–Hwang theorem for the class of
- truncated normal distributions.
- 
+.
 \end_layout
 
 \begin_layout Proof
@@ -3347,7 +3373,7 @@ name "proof:generalized shifted exponential"
 \end_inset
 
 Let 
-\begin_inset Formula $n^{2}>c$
+\begin_inset Formula $n^{2}>-c$
 \end_inset
 
 , so that 
@@ -3355,7 +3381,11 @@ Let
 \end_inset
 
 .
- Using the well-known formula for the truncated normal,
+ Recll the well-known formula for the normal truncated to 
+\begin_inset Formula $[a,b]$
+\end_inset
+
+,
 \begin_inset Formula 
 \begin{eqnarray}
 f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\label{eq:truncated}\\
