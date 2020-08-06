@@ -4,6 +4,7 @@
 
 cuddy2018 = publipha::dat.cuddy2018
 cuddy2018 = cuddy2018[cuddy2018$yi < 1.5, ] # removes outlier.
+cuddy2018 = cuddy2018
 
 yi = cuddy2018$yi
 vi = cuddy2018$vi
@@ -24,7 +25,7 @@ objective = function(p) {
     log = TRUE))
 }
 
-x = seq(0.4, 0.7, length.out = 100)
+x = seq(-3, 1, length.out = 100)
 y = seq(0.01, 1, length.out = 100)
 FUN = Vectorize(function(theta0, tau) objective(c(theta0, tau)))
 z = outer(X = x, Y = y, FUN = FUN)
@@ -36,6 +37,7 @@ contour(
   x = x, 
   y = y, 
   z = -z, 
+  levels = c(12, 10, 5, 0, -10, -100, -200, -500),
   xlab = expression(theta[0]), ylab = expression(tau),
   cex.lab = sqrt(2), main = "Likelihood of Hedges' publication bias model"
   )
