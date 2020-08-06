@@ -26,7 +26,7 @@ objective = function(p) {
 }
 
 x = seq(-3, 1, length.out = 100)
-y = seq(0.01, 1, length.out = 100)
+y = seq(10^(-7), 1, length.out = 100)
 FUN = Vectorize(function(theta0, tau) objective(c(theta0, tau)))
 z = outer(X = x, Y = y, FUN = FUN)
 
