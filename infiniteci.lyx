@@ -1041,7 +1041,7 @@ literal "false"
 
  notes that while estimation of the basic publication bias model is hard,
  introducing the heterogeneity parameter exacerbates the problem.
- The likelihood function has ridges following approximately 
+ The likelihood function has contours following approximately 
 \begin_inset Formula $\tau\propto\sqrt{|\theta|}$
 \end_inset
 
@@ -1079,20 +1079,16 @@ noprefix "false"
 \end_inset
 
 .
- Recall that most likelihood theory is based on quadratic approximations
- around the maximum.
- Such methods will be unreliable when the likelihood fails to be locally
- quadratic.
- Models with likelihood ridges and their associated difficulties are discussed
- by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "berger1999integrated"
-literal "false"
-
+ Only just around the maximum at 
+\begin_inset Formula $\hat{\theta}_{0}=0.55$
 \end_inset
 
-.
+ and 
+\begin_inset Formula $\hat{\sigma}=5\cdot10^{-7}$
+\end_inset
+
+ can the likelihood be approximated with a quadratic function.
+ 
 \end_layout
 
 \begin_layout Standard

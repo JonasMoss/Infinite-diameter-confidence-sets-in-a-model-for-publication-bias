@@ -1,0 +1,685 @@
+%% LyX 2.3.4.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\usepackage[natbibapa]{apacite}
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{\protect\definitionname}
+\theoremstyle{definition}
+\newtheorem{example}[thm]{\protect\examplename}
+\theoremstyle{plain}
+\newtheorem{lem}[thm]{\protect\lemmaname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{infiniteci}
+
+\titletag{An arXiv preprint, v2}
+\makeatletter
+\titlerunning{\@title}
+\makeatother
+\authorrunning{Jonas Moss}
+
+\renewcommand{\sqrt}[1]{{(#1)^{1/2}}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Cor}{Cor}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\diag}{diag} 
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\supp}{supp}
+
+\usepackage{enumitem}
+\setlist[enumerate]{label = (\roman*)}
+
+\makeatother
+
+\usepackage{babel}
+\providecommand{\definitionname}{Definition}
+\providecommand{\examplename}{Example}
+\providecommand{\lemmaname}{Lemma}
+\providecommand{\theoremname}{Theorem}
+
+\begin{document}
+\title{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model}
+\author{Jonas Moss \orcid{0000-0002-6876-6964}\\
+Department of Mathematics, University of Oslo\\
+PB 1053, Blindern, NO-0316, Oslo, Norway\emph{}\\
+\emph{jonasmgj@math.uio.no}}
+\maketitle
+\begin{abstract}
+Meta-analysis, the statistical analysis of results from separate studies,
+is a fundamental building block of science. But the assumptions of
+classical meta-analysis models are not satisfied whenever publication
+bias is present, which causes inconsistent parameter estimates. Hedges'
+selection function model takes publication bias into account, but
+estimating and infering with this model is tough. Using a generalized
+Gleser--Hwang theorem, we show there is no confidence set of guaranteed
+finite diameter for the parameters of Hedges' selection model. This
+result provides a partial explanation for why inference with Hedges'
+selection model is fraught with difficulties.
+\end{abstract}
+\keywords{meta-analysis \and confidence intervals \and file-drawer  problem \and publication bias \and selection models \and weigth function models}
+
+\section{Introduction}
+
+A meta-analysis is a statistical analysis that quantiatively combines
+results from separate scientific studies. When the studies measure
+the same phenomenon, pooling of information allows us to predict the
+common effect size with larger precision than we could have done with
+one study alone. Meta-analyses are ubiquitous in the empirical sciences
+and forms a key component of most systematic reviews such as Cochrane's
+reviews \citep{Higgins2019-vv}.
+
+Most meta-analytic techniques assume honest and unbiased reporting
+of results. But there is ample evidence that the scientific literature
+is not unbiased, as studies with\emph{ }significant \emph{p}-values
+tend to be published with a greater probability than other studies
+\citep{Easterbrook1991-ph}, a phenomenon called publication bias
+by \citet{sterling1959publication} and the file-drawer problem by
+\citet{Rosenthal1979-pm}. When publication bias is present, there
+is no reason to trust the results of meta-analytic methods that do
+not account for it, as the parameter estimates will be incosistent
+\citep{Carter2019-rw}. 
+
+Hedges' \citeyearpar{hedges1992modeling} publication bias model takes
+publication bias explicitly into account using a selection model,
+and is arguably the most appropriate model for publication bias \citep{Carter2019-rw}.
+Despite there being an $\mathtt{R}$ \citep{Team2013-tt} package
+for maximum likelihood estimation of this model, called $\texttt{weightr}$
+\citep{Coburn2019-ec}, the model has not yet taken off. Its maximum
+likelihood estimation methods are numerically unstable and its estimates
+can be off even when they converge \citep{Coburn2019-ec,Stanley2005-ng}.
+The estimate of the mean effect size may be negative and of unrealistically
+large magnitude, and the estimated heterogeneity parameter might be
+improbably large. It turns out there are ridges in the likelihood
+function that can be linked to this behavior \citep{McShane2016-rb},
+but it has not been stated in clear terms exactly what the consequences
+are for inferential procedures. The purpose of this note is to show
+there is no confidence set for the mean effect size that has infinite
+diameter with probability $0$. In the terminology of \citet{berger1999integrated},
+Hedges' publication bias model belongs to the \emph{Gleser--Hwang}
+class.
+
+\section{Hedges' publication bias model}
+
+The most popular and well-known meta-analysis method is the random
+effects model with normal likelihoods \citep{hedges1998fixed}. Written
+in hierarchical notation, it equals
+\begin{eqnarray*}
+\theta_{i} & \sim & N(\theta_{0},\tau),\\
+x_{i}\mid\theta_{i},\sigma & \sim & N(\theta_{i},\sigma_{i}).
+\end{eqnarray*}
+Here $\sigma_{i}$ is the standard deviation of the $i$th study.
+Following the convention in meta-analysis, we assume all $\sigma_{i}$s
+to be known. The mean parameter $\theta$ is the population effect
+size, $N(\theta_{0},\tau)$ is the effect size distribution, and $\tau$
+is the heterogeneity parameter. The purpose of the effect size distribution
+is to model the fact that most effect size estimates plugged into
+a meta-analysis do not appear to measure the same phenomenon. By integrating
+out $\theta_{i}$, we find the density of $x_{i}$,
+\[
+f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}),
+\]
+where $\phi$ is the density of a normal random variable. 
+
+We will assume that the random effects meta-analysis model is true
+in the absence of publication bias. The mechanisms that cause publication
+bias modify the density in a suitable way. Consider the case when
+only significant studies at some specified level $\alpha$ are published.
+Assuming one-sided tests, the \emph{p}-values are $u_{i}=\Phi(-x_{i}/\sigma_{i})$,
+or normal one-sided \emph{p}-values. We will only deal with with one-sided
+\emph{p}-values in this paper, as there is usually, but not always,
+just one direction that is interesting to researchers, reviewers,
+and editors. A one-sided \emph{p}-value can also be used if the researchers
+reported a two-sided value, since $p=0.05$ for a two-sided hypothesis
+corresponds to $p=0.025$ for a one-sided hypothesis, et cetera.
+
+Define $c_{\alpha}=\Phi^{-1}(1-\alpha)$, the cutoff for significance
+at level $\alpha$. The \emph{basic publication bias model} is a truncated
+normal model with density
+\begin{equation}
+f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}^{2}+\tau^{2}}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})1[x_{i}/\sigma_{i}>c_{\alpha}],\label{eq:selection for significance model}
+\end{equation}
+This model for publication bias was introduced by \citet{hedges1984estimation}
+in the context of $F$-distributions.
+
+The basic publication bias model is unrealistic. It requires that
+no non-significant studies are published. But even in the fields most
+severely affected by publication bias, such as psychology, a non-negligble
+number of non-significant studies are published \citep{Motyl2017-dx}.
+Moreover, the basic publication bias model does not allow for different
+cutoffs for significance. For instance, it is likely that some editors
+will accept studies reaching a significance at $\alpha=0.025$, corresponding
+to $x_{i}/\sigma_{i}>1.96$ but not at $\alpha=0.05$, corresponding
+to $x_{i}/\sigma_{i}>1.64$.
+
+These problems can be rectified by adopting the selection model for
+publication bias of \citet{iyengar1988selection}, which models the
+following scenario.
+\begin{quote}
+\textbf{Publication bias scenario.} Alice the editor receives a study
+with the \emph{p}-value $u$. Her publication decision is a random
+function of this \emph{p}-value. That is, she will publish the study
+with some probability $w(u)$ and reject it with probability $1-w(u)$.
+Every study you will ever read in Alice's journal has survived this
+selection mechanism, the rest are lost forever.
+\end{quote}
+Let $w(u_{i})$ be a function of the \emph{p}-value $u_{i}=1-\Phi(-x_{i}/\sigma_{i})$
+taking values in $[0,1]$. Then $w(u_{i})$ is a probability for every
+$u_{i}$, and the selection model
+
+\begin{equation}
+f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})\propto\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})w(u)\label{eq:iyengar-greenhouse model}
+\end{equation}
+models the publication bias scenario exactly. This model can be viewed
+as a rejection sampling procedure \citep{flury1990acceptance,von1951various},
+where $\phi$ serves as proposal distribution for $f$. Variants of
+this model, with and without covariates, has been studied by e.g.
+\citet{Dear1992-gw,Vevea1995-on,Vevea2005-xp,citkowicz2017parsimonious}.
+
+\citet{hedges1992modeling} studies the selection model when $w$
+is a step function with fixed steps. Let $\alpha$ be a vector with
+elements $0=\alpha_{0}<\alpha_{1}<\ldots<\alpha_{K}=1$ and $\rho$
+be a $K$-ary non-negative, non-increasing vector having its first
+element equal to $\rho_{1}=1$. Define the step function $w$ based
+on $\alpha$ and $\rho$ as
+\begin{equation}
+w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho_{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{eq:step function}
+\end{equation}
+We call the selection model with a step function \emph{Hedges' publication
+bias model. }Its density is
+\begin{equation}
+f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho_{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
+\end{equation}
+Interpretating Hedges' publication bias model is easy. When the editor
+receives a study with \emph{p}-value $u$, she finds the $j$ such
+that $u\in(\alpha_{j-1},\alpha_{j}]$ and accepts with probability
+$\rho_{j}$. Since $\rho_{1}=1$, she always accepts when $u\in[0,\alpha_{1}]$.
+The vector $\rho$ is non-increasing since a publication decision
+based solely on \emph{p}-values should always act favorably towards
+lower \emph{p}-values. The parameters $(\theta_{0},\tau,\rho)$ of
+the model are identified when $\alpha$ is fixed \citep[Web Appendix A]{moss2019modelling}.
+
+Hedges' publication bias models allows both for non-significant studies
+to be published and allows the editor to act differently towards different
+cutoffs such as $\alpha=0.025$ and $\alpha=0.05$. In addition, the
+model can approximate any non-increasing selection function $w$ by
+increasing the number of steps.
+
+We can write Hedges' model as a mixture model on the form
+\begin{equation}
+f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})=\sum_{k=1}^{K}\pi^{k}f^{k}(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}).\label{eq:mixture model formulation}
+\end{equation}
+Here $f^{K}$ is a normal density, $f^{k},k<K$ are normal densities
+truncated to $[\Phi^{-1}(1-\alpha_{j-1}),\Phi^{-1}(1-\alpha))$, and
+$\pi^{k}$ are mixture probabilities, i.e., $\pi^{k}>0$ for each
+$k$ and $\sum_{k=1}^{K}\pi^{k}=1$. The mixture probabilities $\pi^{k}$
+are functions of $(\theta_{0},\tau,\sigma_{i},\rho)$, see the appendix
+(p. \pageref{eq:pi_i formula}) for their formula.
+
+The main benefit of Hedges' publication bias model (\ref{eq:hedges model})
+is how it models \emph{p}-values based publication bias directly,
+there is no approximation involved. If you believe in the random effects
+meta-analysis model and the \emph{p}-value based publication bias
+scenario, Hedges' publication bias model is simply the correct model.
+Most statistical methods correcting for publication bias in the literature
+either do not make use of an explicit statistical model or do not
+estimate the parameters $\theta_{0}$ and $\tau$. For instance, the
+funnel funnel plot of \citet{Egger1997-rd} is a graphical method,
+while the trim-and-fill method of \citet{Duval2000-ct} is a non-parametric
+method based on making the funnel plot symmetric. \citet{Stanley2005-ng,stanley2014meta}
+discuss various misspecified regression-based estimators of the corrected
+effect size $\theta$ based on the fixed effect Hedges' publication
+bias model. The estimating \emph{p}-curve method of \citet{Simonsohn2014-cn}
+and \emph{p}-uniform of \citet{Van_Assen2015-qs,Van_Aert2016-cu}
+are two methods for dealing with publication bias hailing from psychology.
+Both are based on a variant of the basic publication bias model, but
+with fixed instead of random effects, and both employ somewhat unusual
+estimation methods \citep{McShane2016-rb}. Since there is ample evidence
+of heterogeneity in meta-analysis, restricting oneself to the fixed
+effects meta-analysis is a mistake.
+
+Hedges' model has some downsides. It models only bias due to selection
+of \emph{p}-values, not every source of bias, such as language bias
+\citep{Egger1998-kj}. Second, it may not be best model for biases
+with other causes than the publication process, such as \emph{p}-hacking
+\citep{simmons2011false}. \citet{moss2019modelling} propose a related
+model that may be more successful at correcting for \emph{p}-hacking. 
+
+Estimation of Hedges' model is difficult. \citet[Section 6.3]{Stanley2005-ng}
+discusses three problematic cases in economics when maximum likelihood
+was used to estimate Hedges' publication bias model. \citet[Appendix A]{McShane2016-rb}
+notes that while estimation of the basic publication bias model is
+hard, introducing the heterogeneity parameter exacerbates the problem.
+The likelihood function has contours following approximately $\tau\propto\sqrt{|\theta|}$.
+Figure \ref{fig:contour lines} shows the contour lines for the meta-analysis
+of \citet{Cuddy2018-kp} where the selection probabilities of the
+step function (\ref{eq:step function}) are fixed at $\rho=(1,0.6,0.1)$.
+Only just around the maximum at $\hat{\theta}_{0}=0.55$ and $\hat{\sigma}=5\cdot10^{-7}$
+can the likelihood be approximated with a quadratic function. 
+
+\begin{figure}
+\noindent \begin{centering}
+\includegraphics[scale=0.5]{chunks/cuddy}
+\par\end{centering}
+\caption{\label{fig:contour lines}Contour lines for the log-likelihood for
+the simple publication model using power posing data of \citet{Cuddy2018-kp}. }
+
+\end{figure}
+
+
+\section{Confidence sets of infinite diameter}
+
+Fix some measurable space $(\Omega,\mathcal{F})$, let $\mathcal{P}$
+be a family of dominated probability measures defined on this measurable
+space, and $\mathcal{\Pi}$ a partition of $\mathcal{P}$. Recall
+that a partition of $\mathcal{P}$ is a collection of disjoint non-empty
+subsets $\pi$ of $\mathcal{P}$ such that $\bigcup_{\pi\in\Pi}\pi=\mathcal{P}$.
+When $p$ is a density associated with a $P\in\mathcal{P}$, we will
+use the standard notation $[p]$ to denote the unique $\pi$ containing
+$P$. 
+\begin{defn}
+\label{def:confidence set} A \emph{confidence set} of level $\alpha$
+is a family of rejection sets $\{R(\pi)\},\pi\in\Pi$ such that
+\[
+\sup_{\pi\in\Pi}\sup_{P\in\pi}P(R(\pi))\leq\alpha.
+\]
+If the inequality is an equality, the confidence set has \emph{size}
+$\alpha$. 
+\end{defn}
+
+This definition of confidence sets might look slightly unfamiliar,
+but it is a straight-forward generalization of the definitions in
+\citet[Definition 9.1.5]{Casella2002-lg} and \citet[Section 3.5]{lehmann2006testing}.
+Usually, a confidence is defined as a set $C$ adhering to the relation
+\begin{equation}
+\pi_{0}\in C\iff\omega\notin R(\pi_{0}).\label{eq:c-confidence set}
+\end{equation}
+That is, $\pi_{0}\in C$ if and only if we accept the null-hypothesis
+$H_{0}:\pi=\pi_{0}$, but will only need the formulation using rejection
+sets in this paper. When confidence sets are defined in terms of rejection
+sets, there is sometimes no partition $\Pi$ to take the supremum
+over, and the definition reduces to $\sup_{P\in\mathcal{P}}P(R(P))\leq\alpha$.
+The term\emph{ confidence interval} is far more common than confidence
+set, but this requires that $C$ of equation \ref{eq:c-confidence set}
+is an interval, which we will not require here.
+
+The following example should make Definition \ref{def:confidence set}
+familiar.
+\begin{example}
+\label{exa:t-test} Consider the usual \emph{t}-confidence interval
+with $n$ observations. Here $\mathcal{P}$ contains all measures
+$P_{\mu,\sigma}^{n}$, where $P_{\mu,\sigma}$ is the probability
+measure of a normal with mean $\mu$ and standard deviation $\sigma$.
+Furthermore, when $Q$ is a probability measure, $Q^{n}$ denotes
+the $n$-fold product measure of $Q$, corresponding to $n$ independent
+samples from $Q$. Let $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
+contain all normal probability measures with mean $\mu$ and some
+positive standard deviation. Then $\{\pi(\mu)\},\mu\in\mathbb{R}$
+defines a partition of $\mathcal{P}$. A two-sided \emph{t}-confidence
+interval is a confidence set of size $\alpha$ with partition $\{\pi(\mu)\},\mu\in\mathbb{R}$
+according to definition \ref{def:confidence set}.
+\end{example}
+
+Now we must find out how to measure the size of confidence sets. Let
+a \emph{size function} be any positive function $\left\Vert \cdot\right\Vert :\Pi\to[0,\infty)$.
+In the \emph{t}-confidence interval example above, $\left\Vert \cdot\right\Vert $
+can be taken to be $\left\Vert \pi\right\Vert =|\mu|$ for the unique
+$\mu$ associated with each $\pi$. 
+
+The diameter of a confidence set is the random variable
+\begin{equation}
+D(\omega)=\sup_{\pi\in\Pi}\{\left\Vert \pi\right\Vert \mid\omega\notin R(\pi)\}.\label{eq:diameter}
+\end{equation}
+That is, the diameter tells you the size of the largest accepted $\pi$.
+We will assume that $D$ is Borel measurable.
+\begin{defn}
+\label{def:infinite diameter}A confidence set has infinite diameter
+with $P$-positive probability if $P(D=\infty)>0$. It has infinite
+diameter with positive probability if $P(D=\infty)>0$ for all $P\in\mathcal{P}$.
+\end{defn}
+
+This is a modified Gleser--Hwang theorem \citep[Theorem 1]{gleser1987nonexistence}
+formulated in terms of partitions. Its proof is in the appendix (p.
+\pageref{proof:Gleser--Hwang}).
+\begin{thm}[Gleser--Hwang theorem]
+\label{thm:Gleser--Hwang} Suppose there is a sequence $\{p_{i}\}$
+of densities from $\mathcal{P}$ satisfying the following: 
+\begin{enumerate}
+\item There is a density $p^{\star}$ such that $p_{i}$ converges to $p^{\star}$
+pointwise,
+\item $\supp p\supseteq\supp p^{\star}$ for all $p$,
+\item the size of $[p_{i}]$ goes to infinity, $\left\Vert [p_{i}]\right\Vert \to\infty$.
+\end{enumerate}
+Then every confidence set with level $\alpha>0$ has infinite diameter
+with positive probability.
+\end{thm}
+
+Following the terminology of \citet{berger1999integrated}, we will
+say that families $\mathcal{P}$ of probabilities satisfying the conclusion
+of Theorem \ref{thm:Gleser--Hwang} for some suitable partition $\Pi$
+belong to the Gleser--Hwang class. To make the Gleser--Hwang class
+more familiar, we will present two examples. More examples can be
+found in the papers of \citet{gleser1987nonexistence} and \citet{berger1999integrated}.
+\begin{example}[Fieller's problem]
+\label{exa:Fieller's problem} Let $X,Y$ be an observation from
+a bivariate normal $N([\mu_{1},\mu_{2}],I\sigma^{2})$, where $\sigma^{2}$
+is known. We want to form a confidence set for ratio $\mu_{2}/\mu_{1}$.
+The most famous confidence set is due to \citet{Fieller1940-lg}.
+His confidence set can be finite, the whole real line, or the union
+of two disjoint semi-infinite intervals \citep{Koschat1987-dk}, all
+with positive probability.
+
+But it is not only Fieller's confidence set that might be infinitely
+long. The Gleser--Hwang theorem can be used to show that every confidence
+set for $\mu_{2}/\mu_{1}$ must be infinitily long with positive probability.
+This result is almost independent of the distribution of $X$ and
+$Y$. To state this result in our notation, let $\mathcal{P}$ be
+a family of bivariate distributions over $(X,Y)$. All of these distributions
+have the same support, and all of them have finite means $E_{p}(X)$
+and $E_{p}(Y)$. Moreover, assume $E_{p}(X)=0$ is attainable for
+some $p\in\mathcal{P}$. Define the partition $\Pi$ by $p,q\in\pi$
+if and only if $E_{p}(X)/E_{p}(Y)=E_{q}(X)/E_{q}(Y)$, and let $\left\Vert [p]\right\Vert =|E_{q}(X)/E_{q}(Y)|$,
+i.e., the ratio of means. Choose a sequence $p_{n}(x,y)=p(x,y)$,
+where $p(x,y)$ is density with means $E_{p}X>0$ and $E_{p}Y=0$.
+Then $\left\Vert [p]\right\Vert =\infty$, the conditions of Theorem
+\ref{thm:Gleser--Hwang} are satisfied, and every confidence set with
+level $\alpha>0$ has infinite diameter with positive probability.
+\begin{example}[Bahadur--Savage]
+\label{exa:Bahadur--Savage} \citet{bahadur1956nonexistence} studies
+non-parametric testing of the mean, and concludes the mean cannot
+be meaningfully tested. They are working with a family $\mathcal{P}$
+of densities over $\mathbb{R}$ that covers all finite means, has
+finite variances, and is closed under convex combinations. Similar
+problems were considered by \citet{romano2004non} and \citet{Donoho1988-hg}.
+
+Using the Gleswer--Hwang theorem, it is easy to verify every confidence
+set has infinite diameter with positive probability. Define the partition
+$\Pi$ by $p,q\in\Pi$ if and only if $E_{p}(X)=E_{q}(X)$, and let
+$\left\Vert [p]\right\Vert =|E_{p}(X)|$. Let
+\[
+p_{n}(x)=\left(1-\frac{1}{n}\right)q_{0}(x)+\frac{1}{n}q_{n^{2}}(x),
+\]
+where $p_{0}$ has mean $0$ and $q_{n^{2}}$ has mean $n^{2}$. Then
+$\left\Vert [p_{n}]\right\Vert =n$, the conditions of Theorem \ref{thm:Gleser--Hwang}
+are satisfied, and every confidence set with level $\alpha>0$ has
+infinite diameter with positive probability.
+\end{example}
+
+\end{example}
+
+There are several natural candidates for $\Pi$ when working with
+Hedges' selection function model (\ref{eq:hedges model}). We will
+work with three of them. First, consider the partition where $p,q\in\pi$
+if and only if $p,q$ have the same mean effect size parameter $\theta_{0}$.
+We will equip this partition with the size function $\left\Vert \pi\right\Vert =|\theta_{0}|$,
+and it corresponds to a confidence set for $\theta_{0}$. Second,
+consider the partition where all $p,q\in\pi$ have the same heterogeneity
+parameter $\tau$, equipped with $\left\Vert \pi\right\Vert =\tau$.
+Finally, we will work with the partition where all $p,q\in\pi$ have
+the same heterogeneity parameter $\tau$ and population effect size
+$\theta_{0}$, and equip it with $\left\Vert \pi\right\Vert =\sqrt{\theta_{0}^{2}+\tau^{2}}$.
+This information is summarised in Table \ref{tab:Possible partitions}
+for convenience. 
+
+\begin{table}
+\noindent \centering{}\caption{\label{tab:Possible partitions}The three partitions $\Pi$ for the
+selection function model}
+{\small{}}%
+\begin{tabular}{llll}
+ & {\small{}Symbol} & {\small{}Size $\left\Vert \cdot\right\Vert $} & {\small{}Confidence set}\tabularnewline
+\hline 
+{\small{}Mean effect size} & {\small{}$\theta_{0}$} & {\small{}$\left\Vert \pi\right\Vert =|\theta_{0}|$} & {\small{}Confidence set for $\theta_{0}$}\tabularnewline
+{\small{}Heterogeneity parameter} & {\small{}$\tau$} & {\small{}$\left\Vert \pi\right\Vert =\tau$} & {\small{}Confidence set for $\tau$}\tabularnewline
+Both parameters & {\small{}$(\theta_{0},\tau)$} & {\small{}$\left\Vert \pi\right\Vert =\sqrt{\theta_{0}^{2}+\tau^{2}}$} & {\small{}Joint confidence set for $(\theta,\tau)$}\tabularnewline
+\end{tabular}
+\end{table}
+
+Let us take a look at the basic publication bias model (\ref{eq:selection for significance model})
+again. To use Theorem \ref{thm:Gleser--Hwang} we need a witnessing
+sequence of functions $p_{n}\to p$ satisfying the conditions $\text{(ii)}$
+and $\text{(iii)}$. The next lemma shows how to make such a witness
+for the truncated normal. Its proof is in the appendix (p. \pageref{proof:generalized shifted exponential}).
+\begin{lem}
+\label{lem:generalized shifted exponential} Let $f_{n}$ be a normal
+density truncated to $[a,b)$, where $b=\infty$ is allowed, with
+underlying mean $\theta_{n}=-n$ and standard deviation $\sigma_{n}^{2}=n^{2}+c$
+for some $c\in\mathbb{R}$. Then $f_{n}$ converges pointwise to $\exp(-x)/[\exp(-a)-\exp(-b)]$,
+the distribution of an exponential variable truncated to $[a,b)$.
+\end{lem}
+
+Using Lemma \pageref{lem:generalized shifted exponential} it is not
+hard to show that the basic publication bias model (\ref{eq:selection for significance model})
+is a member of the Gleser--Hwang class.
+\begin{thm}
+\label{thm:simple publication bias} Assume $n$ independent samples
+from the basic publication bias model (\ref{eq:selection for significance model}).
+Then, for any $n$, any confidence set for $\theta_{0},\tau$, or
+$(\theta_{0},\tau)$ with level $\alpha>0$ will have infinite diameter
+with positive probability. 
+\end{thm}
+
+\begin{proof}
+\label{proof:simple publication bias}Let $\Pi$ be the partition
+of $\mathcal{P}$ where $p,q\in\pi$ if and only if they share the
+same $\theta_{0}$, and let $||[p]||=|\theta_{0}|$. We are dealing
+with products of densities of the form (\ref{eq:selection for significance model}),
+that is,
+\[
+p(x)=\prod_{i=1}^{N}\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}+\tau}}\right)^{-1}\phi(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}}),
+\]
+where $\sigma_{i}$ are known parameters. From Lemma \ref{lem:generalized shifted exponential},
+$p_{n}$ converges to a product of truncated exponentials when $\theta_{n}=-n$
+and $\tau_{n}^{2}=n$. Since $||[p_{n}]||=n$, the three conditions
+of Theorem \ref{thm:Gleser--Hwang} are satisfied. The proofs for
+$||[p]||=\tau$ and $||[p]||=\sqrt{\tau^{2}+\theta_{0}^{2}}$ are
+similar and omitted.
+\end{proof}
+Proving the analogue of Theorem \ref{thm:simple publication bias}
+for Hedges' publication is only somewhat more involved. We will use
+the mixture representation of (\ref{eq:mixture model formulation})
+and a lemma generalizing Theorem \ref{thm:Gleser--Hwang} to a certain
+kind of mixtures. 
+
+Let $f^{1},f^{2},\ldots,f^{K}$ be a sequence of densities, $\pi=(\pi_{1},\pi_{2},\ldots,\pi_{K})$
+a probability vector, and $p=\sum_{k\leq K}\pi^{k}f^{k}$ a mixture
+distribution. We will assume that the size of $[p]$ equals the size
+of any of its mixture components $[f^{k}]$ for some size $\left\Vert \cdot\right\Vert $,
+i.e., $\left\Vert [p]\right\Vert =\left\Vert [f^{k}]\right\Vert $
+for all $k$. Why we do this will be clear in the proof of Theorem
+\ref{thm:general publication bias}, but think of it this way: If
+all of $p$s mixture components have the same mean, the mean of $p$
+equals the mean of any $f^{k}$. 
+\begin{lem}
+\label{prop:Mixture model corollary} Let $\mathcal{P}$ be a class
+of $K$-ary mixture distributions and $||[p]||$ be the assumption
+above. Assume there is a sequence $p_{i}=\sum_{k\leq K}\pi_{i}^{k}f_{i}^{k}$
+and a subset $K'$ such that 
+\begin{enumerate}
+\item For all $k\in K'$, there is a density $f^{k\star}$ such that $f_{i}^{k}$
+converges to $f^{k\star}$ pointwise.
+\item For all mixtures $p$, $\supp p\supseteq\supp f^{k\star}$ for some
+$k\in K'$.
+\item For all $k\in K'$, the size of $[f_{i}^{k}]$ goes to infinity, $\left\Vert [f_{i}^{k}]\right\Vert \to\infty$.
+\item The density concentrates on the components indexed by $K'$, $\lim_{i\to\infty}\sum_{k\in K'}\pi_{i}^{k}=1$.
+\end{enumerate}
+Then every confidence set with level $\alpha>0$ has infinite diameter
+with positive probability.
+\end{lem}
+
+\begin{proof}
+We employ Theorem \ref{thm:Gleser--Hwang}. By (i) and (iv), $p_{i}$
+converges pointwise to the density $\sum_{k\in K'}\pi_{i}^{k\star}f_{i}^{k\star}=p^{\star}$
+. That $\supp p\supseteq p^{\star}$ follows from (ii) and (iv). Finally,
+from the assumption that$\left\Vert [p]\right\Vert =\left\Vert [f_{k}]\right\Vert $,
+we get that $\left\Vert [p]\right\Vert \to\infty$ too. 
+\end{proof}
+\begin{thm}
+\label{thm:general publication bias} Assume $n$ independent samples
+from the publication bias model (\ref{eq:selection for significance model}),
+where the selection probability $\rho$ is unknown and $\alpha$ is
+known. Then any confidence set for $\theta_{0},\tau$, or $(\theta_{0},\tau)$
+will have infinite diameter with positive probability.
+\end{thm}
+
+\begin{proof}
+\label{proof:general publication bias} Let $n=1$ and consider confidence
+sets for $\theta_{0}$. Let $\Pi$ be the partition of $\mathcal{P}$
+where $p,q\in\pi$ if and only if they share the same $\theta_{0}$,
+and let $||[p]||=|\theta_{0}|$. Then $||f^{k}||=|\theta_{0}|$ from
+the mixture representation (\ref{eq:mixture model formulation}).
+Using Lemma \ref{lem:generalized shifted exponential}, we see that
+$f^{k},k>1$ converges pointwise to a truncated exponential when $\theta_{0}=-n$
+and $\sqrt{\tau^{2}+\sigma^{2}}=n^{1/2}$, so that (i), (ii), (iii)
+of Proposition \ref{prop:Mixture model corollary} are satisfied with
+$K'=K\backslash\{1\}$. The mixture probabilities for $k\neq K$ can
+be fixed at e.g. $\pi=1/(K-1)$, and (iv) is satisfied as well. The
+proofs for $||[p]||=\tau$ and $||[p]||=\sqrt{\tau^{2}+\theta_{0}^{2}}$
+are similar and omitted. When $n>1$, expand the expression $\prod_{j=1}^{n}\sum_{k\leq K}\pi_{i}^{k}(\sigma_{j})f_{i}^{k}(\sigma_{j}),$and
+use the same reasoning as in the first part of this proof.
+\end{proof}
+
+\section{Remarks}
+
+Well-behaved confidence sets for Hedges publication bias model do
+not exist, but well-behaved credibility sets do. Bayesian estimation
+of Hedges' model can be made routine, as it is easy to find uncontroverisal
+priors for $\theta_{0}$ and $\tau$. In practical meta-analyses we
+know that $\theta_{0}$ cannot be large, and is likely to be close
+to $0$. Moreover, since it is common effects in meta-analyses to
+be intepreted as the aggregation of many small effects, the central
+limit theorem justifies using a normal prior. As we want to remove
+prior mass from negative $\theta_{0}$s of large magnitude, $N(0,1)$
+is a decent standard prior. Similarily, a half-normal is a reasonable
+prior for the heterogeneity parameter $\tau$. \citet{moss2019modelling}
+employed these priors on several examples. 
+
+\section*{Appendix}
+
+The following sandwich convergence theorem is used in the proof of
+the Gleser--Hwang theorem. 
+\begin{lem}[{\citet[Exercise 16.4(a)]{billingsley1995probability}}]
+\label{lem:Dominated covergence theorem} Suppose $a_{n},b_{n},f_{n}$
+converge to $a,b,f$ and $a_{n}\leq f_{n}\leq b_{n}$ for all $n$.
+If $\int a_{n}d\mu\to\int ad\mu$ and $\int b_{n}d\mu\to\int bd\mu$,
+then $\int f_{n}d\mu\to\int fd\mu$.
+\end{lem}
+
+The proof of Theorem \ref{thm:Gleser--Hwang} follows the proof of
+\citet[Theorem 1]{gleser1987nonexistence} closely. 
+\begin{proof}[Proof of Theorem \ref{thm:Gleser--Hwang}]
+\label{proof:Gleser--Hwang}We can assume without loss of generality
+that $\left\Vert [p_{n}]\right\Vert \geq n$, as we can choose a subsequence
+if we have to. By definition of the diameter $D$ (\ref{eq:diameter})
+we see that
+\[
+\{D\geq n\}=\{\omega\in\Omega\mid\textrm{there is a }\pi\textrm{ such that}\left\Vert \pi\right\Vert \geq n\textrm{ and }\omega\in R^{c}(\pi)\},
+\]
+and if $||[p_{n}]||\geq n$, then $R^{c}([p_{n}])\subseteq\{D\geq n\}$.
+Since we assume that $\left\Vert [p_{n}]\right\Vert \geq n$ and 
+\[
+1-\alpha\leq P_{n}(R^{c}([p_{n}]))=\int_{R^{c}([p_{n}])}p_{n}d\mu
+\]
+by definition of a confidence set, we have that
+\begin{equation}
+0<1-\alpha\leq\int_{R^{c}([p_{n}])}p_{n}d\mu\leq\int_{D\geq n}p_{n}d\mu\label{eq:inequality with R^c}
+\end{equation}
+for all $n$. Since $p_{n}$ and $p^{\star}$ are densities,
+\[
+\lim_{n\to\infty}\int p_{n}d\mu=1=\int p^{\star}d\mu=\int\lim_{n\to\infty}p_{n}d\mu.
+\]
+This allows us to use Lemma \ref{lem:Dominated covergence theorem}
+with $a_{n}=0$, $b_{n}=p_{n}$, and $f_{n}=1_{D\geq n}p_{n}$ and
+conclude that
+
+\begin{equation}
+\int_{D\geq n}p_{n}d\mu\to\int_{D=\infty}p^{\star}d\mu.\label{eq:limit of pn}
+\end{equation}
+Combining equations (\ref{eq:inequality with R^c}) and (\ref{eq:limit of pn}),
+we get
+\[
+0<1-\alpha\leq\int_{D=\infty}p^{\star}d\mu.
+\]
+Let $P\in\mathcal{P}$ be arbitrary, $p$ be its density, and consider
+\[
+P(D=\infty)=\int_{D=\infty}pd\mu\geq\int_{D=\infty\cap\supp p^{\star}}\left(\frac{p}{p^{\star}}\right)p^{\star}d\mu.
+\]
+Since $\int_{D=\infty}p^{\star}d\mu>0$ and $p/p^{\star}>0$ on $\supp p^{\star}$
+(since $\supp p\supseteq\supp p^{\star}$ by assumption), we see that
+$\int_{D=\infty\cap\supp p^{\star}}(p/p^{\star})p^{\star}d\mu>0$
+too. It follows that $P(D=\infty)>0$, and, since $P$ is aribtrary,
+$D$ has infinite diameter with positive probability.
+\end{proof}
+Now we prove Lemma (\ref{lem:generalized shifted exponential}).
+\begin{proof}[Proof of Lemma (\ref{lem:generalized shifted exponential})]
+\label{proof:generalized shifted exponential}Let $n^{2}>-c$, so
+that $\sigma_{n}^{2}>0$. Recll the well-known formula for the normal
+truncated to $[a,b]$,
+\begin{eqnarray}
+f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\label{eq:truncated}\\
+ & = & \frac{\phi(x;-n,(n+c)^{1/2})1[a,b](x)}{\Phi[-(a+n)(n+c)^{-1/2}]-\Phi[-(b+n)(n+c)^{-1/2}]}.\nonumber 
+\end{eqnarray}
+The normal density part equals
+\[
+\phi(x;-n,(n+c)^{1/2})=(2\pi)^{-1/2}(n+c)^{-1/2}\exp\left(-\frac{x^{2}+2nx+n^{2}}{2(n+c)}\right).
+\]
+When $n$ is large compared to $x$, the term $x^{2}/2(n+c)$ is negligible,
+hence
+\begin{eqnarray*}
+\phi(x;-n,(n+c)^{1/2}) & \approx & (2\pi)^{-1/2}(n+c)^{-1/2}\exp(-n^{2}/2(n+c))\exp(-x),\\
+ & = & (n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x).
+\end{eqnarray*}
+From Equation 5 of \citet{borjesson1979simple}, we know that $\Phi(-x)\approx\phi(x)/x$
+as $x$ grows. The part of (\ref{eq:truncated}) involving cumulative
+normal distributions become
+\begin{eqnarray*}
+\Phi[-(a+n)(n+c)^{-1/2}] & \approx & \frac{(n+c)^{1/2}}{n+a}\phi[-(a+n)(n+c)^{-1/2}],
+\end{eqnarray*}
+and using the same reasoning as above, we find that $\phi[-(a+n)(n+c)^{-1/2}]\approx\phi((n+c)^{1/2})\exp(-a)$
+as $n$ increase. Therefore,
+\[
+\Phi[-(a+n)(n+c)^{-1/2}]\to\frac{(n+c)^{1/2}\phi((n+c)^{1/2})\exp(-a)}{a+n}.
+\]
+Since this reasoning applies to $b$ as well, we get that $f$ approaches
+\begin{eqnarray*}
+ &  & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{\Phi[-(a+n)n^{-1/2}]-\Phi[-(b+n)n^{-1/2}]},\\
+ & \approx & \frac{(n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x)}{(n+c)^{1/2}\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]},\\
+ & = & \frac{\phi(-n^{2}/2(n+c))\exp(-x)}{\phi((n+c)^{1/2})\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]},\\
+ & \approx & \exp(-x)n^{-1}\left[\frac{\exp(-a)}{a+n}-\frac{\exp(-b)}{b+n}\right]^{-1},\\
+ & \to & \exp(-x)\left[\exp(-a)-\exp(-b)\right]^{-1}.
+\end{eqnarray*}
+Here the third line follows from $\phi(n/(n+c)^{1/2})/\phi((n+c)^{1/2})\to1$.
+\end{proof}
+For convenience, we show the formula for the mixture probabilities
+$\pi_{i}$ here. Let $c_{j}=\Phi^{-1}(1-\alpha_{j})$ and define 
+\[
+c=\sum_{k=1}^{K}\rho_{k}[\Phi(c_{j-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
+\]
+Then $\pi_{K}=\rho_{K}c^{-1}$ and \label{eq:pi_i formula}
+\[
+\pi_{k}=c^{-1}(\rho_{k}-\rho_{K})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]
+\]
+
+\bibliographystyle{apacite}
+\bibliography{infiniteci}
+
+\end{document}
