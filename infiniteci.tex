@@ -59,6 +59,66 @@
 \providecommand{\lemmaname}{Lemma}
 \providecommand{\theoremname}{Theorem}
 
+%% almost as usual
+\author{Matthias Templ\\ Vienna University of Technology \And 
+        Second Author\\ Affiliation}
+%% \AND can be used instead of \And and starts a new line
+\title{Guidelines for Submitting a Manuscript to the Austrian Journal of Statistics}
+
+%% for pretty printing and a nice hypersummary also set:
+\Plainauthor{Matthias Templ, Second Author} %% comma-separated
+\Plaintitle{A Capitalized Title: Something about a Topic} %% without formatting
+\Shorttitle{A Capitalized Title} %% a short title (if necessary)
+
+%% an abstract and keywords
+\Abstract{
+  This guideline of the Austrian Journal of Statistics (AJS) shows the required style of manuscripts submitted to the Austrian Journal of Statistics. We highly recommend
+to follow exactly the provided instructions already at the very
+beginning when writing the paper. The present document can be used
+directly as template. The file named {\tt guidelinesAJS.tex} may be
+obtained from the site \href{https://github.com/matthias-da/ajs-public}{https://github.com/matthias-da/ajs-public}.
+
+Manuscripts submitted without considering the AJS style file will be very likely not sent into review, but declined with possibility for re-submission.
+}
+\Keywords{meta-analysis, confidence intervals,file-drawer problem, publication bias, selection models,weigth function models}
+\Plainkeyword{meta-analysis, confidence intervals,file-drawer problem, publication bias, selection models,weigth function models}
+
+%% publication information
+%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
+%% \Volume{50}
+%% \Issue{9}
+%% \Month{June}
+%% \Year{2012}
+%% \Submitdate{2012-06-04}
+%% \Acceptdate{2012-06-04}
+%% \setcounter{page}{1}
+\Pages{1--xx}
+
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+  Matthias Templ\\
+  Institue of Data Analysis and Process Design\\
+  Zurich University of Applied Sciences\\
+  CH-8400 Winterthur, Switzerland\\
+  E-mail: \email{matthias.templ@gmail.com}\\
+  URL: \url{https://www.zhaw.ch/de/ueber-uns/person/teml/}
+}
+%% It is also possible to add a telephone and fax number
+%% before the e-mail in the following format:
+%% Telephone: +43/512/507-7103
+%% Fax: +43/512/507-2851
+
+%% for those who use Sweave please include the following line (with % symbols):
+%% need no \usepackage{Sweave.sty}
+
+%% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
 \begin{document}
 \title{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model}
 \author{Jonas Moss \orcid{0000-0002-6876-6964}\\
@@ -72,7 +132,7 @@ is a fundamental building block of science. But the assumptions of
 classical meta-analysis models are not satisfied whenever publication
 bias is present, which causes inconsistent parameter estimates. Hedges'
 selection function model takes publication bias into account, but
-estimating and infering with this model is tough. Using a generalized
+estimating and inferring with this model is tough. Using a generalized
 Gleser--Hwang theorem, we show there is no confidence set of guaranteed
 finite diameter for the parameters of Hedges' selection model. This
 result provides a partial explanation for why inference with Hedges'
