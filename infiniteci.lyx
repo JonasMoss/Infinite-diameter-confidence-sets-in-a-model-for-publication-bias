@@ -148,7 +148,7 @@ Meta-analysis, the statistical analysis of results from separate studies,
  whenever publication bias is present, which causes inconsistent parameter
  estimates.
  Hedges' selection function model takes publication bias into account, but
- estimating and infering with this model is tough.
+ estimating and inferring with this model is tough.
  Using a generalized Gleser–Hwang theorem, we show there is no confidence
  set of guaranteed finite diameter for the parameters of Hedges' selection
  model.
@@ -187,7 +187,7 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-A meta-analysis is a statistical analysis that quantiatively combines results
+A meta-analysis is a statistical analysis that quantitatively combines results
  from separate scientific studies.
  When the studies measure the same phenomenon, pooling of information allows
  us to predict the common effect size with larger precision than we could
@@ -243,7 +243,7 @@ literal "false"
 .
  When publication bias is present, there is no reason to trust the results
  of meta-analytic methods that do not account for it, as the parameter estimates
- will be incosistent 
+ will be inconsistent 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Carter2019-rw"
@@ -518,7 +518,7 @@ literal "false"
 The basic publication bias model is unrealistic.
  It requires that no non-significant studies are published.
  But even in the fields most severely affected by publication bias, such
- as psychology, a non-negligble number of non-significant studies are published
+ as psychology, a non-negligible number of non-significant studies are published
  
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -732,7 +732,7 @@ f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho^{k}\
 
 \end_inset
 
-Interpretating Hedges' publication bias model is easy.
+Interpreting Hedges' publication bias model is easy.
  When the editor receives a study with 
 \emph on
 p
@@ -1738,7 +1738,7 @@ But it is not only Fieller's confidence set that might be infinitely long.
 \begin_inset Formula $\mu_{2}/\mu_{1}$
 \end_inset
 
- must be infinitily long with positive probability.
+ must be infinitely long with positive probability.
  This result is almost independent of the distribution of 
 \begin_inset Formula $X$
 \end_inset
@@ -2005,7 +2005,7 @@ noprefix "false"
 \end_inset
 
 .
- This information is summarised in Table 
+ This information is summarized in Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Possible partitions"
@@ -2953,7 +2953,7 @@ Remarks
 Well-behaved confidence sets for Hedges publication bias model do not exist,
  but well-behaved credibility sets do.
  Bayesian estimation of Hedges' model can be made routine, as it is easy
- to find uncontroverisal priors for 
+ to find uncontroversial priors for 
 \begin_inset Formula $\theta_{0}$
 \end_inset
 
@@ -2971,7 +2971,7 @@ Well-behaved confidence sets for Hedges publication bias model do not exist,
 \end_inset
 
 .
- Moreover, since it is common effects in meta-analyses to be intepreted
+ Moreover, since it is common effects in meta-analyses to be interpreted
  as the aggregation of many small effects, the central limit theorem justifies
  using a normal prior.
  As we want to remove prior mass from negative 
@@ -2983,7 +2983,7 @@ s of large magnitude,
 \end_inset
 
  is a decent standard prior.
- Similarily, a half-normal is a reasonable prior for the heterogeneity parameter
+ Similarly, a half-normal is a reasonable prior for the heterogeneity parameter
  
 \begin_inset Formula $\tau$
 \end_inset
@@ -3126,7 +3126,7 @@ We can assume without loss of generality that
 \begin_inset Formula $\left\Vert [p_{n}]\right\Vert \geq n$
 \end_inset
 
-, as we can choose a subsequence if we have to.
+, as we can choose a sub-sequence if we have to.
  By definition of the diameter 
 \begin_inset Formula $D$
 \end_inset
@@ -3305,7 +3305,7 @@ Since
 \begin_inset Formula $P$
 \end_inset
 
- is aribtrary, 
+ is arbitrary, 
 \begin_inset Formula $D$
 \end_inset
 

@@ -71,7 +71,7 @@ is a fundamental building block of science. But the assumptions of
 classical meta-analysis models are not satisfied whenever publication
 bias is present, which causes inconsistent parameter estimates. Hedges'
 selection function model takes publication bias into account, but
-estimating and infering with this model is tough. Using a generalized
+estimating and inferring with this model is tough. Using a generalized
 Gleser--Hwang theorem, we show there is no confidence set of guaranteed
 finite diameter for the parameters of Hedges' selection model. This
 result provides a partial explanation for why inference with Hedges'
@@ -81,7 +81,7 @@ selection model is fraught with difficulties.
 
 \section{Introduction}
 
-A meta-analysis is a statistical analysis that quantiatively combines
+A meta-analysis is a statistical analysis that quantitatively combines
 results from separate scientific studies. When the studies measure
 the same phenomenon, pooling of information allows us to predict the
 common effect size with larger precision than we could have done with
@@ -97,7 +97,7 @@ tend to be published with a greater probability than other studies
 by \citet{sterling1959publication} and the file-drawer problem by
 \citet{Rosenthal1979-pm}. When publication bias is present, there
 is no reason to trust the results of meta-analytic methods that do
-not account for it, as the parameter estimates will be incosistent
+not account for it, as the parameter estimates will be inconsistent
 \citep{Carter2019-rw}. 
 
 Hedges' \citeyearpar{hedges1992modeling} publication bias model takes
@@ -165,7 +165,7 @@ in the context of $F$-distributions.
 
 The basic publication bias model is unrealistic. It requires that
 no non-significant studies are published. But even in the fields most
-severely affected by publication bias, such as psychology, a non-negligble
+severely affected by publication bias, such as psychology, a non-negligible
 number of non-significant studies are published \citep{Motyl2017-dx}.
 Moreover, the basic publication bias model does not allow for different
 cutoffs for significance. For instance, it is likely that some editors
@@ -211,7 +211,7 @@ bias model. }Its density is
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho^{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
 \end{equation}
-Interpretating Hedges' publication bias model is easy. When the editor
+Interpreting Hedges' publication bias model is easy. When the editor
 receives a study with \emph{p}-value $u$, she finds the $k$ such
 that $u\in(\alpha_{k-1},\alpha_{k}]$ and accepts with probability
 $\rho^{k}$. Since $\rho^{1}=1$, she always accepts when $u\in[0,\alpha_{1}]$.
@@ -394,7 +394,7 @@ whole real line, or the union of two disjoint semi-infinite intervals
 
 But it is not only Fieller's confidence set that might be infinitely
 long. The Gleser--Hwang theorem can be used to show that every confidence
-set for $\mu_{2}/\mu_{1}$ must be infinitily long with positive probability.
+set for $\mu_{2}/\mu_{1}$ must be infinitely long with positive probability.
 This result is almost independent of the distribution of $X$ and
 $Y$. To state this result in our notation, let $\mathcal{P}$ be
 a family of bivariate distributions over $(X,Y)$. All of these distributions
@@ -438,7 +438,7 @@ parameter $\tau$, equipped with $\left\Vert \pi\right\Vert =\tau$.
 Finally, we will work with the partition where all $p,q\in\pi$ have
 the same heterogeneity parameter $\tau$ and population effect size
 $\theta_{0}$, and equip it with $\left\Vert \pi\right\Vert =\sqrt{\theta_{0}^{2}+\tau^{2}}$.
-This information is summarised in Table \ref{tab:Possible partitions}
+This information is summarized in Table \ref{tab:Possible partitions}
 for convenience. 
 
 \begin{table}
@@ -562,14 +562,14 @@ use the same reasoning as in the first part of this proof.
 
 Well-behaved confidence sets for Hedges publication bias model do
 not exist, but well-behaved credibility sets do. Bayesian estimation
-of Hedges' model can be made routine, as it is easy to find uncontroverisal
+of Hedges' model can be made routine, as it is easy to find uncontroversial
 priors for $\theta_{0}$ and $\tau$. In practical meta-analyses we
 know that $\theta_{0}$ cannot be large, and is likely to be close
 to $0$. Moreover, since it is common effects in meta-analyses to
-be intepreted as the aggregation of many small effects, the central
+be interpreted as the aggregation of many small effects, the central
 limit theorem justifies using a normal prior. As we want to remove
 prior mass from negative $\theta_{0}$s of large magnitude, $N(0,1)$
-is a decent standard prior. Similarily, a half-normal is a reasonable
+is a decent standard prior. Similarly, a half-normal is a reasonable
 prior for the heterogeneity parameter $\tau$. \citet{moss2019modelling}
 employed these priors on several examples. 
 
@@ -588,7 +588,7 @@ The proof of Theorem \ref{thm:Gleser--Hwang} closely follows the
 proof of \citet[Theorem 1]{gleser1987nonexistence}.
 \begin{proof}[Proof of Theorem \ref{thm:Gleser--Hwang}]
 \label{proof:Gleser--Hwang}We can assume without loss of generality
-that $\left\Vert [p_{n}]\right\Vert \geq n$, as we can choose a subsequence
+that $\left\Vert [p_{n}]\right\Vert \geq n$, as we can choose a sub-sequence
 if we have to. By definition of the diameter $D$ (\ref{eq:diameter})
 we see that
 \[
@@ -626,7 +626,7 @@ P(D=\infty)=\int_{D=\infty}pd\mu\geq\int_{D=\infty\cap\supp p^{\star}}\left(\fra
 Since $\int_{D=\infty}p^{\star}d\mu>0$ and $p/p^{\star}>0$ on $\supp p^{\star}$
 (since $\supp p\supseteq\supp p^{\star}$ by assumption), we see that
 $\int_{D=\infty\cap\supp p^{\star}}(p/p^{\star})p^{\star}d\mu>0$
-too. It follows that $P(D=\infty)>0$, and, since $P$ is aribtrary,
+too. It follows that $P(D=\infty)>0$, and, since $P$ is arbitrary,
 $D$ has infinite diameter with positive probability.
 \end{proof}
 Now we prove Lemma \ref{lem:generalized shifted exponential}.
