@@ -1,6 +1,4 @@
-%% LyX 2.3.4.4 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[twoside]{article}
+\documentclass[article]{ajs}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -8,17 +6,17 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{enumitem}
+\setlist[enumerate]{label = (\roman*)}
 
-\makeatletter
+%%%%%%%%%%%%
+%% Macros %%
+%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
-\usepackage[natbibapa]{apacite}
 \theoremstyle{plain}
 \newtheorem{thm}{\protect\theoremname}
 \theoremstyle{definition}
@@ -27,15 +25,10 @@
 \newtheorem{example}[thm]{\protect\examplename}
 \theoremstyle{plain}
 \newtheorem{lem}[thm]{\protect\lemmaname}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-\usepackage{infiniteci}
-
-\titletag{An arXiv preprint, v2}
-\makeatletter
-\titlerunning{\@title}
-\makeatother
-\authorrunning{Jonas Moss}
+\providecommand{\definitionname}{Definition}
+\providecommand{\examplename}{Example}
+\providecommand{\lemmaname}{Lemma}
+\providecommand{\theoremname}{Theorem}
 
 \renewcommand{\sqrt}[1]{{(#1)^{1/2}}}
 \DeclareMathOperator{\tr}{tr}
@@ -48,85 +41,18 @@
 \DeclareMathOperator{\argmax}{argmax}
 \DeclareMathOperator{\supp}{supp}
 
-\usepackage{enumitem}
-\setlist[enumerate]{label = (\roman*)}
+%%%%%%%%%%%%%%%%%%
+%% Declarations %%
+%%%%%%%%%%%%%%%%%%
 
-\makeatother
-
-\usepackage{babel}
-\providecommand{\definitionname}{Definition}
-\providecommand{\examplename}{Example}
-\providecommand{\lemmaname}{Lemma}
-\providecommand{\theoremname}{Theorem}
-
-%% almost as usual
-\author{Matthias Templ\\ Vienna University of Technology \And 
-        Second Author\\ Affiliation}
-%% \AND can be used instead of \And and starts a new line
-\title{Guidelines for Submitting a Manuscript to the Austrian Journal of Statistics}
-
-%% for pretty printing and a nice hypersummary also set:
-\Plainauthor{Matthias Templ, Second Author} %% comma-separated
-\Plaintitle{A Capitalized Title: Something about a Topic} %% without formatting
-\Shorttitle{A Capitalized Title} %% a short title (if necessary)
-
-%% an abstract and keywords
-\Abstract{
-  This guideline of the Austrian Journal of Statistics (AJS) shows the required style of manuscripts submitted to the Austrian Journal of Statistics. We highly recommend
-to follow exactly the provided instructions already at the very
-beginning when writing the paper. The present document can be used
-directly as template. The file named {\tt guidelinesAJS.tex} may be
-obtained from the site \href{https://github.com/matthias-da/ajs-public}{https://github.com/matthias-da/ajs-public}.
-
-Manuscripts submitted without considering the AJS style file will be very likely not sent into review, but declined with possibility for re-submission.
-}
-\Keywords{meta-analysis, confidence intervals,file-drawer problem, publication bias, selection models,weigth function models}
-\Plainkeyword{meta-analysis, confidence intervals,file-drawer problem, publication bias, selection models,weigth function models}
-
-%% publication information
-%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
-%% \Volume{50}
-%% \Issue{9}
-%% \Month{June}
-%% \Year{2012}
-%% \Submitdate{2012-06-04}
-%% \Acceptdate{2012-06-04}
-%% \setcounter{page}{1}
-\Pages{1--xx}
-
-%% The address of (at least) one author should be given
-%% in the following format:
-\Address{
-  Matthias Templ\\
-  Institue of Data Analysis and Process Design\\
-  Zurich University of Applied Sciences\\
-  CH-8400 Winterthur, Switzerland\\
-  E-mail: \email{matthias.templ@gmail.com}\\
-  URL: \url{https://www.zhaw.ch/de/ueber-uns/person/teml/}
-}
-%% It is also possible to add a telephone and fax number
-%% before the e-mail in the following format:
-%% Telephone: +43/512/507-7103
-%% Fax: +43/512/507-2851
-
-%% for those who use Sweave please include the following line (with % symbols):
-%% need no \usepackage{Sweave.sty}
-
-%% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-\begin{document}
+\author{Jonas Moss \\ University of Oslo}
 \title{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model}
-\author{Jonas Moss \orcid{0000-0002-6876-6964}\\
-Department of Mathematics, University of Oslo\\
-PB 1053, Blindern, NO-0316, Oslo, Norway\emph{}\\
-\emph{jonasmgj@math.uio.no}}
-\maketitle
-\begin{abstract}
+
+\Plainauthor{Jonas Moss} 
+\Plaintitle{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model} 
+\Shorttitle{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model} 
+
+\Abstract{
 Meta-analysis, the statistical analysis of results from separate studies,
 is a fundamental building block of science. But the assumptions of
 classical meta-analysis models are not satisfied whenever publication
@@ -137,8 +63,30 @@ Gleser--Hwang theorem, we show there is no confidence set of guaranteed
 finite diameter for the parameters of Hedges' selection model. This
 result provides a partial explanation for why inference with Hedges'
 selection model is fraught with difficulties.
-\end{abstract}
-\keywords{meta-analysis \and confidence intervals \and file-drawer  problem \and publication bias \and selection models \and weigth function models}
+}
+
+\Keywords{meta-analysis, confidence intervals, file-drawer problem, publication bias, selection models, weight function models}
+\Plainkeywords{meta-analysis, confidence intervals, file-drawer problem, publication bias, selection models, weight function models}
+
+%% publication information
+%% \Volume{50}
+%% \Issue{9}
+%% \Month{June}
+%% \Year{2012}
+%% \Submitdate{2012-06-04}
+%% \Acceptdate{2012-06-04}
+%% \setcounter{page}{1}
+\Pages{1--xx}
+
+\Address{
+  Jonas Moss\\
+  Department of Mathematics\\
+  University of Oslo\\
+  PB 1053, Blindern, NO-0316, Oslo, Norway\\
+  E-mail: \email{jonasmgj@math.uio.no}
+}
+
+\begin{document}
 
 \section{Introduction}
 
@@ -740,7 +688,6 @@ Then $\pi^{K}=\rho^{k}c^{-1}$ and \label{eq:pi_i formula}
 \pi^{k}=c^{-1}(\rho^{k}-\rho^{k})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]
 \]
 
-\bibliographystyle{apacite}
 \bibliography{infiniteci}
 
 \end{document}
