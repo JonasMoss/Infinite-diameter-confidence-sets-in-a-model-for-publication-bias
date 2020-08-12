@@ -128,14 +128,15 @@ in hierarchical notation, it equals
 \theta_{i} & \sim & N(\theta_{0},\tau),\\
 x_{i}\mid\theta_{i},\sigma & \sim & N(\theta_{i},\sigma_{i}).
 \end{eqnarray*}
-Here $\sigma_{i}$ is the standard deviation of the $i$th study.
-Following the convention in meta-analysis, we assume all $\sigma_{i}$s
-to be known. The mean parameter $\theta$ is the population effect
-size, $N(\theta_{0},\tau)$ is the effect size distribution, and $\tau$
-is the heterogeneity parameter. The purpose of the effect size distribution
-is to model the fact that most effect size estimates plugged into
-a meta-analysis do not appear to measure the same phenomenon. By integrating
-out $\theta_{i}$, we find the density of $x_{i}$,
+Here $x_{i}$ is the effect size and $\sigma_{i}$ is the standard
+deviation of the $i$th study, and $i=1,\ldots,N$. Following the
+convention in meta-analysis, we assume all $\sigma_{i}$s to be known.
+The mean parameter $\theta$ is the population effect size, $N(\theta_{0},\tau)$
+is the effect size distribution, and $\tau$ is the heterogeneity
+parameter. The purpose of the effect size distribution is to model
+the fact that most effect size estimates plugged into a meta-analysis
+do not appear to measure the same phenomenon. By integrating out $\theta_{i}$,
+we find the density of $x_{i}$,
 \[
 f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}),
 \]
@@ -203,23 +204,23 @@ be a $K$-ary non-negative, non-increasing vector having its first
 element equal to $\rho_{1}=1$. Define the step function $w$ based
 on $\alpha$ and $\rho$ as
 \begin{equation}
-w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho_{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{eq:step function}
+w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho^{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{eq:step function}
 \end{equation}
 We call the selection model with a step function \emph{Hedges' publication
 bias model. }Its density is
 \begin{equation}
-f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho_{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
+f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho^{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
 \end{equation}
 Interpretating Hedges' publication bias model is easy. When the editor
-receives a study with \emph{p}-value $u$, she finds the $j$ such
-that $u\in(\alpha_{j-1},\alpha_{j}]$ and accepts with probability
-$\rho_{j}$. Since $\rho_{1}=1$, she always accepts when $u\in[0,\alpha_{1}]$.
+receives a study with \emph{p}-value $u$, she finds the $k$ such
+that $u\in(\alpha_{k-1},\alpha_{k}]$ and accepts with probability
+$\rho^{k}$. Since $\rho^{1}=1$, she always accepts when $u\in[0,\alpha_{1}]$.
 The vector $\rho$ is non-increasing since a publication decision
 based solely on \emph{p}-values should always act favorably towards
 lower \emph{p}-values. The parameters $(\theta_{0},\tau,\rho)$ of
 the model are identified when $\alpha$ is fixed \citep[Web Appendix A]{moss2019modelling}.
 
-Hedges' publication bias models allows both for non-significant studies
+Hedges' publication bias model allows both for non-significant studies
 to be published and allows the editor to act differently towards different
 cutoffs such as $\alpha=0.025$ and $\alpha=0.05$. In addition, the
 model can approximate any non-increasing selection function $w$ by
@@ -244,8 +245,8 @@ scenario, Hedges' publication bias model is simply the correct model.
 Most statistical methods correcting for publication bias in the literature
 either do not make use of an explicit statistical model or do not
 estimate the parameters $\theta_{0}$ and $\tau$. For instance, the
-funnel funnel plot of \citet{Egger1997-rd} is a graphical method,
-while the trim-and-fill method of \citet{Duval2000-ct} is a non-parametric
+funnel plot of \citet{Egger1997-rd} is a graphical method, while
+the trim-and-fill method of \citet{Duval2000-ct} is a non-parametric
 method based on making the funnel plot symmetric. \citet{Stanley2005-ng,stanley2014meta}
 discuss various misspecified regression-based estimators of the corrected
 effect size $\theta$ based on the fixed effect Hedges' publication
@@ -291,9 +292,9 @@ the simple publication model using power posing data of \citet{Cuddy2018-kp}. }
 
 Fix some measurable space $(\Omega,\mathcal{F})$, let $\mathcal{P}$
 be a family of dominated probability measures defined on this measurable
-space, and $\mathcal{\Pi}$ a partition of $\mathcal{P}$. Recall
-that a partition of $\mathcal{P}$ is a collection of disjoint non-empty
-subsets $\pi$ of $\mathcal{P}$ such that $\bigcup_{\pi\in\Pi}\pi=\mathcal{P}$.
+space, and $\Pi$ a partition of $\mathcal{P}$. Recall that a partition
+of $\mathcal{P}$ is a collection of disjoint non-empty subsets $\pi$
+of $\mathcal{P}$ such that $\bigcup_{\pi\in\Pi}\pi=\mathcal{P}$.
 When $p$ is a density associated with a $P\in\mathcal{P}$, we will
 use the standard notation $[p]$ to denote the unique $\pi$ containing
 $P$. 
@@ -362,13 +363,15 @@ This is a modified Gleser--Hwang theorem \citep[Theorem 1]{gleser1987nonexistenc
 formulated in terms of partitions. Its proof is in the appendix (p.
 \pageref{proof:Gleser--Hwang}).
 \begin{thm}[Gleser--Hwang theorem]
-\label{thm:Gleser--Hwang} Suppose there is a sequence $\{p_{i}\}$
+\label{thm:Gleser--Hwang} Suppose there is a sequence $\{p_{n}\}$
 of densities from $\mathcal{P}$ satisfying the following: 
 \begin{enumerate}
-\item There is a density $p^{\star}$ such that $p_{i}$ converges to $p^{\star}$
+\item There is a density $p^{\star}$ such that $p_{n}$ converges to $p^{\star}$
 pointwise,
-\item $\supp p\supseteq\supp p^{\star}$ for all $p$,
-\item the size of $[p_{i}]$ goes to infinity, $\left\Vert [p_{i}]\right\Vert \to\infty$.
+\item $\supp p\supseteq\supp p^{\star}$ for all densities $p$ derived
+from $\mathcal{P}$,
+\item the size of the equivalence class $[p_{n}]$ goes to infinity as $n$
+increases, $\left\Vert [p_{n}]\right\Vert \to\infty$.
 \end{enumerate}
 Then every confidence set with level $\alpha>0$ has infinite diameter
 with positive probability.
@@ -376,18 +379,18 @@ with positive probability.
 
 Following the terminology of \citet{berger1999integrated}, we will
 say that families $\mathcal{P}$ of probabilities satisfying the conclusion
-of Theorem \ref{thm:Gleser--Hwang} for some suitable partition $\Pi$
+of Theorem \ref{thm:Gleser--Hwang} for a suitable partition $\Pi$
 belong to the Gleser--Hwang class. To make the Gleser--Hwang class
 more familiar, we will present two examples. More examples can be
 found in the papers of \citet{gleser1987nonexistence} and \citet{berger1999integrated}.
-\begin{example}[Fieller's problem]
-\label{exa:Fieller's problem} Let $X,Y$ be an observation from
-a bivariate normal $N([\mu_{1},\mu_{2}],I\sigma^{2})$, where $\sigma^{2}$
-is known. We want to form a confidence set for ratio $\mu_{2}/\mu_{1}$.
-The most famous confidence set is due to \citet{Fieller1940-lg}.
-His confidence set can be finite, the whole real line, or the union
-of two disjoint semi-infinite intervals \citep{Koschat1987-dk}, all
-with positive probability.
+
+Fieller's problem is the best known case of a badly behaved confidence
+set. Let $X,Y$ be an observation from a bivariate normal $N([\mu_{1},\mu_{2}],I\sigma^{2})$,
+where $\sigma^{2}$ is known. We want to form a confidence set for
+the ratio $\mu_{2}/\mu_{1}$. The most famous confidence set is due
+to \citet{Fieller1940-lg}. His confidence set can be finite, the
+whole real line, or the union of two disjoint semi-infinite intervals
+\citep{Koschat1987-dk}, all with positive probability.
 
 But it is not only Fieller's confidence set that might be infinitely
 long. The Gleser--Hwang theorem can be used to show that every confidence
@@ -404,17 +407,17 @@ where $p(x,y)$ is density with means $E_{p}X>0$ and $E_{p}Y=0$.
 Then $\left\Vert [p]\right\Vert =\infty$, the conditions of Theorem
 \ref{thm:Gleser--Hwang} are satisfied, and every confidence set with
 level $\alpha>0$ has infinite diameter with positive probability.
-\begin{example}[Bahadur--Savage]
-\label{exa:Bahadur--Savage} \citet{bahadur1956nonexistence} studies
-non-parametric testing of the mean, and concludes the mean cannot
-be meaningfully tested. They are working with a family $\mathcal{P}$
-of densities over $\mathbb{R}$ that covers all finite means, has
-finite variances, and is closed under convex combinations. Similar
-problems were considered by \citet{romano2004non} and \citet{Donoho1988-hg}.
+
+\citet{bahadur1956nonexistence} studies non-parametric testing of
+the mean, and concludes the mean cannot be meaningfully tested. They
+are working with a family $\mathcal{P}$ of densities over $\mathbb{R}$
+that covers all finite means, has finite variances, and is closed
+under convex combinations. Similar problems were considered by \citet{romano2004non}
+and \citet{Donoho1988-hg}.
 
 Using the Gleswer--Hwang theorem, it is easy to verify every confidence
 set has infinite diameter with positive probability. Define the partition
-$\Pi$ by $p,q\in\Pi$ if and only if $E_{p}(X)=E_{q}(X)$, and let
+$\Pi$ by $p,q\in\pi$ if and only if $E_{p}(X)=E_{q}(X)$, and let
 $\left\Vert [p]\right\Vert =|E_{p}(X)|$. Let
 \[
 p_{n}(x)=\left(1-\frac{1}{n}\right)q_{0}(x)+\frac{1}{n}q_{n^{2}}(x),
@@ -423,9 +426,6 @@ where $p_{0}$ has mean $0$ and $q_{n^{2}}$ has mean $n^{2}$. Then
 $\left\Vert [p_{n}]\right\Vert =n$, the conditions of Theorem \ref{thm:Gleser--Hwang}
 are satisfied, and every confidence set with level $\alpha>0$ has
 infinite diameter with positive probability.
-\end{example}
-
-\end{example}
 
 There are several natural candidates for $\Pi$ when working with
 Hedges' selection function model (\ref{eq:hedges model}). We will
@@ -467,8 +467,8 @@ for some $c\in\mathbb{R}$. Then $f_{n}$ converges pointwise to $\exp(-x)/[\exp(-
 the distribution of an exponential variable truncated to $[a,b)$.
 \end{lem}
 
-Using Lemma \pageref{lem:generalized shifted exponential} it is not
-hard to show that the basic publication bias model (\ref{eq:selection for significance model})
+Using Lemma \ref{lem:generalized shifted exponential} it is not hard
+to show that the basic publication bias model (\ref{eq:selection for significance model})
 is a member of the Gleser--Hwang class.
 \begin{thm}
 \label{thm:simple publication bias} Assume $n$ independent samples
@@ -500,7 +500,7 @@ the mixture representation of (\ref{eq:mixture model formulation})
 and a lemma generalizing Theorem \ref{thm:Gleser--Hwang} to a certain
 kind of mixtures. 
 
-Let $f^{1},f^{2},\ldots,f^{K}$ be a sequence of densities, $\pi=(\pi_{1},\pi_{2},\ldots,\pi_{K})$
+Let $f^{1},f^{2},\ldots,f^{K}$ be a sequence of densities, $\pi=(\pi^{1},\pi^{2},\ldots,\pi^{K})$
 a probability vector, and $p=\sum_{k\leq K}\pi^{k}f^{k}$ a mixture
 distribution. We will assume that the size of $[p]$ equals the size
 of any of its mixture components $[f^{k}]$ for some size $\left\Vert \cdot\right\Vert $,
@@ -512,26 +512,26 @@ equals the mean of any $f^{k}$.
 \begin{lem}
 \label{prop:Mixture model corollary} Let $\mathcal{P}$ be a class
 of $K$-ary mixture distributions and $||[p]||$ be the assumption
-above. Assume there is a sequence $p_{i}=\sum_{k\leq K}\pi_{i}^{k}f_{i}^{k}$
+above. Assume there is a sequence $p_{n}=\sum_{k\leq K}\pi_{n}^{k}f_{n}^{k}$
 and a subset $K'$ such that 
 \begin{enumerate}
-\item For all $k\in K'$, there is a density $f^{k\star}$ such that $f_{i}^{k}$
+\item For all $k\in K'$, there is a density $f^{k\star}$ such that $f_{n}^{k}$
 converges to $f^{k\star}$ pointwise.
 \item For all mixtures $p$, $\supp p\supseteq\supp f^{k\star}$ for some
 $k\in K'$.
-\item For all $k\in K'$, the size of $[f_{i}^{k}]$ goes to infinity, $\left\Vert [f_{i}^{k}]\right\Vert \to\infty$.
-\item The density concentrates on the components indexed by $K'$, $\lim_{i\to\infty}\sum_{k\in K'}\pi_{i}^{k}=1$.
+\item For all $k\in K'$, the size of $[f_{n}^{k}]$ goes to infinity, $\left\Vert [f_{n}^{k}]\right\Vert \to\infty$.
+\item The density concentrates on the components indexed by $K'$, $\lim_{n\to\infty}\sum_{k\in K'}\pi_{n}^{k}=1$.
 \end{enumerate}
 Then every confidence set with level $\alpha>0$ has infinite diameter
 with positive probability.
 \end{lem}
 
 \begin{proof}
-We employ Theorem \ref{thm:Gleser--Hwang}. By (i) and (iv), $p_{i}$
-converges pointwise to the density $\sum_{k\in K'}\pi_{i}^{k\star}f_{i}^{k\star}=p^{\star}$
+We employ Theorem \ref{thm:Gleser--Hwang}. By (i) and (iv), $p_{n}$
+converges pointwise to the density $\sum_{k\in K'}\pi_{n}^{k\star}f_{n}^{k\star}=p^{\star}$
 . That $\supp p\supseteq p^{\star}$ follows from (ii) and (iv). Finally,
-from the assumption that$\left\Vert [p]\right\Vert =\left\Vert [f_{k}]\right\Vert $,
-we get that $\left\Vert [p]\right\Vert \to\infty$ too. 
+from the assumption that$\left\Vert [p_{n}]\right\Vert =\left\Vert [f_{n}^{k}]\right\Vert $,
+we get that $\left\Vert [p_{n}]\right\Vert \to\infty$ too. 
 \end{proof}
 \begin{thm}
 \label{thm:general publication bias} Assume $n$ independent samples
@@ -554,7 +554,7 @@ of Proposition \ref{prop:Mixture model corollary} are satisfied with
 $K'=K\backslash\{1\}$. The mixture probabilities for $k\neq K$ can
 be fixed at e.g. $\pi=1/(K-1)$, and (iv) is satisfied as well. The
 proofs for $||[p]||=\tau$ and $||[p]||=\sqrt{\tau^{2}+\theta_{0}^{2}}$
-are similar and omitted. When $n>1$, expand the expression $\prod_{j=1}^{n}\sum_{k\leq K}\pi_{i}^{k}(\sigma_{j})f_{i}^{k}(\sigma_{j}),$and
+are similar and omitted. When $N>1$, expand the expression $\prod_{j=1}^{n}\sum_{k\leq K}\pi_{i}^{k}(\sigma_{j})f_{i}^{k}(\sigma_{j}),$and
 use the same reasoning as in the first part of this proof.
 \end{proof}
 
@@ -581,11 +581,11 @@ the Gleser--Hwang theorem.
 \label{lem:Dominated covergence theorem} Suppose $a_{n},b_{n},f_{n}$
 converge to $a,b,f$ and $a_{n}\leq f_{n}\leq b_{n}$ for all $n$.
 If $\int a_{n}d\mu\to\int ad\mu$ and $\int b_{n}d\mu\to\int bd\mu$,
-then $\int f_{n}d\mu\to\int fd\mu$.
+then $\int f_{n}d\mu\to\int fd\mu$ for any measure $\mu$.
 \end{lem}
 
-The proof of Theorem \ref{thm:Gleser--Hwang} follows the proof of
-\citet[Theorem 1]{gleser1987nonexistence} closely. 
+The proof of Theorem \ref{thm:Gleser--Hwang} closely follows the
+proof of \citet[Theorem 1]{gleser1987nonexistence}.
 \begin{proof}[Proof of Theorem \ref{thm:Gleser--Hwang}]
 \label{proof:Gleser--Hwang}We can assume without loss of generality
 that $\left\Vert [p_{n}]\right\Vert \geq n$, as we can choose a subsequence
@@ -629,10 +629,10 @@ $\int_{D=\infty\cap\supp p^{\star}}(p/p^{\star})p^{\star}d\mu>0$
 too. It follows that $P(D=\infty)>0$, and, since $P$ is aribtrary,
 $D$ has infinite diameter with positive probability.
 \end{proof}
-Now we prove Lemma (\ref{lem:generalized shifted exponential}).
+Now we prove Lemma \ref{lem:generalized shifted exponential}.
 \begin{proof}[Proof of Lemma (\ref{lem:generalized shifted exponential})]
 \label{proof:generalized shifted exponential}Let $n^{2}>-c$, so
-that $\sigma_{n}^{2}>0$. Recll the well-known formula for the normal
+that $\sigma_{n}^{2}>0$. Recall the well-known formula for the normal
 truncated to $[a,b]$,
 \begin{eqnarray}
 f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\label{eq:truncated}\\
@@ -672,11 +672,11 @@ Here the third line follows from $\phi(n/(n+c)^{1/2})/\phi((n+c)^{1/2})\to1$.
 For convenience, we show the formula for the mixture probabilities
 $\pi_{i}$ here. Let $c_{j}=\Phi^{-1}(1-\alpha_{j})$ and define 
 \[
-c=\sum_{k=1}^{K}\rho_{k}[\Phi(c_{j-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
+c=\sum_{k=1}^{K}\rho^{k}[\Phi(c_{j-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
 \]
-Then $\pi_{K}=\rho_{K}c^{-1}$ and \label{eq:pi_i formula}
+Then $\pi^{K}=\rho^{k}c^{-1}$ and \label{eq:pi_i formula}
 \[
-\pi_{k}=c^{-1}(\rho_{k}-\rho_{K})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]
+\pi^{k}=c^{-1}(\rho^{k}-\rho^{k})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]
 \]
 
 \bibliographystyle{apacite}

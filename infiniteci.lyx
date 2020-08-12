@@ -370,6 +370,10 @@ x_{i}\mid\theta_{i},\sigma & \sim & N(\theta_{i},\sigma_{i}).
 \end_inset
 
 Here 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is the effect size and 
 \begin_inset Formula $\sigma_{i}$
 \end_inset
 
@@ -377,7 +381,11 @@ Here
 \begin_inset Formula $i$
 \end_inset
 
-th study.
+th study, and 
+\begin_inset Formula $i=1,\ldots,N$
+\end_inset
+
+.
  Following the convention in meta-analysis, we assume all 
 \begin_inset Formula $\sigma_{i}$
 \end_inset
@@ -706,7 +714,7 @@ literal "false"
  as
 \begin_inset Formula 
 \begin{equation}
-w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho_{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{eq:step function}
+w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho^{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{eq:step function}
 \end{equation}
 
 \end_inset
@@ -719,7 +727,7 @@ Hedges' publication bias model.
 Its density is
 \begin_inset Formula 
 \begin{equation}
-f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho_{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
+f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho^{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
 \end{equation}
 
 \end_inset
@@ -734,20 +742,20 @@ p
 \end_inset
 
 , she finds the 
-\begin_inset Formula $j$
+\begin_inset Formula $k$
 \end_inset
 
  such that 
-\begin_inset Formula $u\in(\alpha_{j-1},\alpha_{j}]$
+\begin_inset Formula $u\in(\alpha_{k-1},\alpha_{k}]$
 \end_inset
 
  and accepts with probability 
-\begin_inset Formula $\rho_{j}$
+\begin_inset Formula $\rho^{k}$
 \end_inset
 
 .
  Since 
-\begin_inset Formula $\rho_{1}=1$
+\begin_inset Formula $\rho^{1}=1$
 \end_inset
 
 , she always accepts when 
@@ -789,8 +797,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-Hedges' publication bias models allows both for non-significant studies
- to be published and allows the editor to act differently towards different
+Hedges' publication bias model allows both for non-significant studies to
+ be published and allows the editor to act differently towards different
  cutoffs such as 
 \begin_inset Formula $\alpha=0.025$
 \end_inset
@@ -901,7 +909,7 @@ p
 \end_inset
 
 .
- For instance, the funnel funnel plot of 
+ For instance, the funnel plot of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Egger1997-rd"
@@ -1161,7 +1169,7 @@ Fix some measurable space
 
  be a family of dominated probability measures defined on this measurable
  space, and 
-\begin_inset Formula $\mathcal{\Pi}$
+\begin_inset Formula $\Pi$
 \end_inset
 
  a partition of 
@@ -1567,7 +1575,7 @@ name "thm:Gleser--Hwang"
 \end_inset
 
  Suppose there is a sequence 
-\begin_inset Formula $\{p_{i}\}$
+\begin_inset Formula $\{p_{n}\}$
 \end_inset
 
  of densities from 
@@ -1584,7 +1592,7 @@ There is a density
 \end_inset
 
  such that 
-\begin_inset Formula $p_{i}$
+\begin_inset Formula $p_{n}$
 \end_inset
 
  converges to 
@@ -1598,20 +1606,28 @@ There is a density
 \begin_inset Formula $\supp p\supseteq\supp p^{\star}$
 \end_inset
 
- for all 
+ for all densities 
 \begin_inset Formula $p$
+\end_inset
+
+ derived from 
+\begin_inset Formula $\mathcal{P}$
 \end_inset
 
 ,
 \end_layout
 
 \begin_layout Enumerate
-the size of 
-\begin_inset Formula $[p_{i}]$
+the size of the equivalence class 
+\begin_inset Formula $[p_{n}]$
 \end_inset
 
- goes to infinity, 
-\begin_inset Formula $\left\Vert [p_{i}]\right\Vert \to\infty$
+ goes to infinity as 
+\begin_inset Formula $n$
+\end_inset
+
+ increases, 
+\begin_inset Formula $\left\Vert [p_{n}]\right\Vert \to\infty$
 \end_inset
 
 .
@@ -1649,7 +1665,7 @@ noprefix "false"
 
 \end_inset
 
- for some suitable partition 
+ for a suitable partition 
 \begin_inset Formula $\Pi$
 \end_inset
 
@@ -1674,23 +1690,8 @@ literal "false"
 .
 \end_layout
 
-\begin_layout Example
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Fieller's problem
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "exa:Fieller's problem"
-
-\end_inset
-
+\begin_layout Standard
+Fieller's problem is the best known case of a badly behaved confidence set.
  Let 
 \begin_inset Formula $X,Y$
 \end_inset
@@ -1704,7 +1705,7 @@ name "exa:Fieller's problem"
 \end_inset
 
  is known.
- We want to form a confidence set for ratio 
+ We want to form a confidence set for the ratio 
 \begin_inset Formula $\mu_{2}/\mu_{1}$
 \end_inset
 
@@ -1730,7 +1731,7 @@ literal "false"
 , all with positive probability.
 \end_layout
 
-\begin_layout Example
+\begin_layout Standard
 But it is not only Fieller's confidence set that might be infinitely long.
  The Gleser–Hwang theorem can be used to show that every confidence set
  for 
@@ -1830,25 +1831,7 @@ noprefix "false"
  has infinite diameter with positive probability.
 \end_layout
 
-\begin_deeper
-\begin_layout Example
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Bahadur–Savage
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "exa:Bahadur--Savage"
-
-\end_inset
-
- 
+\begin_layout Standard
 \begin_inset CommandInset citation
 LatexCommand citet
 key "bahadur1956nonexistence"
@@ -1887,7 +1870,7 @@ literal "false"
 .
 \end_layout
 
-\begin_layout Example
+\begin_layout Standard
 Using the Gleswer–Hwang theorem, it is easy to verify every confidence set
  has infinite diameter with positive probability.
  Define the partition 
@@ -1895,7 +1878,7 @@ Using the Gleswer–Hwang theorem, it is easy to verify every confidence set
 \end_inset
 
  by 
-\begin_inset Formula $p,q\in\Pi$
+\begin_inset Formula $p,q\in\pi$
 \end_inset
 
  if and only if 
@@ -1953,7 +1936,6 @@ noprefix "false"
  has infinite diameter with positive probability.
 \end_layout
 
-\end_deeper
 \begin_layout Standard
 There are several natural candidates for 
 \begin_inset Formula $\Pi$
@@ -2400,7 +2382,7 @@ name "lem:generalized shifted exponential"
 \begin_layout Standard
 Using Lemma 
 \begin_inset CommandInset ref
-LatexCommand pageref
+LatexCommand ref
 reference "lem:generalized shifted exponential"
 plural "false"
 caps "false"
@@ -2605,7 +2587,7 @@ Let
 \end_inset
 
  be a sequence of densities, 
-\begin_inset Formula $\pi=(\pi_{1},\pi_{2},\ldots,\pi_{K})$
+\begin_inset Formula $\pi=(\pi^{1},\pi^{2},\ldots,\pi^{K})$
 \end_inset
 
  a probability vector, and 
@@ -2681,7 +2663,7 @@ name "prop:Mixture model corollary"
 
  be the assumption above.
  Assume there is a sequence 
-\begin_inset Formula $p_{i}=\sum_{k\leq K}\pi_{i}^{k}f_{i}^{k}$
+\begin_inset Formula $p_{n}=\sum_{k\leq K}\pi_{n}^{k}f_{n}^{k}$
 \end_inset
 
  and a subset 
@@ -2702,7 +2684,7 @@ For all
 \end_inset
 
  such that 
-\begin_inset Formula $f_{i}^{k}$
+\begin_inset Formula $f_{n}^{k}$
 \end_inset
 
  converges to 
@@ -2734,11 +2716,11 @@ For all
 \end_inset
 
 , the size of 
-\begin_inset Formula $[f_{i}^{k}]$
+\begin_inset Formula $[f_{n}^{k}]$
 \end_inset
 
  goes to infinity, 
-\begin_inset Formula $\left\Vert [f_{i}^{k}]\right\Vert \to\infty$
+\begin_inset Formula $\left\Vert [f_{n}^{k}]\right\Vert \to\infty$
 \end_inset
 
 .
@@ -2750,7 +2732,7 @@ The density concentrates on the components indexed by
 \end_inset
 
 , 
-\begin_inset Formula $\lim_{i\to\infty}\sum_{k\in K'}\pi_{i}^{k}=1$
+\begin_inset Formula $\lim_{n\to\infty}\sum_{k\in K'}\pi_{n}^{k}=1$
 \end_inset
 
 .
@@ -2778,11 +2760,11 @@ noprefix "false"
 
 .
  By (i) and (iv), 
-\begin_inset Formula $p_{i}$
+\begin_inset Formula $p_{n}$
 \end_inset
 
  converges pointwise to the density 
-\begin_inset Formula $\sum_{k\in K'}\pi_{i}^{k\star}f_{i}^{k\star}=p^{\star}$
+\begin_inset Formula $\sum_{k\in K'}\pi_{n}^{k\star}f_{n}^{k\star}=p^{\star}$
 \end_inset
 
  .
@@ -2792,11 +2774,11 @@ noprefix "false"
 
  follows from (ii) and (iv).
  Finally, from the assumption that
-\begin_inset Formula $\left\Vert [p]\right\Vert =\left\Vert [f_{k}]\right\Vert $
+\begin_inset Formula $\left\Vert [p_{n}]\right\Vert =\left\Vert [f_{n}^{k}]\right\Vert $
 \end_inset
 
 , we get that 
-\begin_inset Formula $\left\Vert [p]\right\Vert \to\infty$
+\begin_inset Formula $\left\Vert [p_{n}]\right\Vert \to\infty$
 \end_inset
 
  too.
@@ -2953,7 +2935,7 @@ noprefix "false"
 
  are similar and omitted.
  When 
-\begin_inset Formula $n>1$
+\begin_inset Formula $N>1$
 \end_inset
 
 , expand the expression 
@@ -3083,6 +3065,10 @@ name "lem:Dominated covergence theorem"
 \begin_inset Formula $\int f_{n}d\mu\to\int fd\mu$
 \end_inset
 
+ for any measure 
+\begin_inset Formula $\mu$
+\end_inset
+
 .
 \end_layout
 
@@ -3097,7 +3083,7 @@ noprefix "false"
 
 \end_inset
 
- follows the proof of 
+ closely follows the proof of 
 \begin_inset CommandInset citation
 LatexCommand citet
 after "Theorem 1"
@@ -3106,8 +3092,7 @@ literal "false"
 
 \end_inset
 
- closely.
- 
+.
 \end_layout
 
 \begin_layout Proof
@@ -3330,7 +3315,7 @@ Since
 \begin_layout Standard
 Now we prove Lemma 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "lem:generalized shifted exponential"
 plural "false"
 caps "false"
@@ -3377,7 +3362,7 @@ Let
 \end_inset
 
 .
- Recll the well-known formula for the normal truncated to 
+ Recall the well-known formula for the normal truncated to 
 \begin_inset Formula $[a,b]$
 \end_inset
 
@@ -3537,13 +3522,13 @@ For convenience, we show the formula for the mixture probabilities
  and define 
 \begin_inset Formula 
 \[
-c=\sum_{k=1}^{K}\rho_{k}[\Phi(c_{j-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
+c=\sum_{k=1}^{K}\rho^{k}[\Phi(c_{j-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
 \]
 
 \end_inset
 
 Then 
-\begin_inset Formula $\pi_{K}=\rho_{K}c^{-1}$
+\begin_inset Formula $\pi^{K}=\rho^{k}c^{-1}$
 \end_inset
 
  and 
@@ -3556,7 +3541,7 @@ name "eq:pi_i formula"
 
 \begin_inset Formula 
 \[
-\pi_{k}=c^{-1}(\rho_{k}-\rho_{K})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]
+\pi^{k}=c^{-1}(\rho^{k}-\rho^{k})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]
 \]
 
 \end_inset
