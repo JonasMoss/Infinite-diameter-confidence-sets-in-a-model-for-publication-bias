@@ -1,6 +1,4 @@
-%% LyX 2.3.4.4 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[twoside]{article}
+\documentclass[article]{ajs}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -8,17 +6,17 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{enumitem}
+\setlist[enumerate]{label = (\roman*)}
 
-\makeatletter
+%%%%%%%%%%%%
+%% Macros %%
+%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
-\usepackage[natbibapa]{apacite}
 \theoremstyle{plain}
 \newtheorem{thm}{\protect\theoremname}
 \theoremstyle{definition}
@@ -27,15 +25,10 @@
 \newtheorem{example}[thm]{\protect\examplename}
 \theoremstyle{plain}
 \newtheorem{lem}[thm]{\protect\lemmaname}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-\usepackage{infiniteci}
-
-\titletag{An arXiv preprint, v2}
-\makeatletter
-\titlerunning{\@title}
-\makeatother
-\authorrunning{Jonas Moss}
+\providecommand{\definitionname}{Definition}
+\providecommand{\examplename}{Example}
+\providecommand{\lemmaname}{Lemma}
+\providecommand{\theoremname}{Theorem}
 
 \renewcommand{\sqrt}[1]{{(#1)^{1/2}}}
 \DeclareMathOperator{\tr}{tr}
@@ -48,25 +41,18 @@
 \DeclareMathOperator{\argmax}{argmax}
 \DeclareMathOperator{\supp}{supp}
 
-\usepackage{enumitem}
-\setlist[enumerate]{label = (\roman*)}
+%%%%%%%%%%%%%%%%%%
+%% Declarations %%
+%%%%%%%%%%%%%%%%%%
 
-\makeatother
-
-\usepackage{babel}
-\providecommand{\definitionname}{Definition}
-\providecommand{\examplename}{Example}
-\providecommand{\lemmaname}{Lemma}
-\providecommand{\theoremname}{Theorem}
-
-\begin{document}
+\author{Jonas Moss \\ University of Oslo}
 \title{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model}
-\author{Jonas Moss \orcid{0000-0002-6876-6964}\\
-Department of Mathematics, University of Oslo\\
-PB 1053, Blindern, NO-0316, Oslo, Norway\emph{}\\
-\emph{jonasmgj@math.uio.no}}
-\maketitle
-\begin{abstract}
+
+\Plainauthor{Jonas Moss} 
+\Plaintitle{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model} 
+\Shorttitle{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model} 
+
+\Abstract{
 Meta-analysis, the statistical analysis of results from separate studies,
 is a fundamental building block of science. But the assumptions of
 classical meta-analysis models are not satisfied whenever publication
@@ -77,8 +63,30 @@ Gleser--Hwang theorem, we show there is no confidence set of guaranteed
 finite diameter for the parameters of Hedges' selection model. This
 result provides a partial explanation for why inference with Hedges'
 selection model is fraught with difficulties.
-\end{abstract}
-\keywords{meta-analysis \and confidence intervals \and file-drawer  problem \and publication bias \and selection models \and weigth function models}
+}
+
+\Keywords{meta-analysis, confidence intervals, file-drawer problem, publication bias, selection models, weight function models}
+\Plainkeywords{meta-analysis, confidence intervals, file-drawer problem, publication bias, selection models, weight function models}
+
+%% publication information
+%% \Volume{50}
+%% \Issue{9}
+%% \Month{June}
+%% \Year{2012}
+%% \Submitdate{2012-06-04}
+%% \Acceptdate{2012-06-04}
+%% \setcounter{page}{1}
+\Pages{1--xx}
+
+\Address{
+  Jonas Moss\\
+  Department of Mathematics\\
+  University of Oslo\\
+  PB 1053, Blindern, NO-0316, Oslo, Norway\\
+  E-mail: \email{jonasmgj@math.uio.no}
+}
+
+\begin{document}
 
 \section{Introduction}
 
@@ -680,7 +688,6 @@ Then $\pi^{K}=\rho^{k}c^{-1}$ and \label{eq:pi_i formula}
 \pi^{k}=c^{-1}(\rho^{k}-\rho^{k})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]
 \]
 
-\bibliographystyle{apacite}
 \bibliography{infiniteci}
 
 \end{document}
