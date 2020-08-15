@@ -95,12 +95,12 @@ results from separate scientific studies. When the studies measure
 the same phenomenon, pooling of information allows us to predict the
 common effect size with larger precision than we could have done with
 one study alone. Meta-analyses are ubiquitous in the empirical sciences
-and forms a key component of most systematic reviews such as Cochrane's
+and forms a key component of most systematic reviews such as Cochrane
 reviews \citep{Higgins2019-vv}.
 
 Most meta-analytic techniques assume honest and unbiased reporting
 of results. But there is ample evidence that the scientific literature
-is not unbiased, as studies with\emph{ }significant \emph{p}-values
+is not unbiased, as studies with\emph{ }significant \textit{p}-values
 tend to be published with a greater probability than other studies
 \citep{Easterbrook1991-ph}, a phenomenon called publication bias
 by \citet{sterling1959publication} and the file-drawer problem by
@@ -109,171 +109,69 @@ is no reason to trust the results of meta-analytic methods that do
 not account for it, as the parameter estimates will be inconsistent
 \citep{Carter2019-rw}. 
 
-Hedges' \citeyearpar{hedges1992modeling} publication bias model takes
-publication bias explicitly into account using a selection model,
-and is arguably the most appropriate model for publication bias \citep{Carter2019-rw}.
-Despite there being an $\mathtt{R}$ \citep{Team2013-tt} package
-for maximum likelihood estimation of this model, called $\texttt{weightr}$
-\citep{Coburn2019-ec}, the model has not yet taken off. Its maximum
-likelihood estimation methods are numerically unstable and its estimates
-can be off even when they converge \citep{Coburn2019-ec,Stanley2005-ng}.
-The estimate of the mean effect size may be negative and of unrealistically
-large magnitude, and the estimated heterogeneity parameter might be
-improbably large. It turns out there are ridges in the likelihood
-function that can be linked to this behavior \citep{McShane2016-rb},
-but it has not been stated in clear terms exactly what the consequences
-are for inferential procedures. The purpose of this note is to show
-there is no confidence set for the mean effect size that has infinite
-diameter with probability $0$. In the terminology of \citet{berger1999integrated},
-Hedges' publication bias model belongs to the \emph{Gleser--Hwang}
-class.
+Hedges' \citeyearpar{hedges1992modeling} publication bias model takes publication bias explicitly into account using a selection model, and is arguably the most appropriate model for publication bias \citep{Carter2019-rw}. Despite there being an $\mathtt{R}$ \citep{Team2013-tt} package for maximum likelihood estimation of this model, called $\texttt{weightr}$ \citep{Coburn2019-ec}, the model has not yet taken off. Its maximum likelihood estimation methods are numerically unstable and its estimates can be off even when they converge \citep{Coburn2019-ec,Stanley2005-ng}. The estimate of the mean effect size may be negative and of unrealistically large magnitude, and the estimated heterogeneity parameter might be improbably large. It turns out there are ridges in the likelihood function that can be linked to this behavior \citep{McShane2016-rb}, but it has not been stated in clear terms exactly what the consequences are for inferential procedures. The purpose of this note is to explain why Hedges' publication bias performs poorly, by showing there is no confidence set for the mean effect size that has infinite diameter with probability $0$. %In the terminology of \citet{berger1999integrated}, Hedges' publication bias model belongs to the \emph{Gleser--Hwang} class.
 
 \section{Hedges' publication bias model}
 
-The most popular and well-known meta-analysis method is the random
-effects model with normal likelihoods \citep{hedges1998fixed}. Written
-in hierarchical notation, it equals
+The most popular and well-known meta-analysis method is the random effects model with normal likelihoods \citep{hedges1998fixed}. Written in hierarchical notation, it equals
 \begin{eqnarray*}
 \theta_{i} & \sim & N(\theta_{0},\tau),\\
 x_{i}\mid\theta_{i},\sigma & \sim & N(\theta_{i},\sigma_{i}).
 \end{eqnarray*}
-Here $x_{i}$ is the effect size and $\sigma_{i}$ is the standard
-deviation of the $i$th study, and $i=1,\ldots,N$. Following the
-convention in meta-analysis, we assume all $\sigma_{i}$s to be known.
-The mean parameter $\theta$ is the population effect size, $N(\theta_{0},\tau)$
-is the effect size distribution, and $\tau$ is the heterogeneity
-parameter. The purpose of the effect size distribution is to model
-the fact that most effect size estimates plugged into a meta-analysis
-do not appear to measure the same phenomenon. By integrating out $\theta_{i}$,
-we find the density of $x_{i}$,
+Here $x_{i}$ is the effect size and $\sigma_{i}$ is the standard deviation of the $i$th study, and $i=1,\ldots,N$. Following the convention in meta-analysis, we assume all $\sigma_{i}$s to be known. The mean parameter $\theta$ is the population effect size, $N(\theta_{0},\tau)$ is the effect size distribution, and $\tau$ is the heterogeneity parameter. The purpose of the effect size distribution is to model the fact that most effect size estimates plugged into a meta-analysis do not appear to measure the same phenomenon. By integrating out $\theta_{i}$, we find the density of $x_{i}$,
 \[
 f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}),
 \]
 where $\phi$ is the density of a normal random variable. 
 
-We will assume that the random effects meta-analysis model is true
-in the absence of publication bias. The mechanisms that cause publication
-bias modify the density in a suitable way. Consider the case when
-only significant studies at some specified level $\alpha$ are published.
-Assuming one-sided tests, the \emph{p}-values are $u_{i}=\Phi(-x_{i}/\sigma_{i})$,
-or normal one-sided \emph{p}-values. We will only deal with with one-sided
-\emph{p}-values in this paper, as there is usually, but not always,
-just one direction that is interesting to researchers, reviewers,
-and editors. A one-sided \emph{p}-value can also be used if the researchers
-reported a two-sided value, since $p=0.05$ for a two-sided hypothesis
-corresponds to $p=0.025$ for a one-sided hypothesis, et cetera.
+We will assume that the random effects meta-analysis model is true in the absence of publication bias. The mechanisms that cause publication bias modify the density in a suitable way. Consider the case when only significant studies at some specified level $\alpha$ are published. Assuming one-sided tests, the \textit{p}-values are $u_{i}=\Phi(-x_{i}/\sigma_{i})$, or normal one-sided \textit{p}-values. We will only deal with with one-sided \textit{p}-values in this paper, as there is usually, but not always, just one direction that is interesting to researchers, reviewers, and editors. A one-sided \textit{p}-value can also be used if the researchers reported a two-sided value, since $p=0.05$ for a two-sided hypothesis corresponds to $p=0.025$ for a one-sided hypothesis, et cetera.
 
-Define $c_{\alpha}=\Phi^{-1}(1-\alpha)$, the cutoff for significance
-at level $\alpha$. The \emph{basic publication bias model} is a truncated
-normal model with density
+Define $c_{\alpha}=\Phi^{-1}(1-\alpha)$, the cutoff for significance at level $\alpha$. The \emph{basic publication bias model} is a truncated normal model with density
 \begin{equation}
 f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}^{2}+\tau^{2}}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})1[x_{i}/\sigma_{i}>c_{\alpha}],\label{eq:selection for significance model}
 \end{equation}
-This model for publication bias was introduced by \citet{hedges1984estimation}
-in the context of $F$-distributions.
+where $1[A]$ is the characteristic function of $A$. This model for publication bias was introduced by \citet{hedges1984estimation} in the context of $F$-distributions.
 
-The basic publication bias model is unrealistic. It requires that
-no non-significant studies are published. But even in the fields most
-severely affected by publication bias, such as psychology, a non-negligible
-number of non-significant studies are published \citep{Motyl2017-dx}.
-Moreover, the basic publication bias model does not allow for different
-cutoffs for significance. For instance, it is likely that some editors
-will accept studies reaching a significance at $\alpha=0.025$, corresponding
-to $x_{i}/\sigma_{i}>1.96$ but not at $\alpha=0.05$, corresponding
-to $x_{i}/\sigma_{i}>1.64$.
+The basic publication bias model is unrealistic. It requires that no non-significant studies are published. But even in the fields most severely affected by publication bias, such as psychology, a non-negligible number of non-significant studies are published \citep{Motyl2017-dx}. Moreover, the basic publication bias model does not allow for different cutoffs for significance. It is likely that some editors will accept studies reaching a significance at $\alpha=0.025$, corresponding to $x_{i}/\sigma_{i}>1.96$ but not at $\alpha=0.05$, corresponding to $x_{i}/\sigma_{i}>1.64$.
 
-These problems can be rectified by adopting the selection model for
-publication bias of \citet{iyengar1988selection}, which models the
-following scenario.
+These problems can be rectified by adopting the selection model for publication bias of \citet{iyengar1988selection}, which models the following scenario.
 \begin{quote}
-\textbf{Publication bias scenario.} Alice the editor receives a study
-with the \emph{p}-value $u$. Her publication decision is a random
-function of this \emph{p}-value. That is, she will publish the study
-with some probability $w(u)$ and reject it with probability $1-w(u)$.
-Every study you will ever read in Alice's journal has survived this
-selection mechanism, the rest are lost forever.
+\textbf{Publication bias scenario.} Alice the editor receives a study with the \textit{p}-value $u$. Her publication decision is a random function of this \textit{p}-value. That is, she will publish the study with some probability $w(u)$ and reject it with probability $1-w(u)$. Every study you will ever read in Alice's journal has survived this selection mechanism, the rest are lost forever.
 \end{quote}
-Let $w(u_{i})$ be a function of the \emph{p}-value $u_{i}=1-\Phi(-x_{i}/\sigma_{i})$
-taking values in $[0,1]$. Then $w(u_{i})$ is a probability for every
-$u_{i}$, and the selection model
+Let $w(u_{i})$ be a function of the \textit{p}-value $u_{i}=\Phi(-x_{i}/\sigma_{i})$ taking values in $[0,1]$. Then $w(u_{i})$ is a probability for every $u_{i}$, and the selection model
 
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})\propto\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})w(u)\label{eq:iyengar-greenhouse model}
 \end{equation}
-models the publication bias scenario exactly. This model can be viewed
-as a rejection sampling procedure \citep{flury1990acceptance,von1951various},
-where $\phi$ serves as proposal distribution for $f$. Variants of
-this model, with and without covariates, has been studied by e.g.
-\citet{Dear1992-gw,Vevea1995-on,Vevea2005-xp,citkowicz2017parsimonious}.
+models the publication bias scenario exactly. This model can be viewed as a rejection sampling procedure \citep{flury1990acceptance,von1951various}, where $\phi$ serves as proposal distribution for $f$. Variants of this model, with and without covariates, has been studied by e.g. \citet{Dear1992-gw,Vevea1995-on,Vevea2005-xp,citkowicz2017parsimonious}.
 
-\citet{hedges1992modeling} studies the selection model when $w$
-is a step function with fixed steps. Let $\alpha$ be a vector with
-elements $0=\alpha_{0}<\alpha_{1}<\ldots<\alpha_{K}=1$ and $\rho$
-be a $K$-ary non-negative, non-increasing vector having its first
-element equal to $\rho_{1}=1$. Define the step function $w$ based
-on $\alpha$ and $\rho$ as
+\citet{hedges1992modeling} studies the selection model when $w$ is a step function with fixed steps. Let $\alpha$ be a vector with elements $0=\alpha_{0}<\alpha_{1}<\ldots<\alpha_{K}=1$ and $\rho$ be a $K$-ary non-negative, non-increasing vector having its first element equal to $\rho_{1}=1$ for identifiability. Define the step function $w$ based on $\alpha$ and $\rho$ as
 \begin{equation}
 w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho^{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{eq:step function}
 \end{equation}
-We call the selection model with a step function \emph{Hedges' publication
-bias model. }Its density is
+We call the selection model with a step function \emph{Hedges' publication bias model}. Its density is
 \begin{equation}
-f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho^{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1_{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
+f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho^{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
 \end{equation}
-Interpreting Hedges' publication bias model is easy. When the editor
-receives a study with \emph{p}-value $u$, she finds the $k$ such
-that $u\in(\alpha_{k-1},\alpha_{k}]$ and accepts with probability
-$\rho^{k}$. Since $\rho^{1}=1$, she always accepts when $u\in[0,\alpha_{1}]$.
-The vector $\rho$ is non-increasing since a publication decision
-based solely on \emph{p}-values should always act favorably towards
-lower \emph{p}-values. The parameters $(\theta_{0},\tau,\rho)$ of
-the model are identified when $\alpha$ is fixed \citep[Web Appendix A]{moss2019modelling}.
+Interpreting Hedges' publication bias model is easy. When the editor receives a study with \textit{p}-value $u$, she finds the $k$ such that $u\in(\alpha_{k-1},\alpha_{k}]$ and accepts with probability $\rho^{k}$. Since $\rho^{1}=1$, she always accepts when $u\in[0,\alpha_{1}]$. The vector $\rho$ is non-increasing since a publication decision based solely on \textit{p}-values should always act favorably towards lower \textit{p}-values. The parameters $(\theta_{0},\tau,\rho)$ of the model are identified when $\alpha$ is fixed \citep[Web Appendix A]{moss2019modelling}.
 
-Hedges' publication bias model allows both for non-significant studies
-to be published and allows the editor to act differently towards different
-cutoffs such as $\alpha=0.025$ and $\alpha=0.05$. In addition, the
-model can approximate any non-increasing selection function $w$ by
-increasing the number of steps.
+Hedges' publication bias model allows both for non-significant studies to be published and allows the editor to act differently towards different cutoffs such as $\alpha=0.025$ and $\alpha=0.05$. In addition, the model can approximate any non-increasing selection function $w$ by increasing the number of steps.
 
 We can write Hedges' model as a mixture model on the form
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})=\sum_{k=1}^{K}\pi^{k}f^{k}(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}).\label{eq:mixture model formulation}
 \end{equation}
 Here $f^{K}$ is a normal density, $f^{k},k<K$ are normal densities
-truncated to $[\Phi^{-1}(1-\alpha_{j-1}),\Phi^{-1}(1-\alpha))$, and
-$\pi^{k}$ are mixture probabilities, i.e., $\pi^{k}>0$ for each
-$k$ and $\sum_{k=1}^{K}\pi^{k}=1$. The mixture probabilities $\pi^{k}$
-are functions of $(\theta_{0},\tau,\sigma_{i},\rho)$, see the appendix
-(p. \pageref{eq:pi_i formula}) for their formula.
+truncated to $[\Phi^{-1}(1-\alpha_{k-1}),\Phi^{-1}(1-\alpha_k))$, and $\pi^{k}$ are mixture probabilities, i.e., $\pi^{k}>0$ for each $k$ and $\sum_{k=1}^{K}\pi^{k}=1$. The mixture probabilities $\pi^{k}$ are functions of $(\theta_{0},\tau,\sigma_{i},\rho)$, see the appendix (p. \pageref{eq:pi_i formula}) for their formula.
 
-The main benefit of Hedges' publication bias model (\ref{eq:hedges model})
-is how it models \emph{p}-values based publication bias directly,
-there is no approximation involved. If you believe in the random effects
-meta-analysis model and the \emph{p}-value based publication bias
-scenario, Hedges' publication bias model is simply the correct model.
-Most statistical methods correcting for publication bias in the literature
-either do not make use of an explicit statistical model or do not
-estimate the parameters $\theta_{0}$ and $\tau$. For instance, the
-funnel plot of \citet{Egger1997-rd} is a graphical method, while
-the trim-and-fill method of \citet{Duval2000-ct} is a non-parametric
-method based on making the funnel plot symmetric. \citet{Stanley2005-ng,stanley2014meta}
-discuss various misspecified regression-based estimators of the corrected
-effect size $\theta$ based on the fixed effect Hedges' publication
-bias model. The estimating \emph{p}-curve method of \citet{Simonsohn2014-cn}
-and \emph{p}-uniform of \citet{Van_Assen2015-qs,Van_Aert2016-cu}
-are two methods for dealing with publication bias hailing from psychology.
-Both are based on a variant of the basic publication bias model, but
-with fixed instead of random effects, and both employ somewhat unusual
-estimation methods \citep{McShane2016-rb}. Since there is ample evidence
-of heterogeneity in meta-analysis, restricting oneself to the fixed
-effects meta-analysis is a mistake.
+The main benefit of Hedges' publication bias model (\ref{eq:hedges model}) is how it models \textit{p}-values based publication bias directly, there is no approximation involved. If you believe in the random effects meta-analysis model and the \textit{p}-value based publication bias scenario, Hedges' publication bias model is simply the correct model. Most statistical methods correcting for publication bias in the literature either do not make use of an explicit statistical model or do not estimate the parameters $\theta_{0}$ and $\tau$. For instance, the funnel plot of \citet{Egger1997-rd} is a graphical method, while the trim-and-fill method of \citet{Duval2000-ct} is a non-parametric method based on making the funnel plot symmetric. \citet{Stanley2005-ng,stanley2014meta} discuss various misspecified regression-based estimators of the corrected effect size $\theta$ based on the fixed effect Hedges' publication bias model. The estimating \textit{p}-curve method of \citet{Simonsohn2014-cn} and \textit{p}-uniform of \citet{Van_Assen2015-qs,Van_Aert2016-cu} are two methods for dealing with publication bias hailing from psychology. Both are based on a variant of the basic publication bias model, but with fixed instead of random effects, and both employ somewhat unusual estimation methods \citep{McShane2016-rb}. Since there is ample evidence of heterogeneity in meta-analysis, restricting oneself to the fixed effects meta-analysis is a mistake.
 
 Hedges' model has some downsides. It models only bias due to selection
-of \emph{p}-values, not every source of bias, such as language bias
+of \textit{p}-values, not every source of bias, such as language bias
 \citep{Egger1998-kj}. Second, it may not be best model for biases
-with other causes than the publication process, such as \emph{p}-hacking
+with other causes than the publication process, such as \textit{p}-hacking
 \citep{simmons2011false}. \citet{moss2019modelling} propose a related
-model that may be more successful at correcting for \emph{p}-hacking. 
+model that may be more successful at correcting for \textit{p}-hacking. 
 
 Estimation of Hedges' model is difficult. \citet[Section 6.3]{Stanley2005-ng}
 discusses three problematic cases in economics when maximum likelihood
@@ -520,8 +418,7 @@ all of $p$s mixture components have the same mean, the mean of $p$
 equals the mean of any $f^{k}$. 
 \begin{lem}
 \label{prop:Mixture model corollary} Let $\mathcal{P}$ be a class
-of $K$-ary mixture distributions and $||[p]||$ be the assumption
-above. Assume there is a sequence $p_{n}=\sum_{k\leq K}\pi_{n}^{k}f_{n}^{k}$
+of $K$-ary mixture distributions and $||[p]||$ be as assumed above. Assume there is a sequence $p_{n}=\sum_{k\leq K}\pi_{n}^{k}f_{n}^{k}$
 and a subset $K'$ such that 
 \begin{enumerate}
 \item For all $k\in K'$, there is a density $f^{k\star}$ such that $f_{n}^{k}$
@@ -537,8 +434,8 @@ with positive probability.
 
 \begin{proof}
 We employ Theorem \ref{thm:Gleser--Hwang}. By (i) and (iv), $p_{n}$
-converges pointwise to the density $\sum_{k\in K'}\pi_{n}^{k\star}f_{n}^{k\star}=p^{\star}$
-. That $\supp p\supseteq p^{\star}$ follows from (ii) and (iv). Finally,
+converges pointwise to the density $$\sum_{k\in K'}\pi_{n}^{k\star}f_{n}^{k\star}=p^{\star}.$$
+That $\supp p\supseteq p^{\star}$ follows from (ii) and (iv). Finally,
 from the assumption that$\left\Vert [p_{n}]\right\Vert =\left\Vert [f_{n}^{k}]\right\Vert $,
 we get that $\left\Vert [p_{n}]\right\Vert \to\infty$ too. 
 \end{proof}
