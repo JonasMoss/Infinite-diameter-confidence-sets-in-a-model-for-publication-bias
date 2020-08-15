@@ -223,12 +223,12 @@ Usually, a confidence is defined as a set $C$ adhering to the relation
 \pi_{0}\in C\iff\omega\notin R(\pi_{0}).\label{eq:c-confidence set}
 \end{equation}
 That is, $\pi_{0}\in C$ if and only if we accept the null-hypothesis
-$H_{0}:\pi=\pi_{0}$, but will only need the formulation using rejection
+$H_{0}:\pi=\pi_{0}$, but we will only need the formulation using rejection
 sets in this paper. When confidence sets are defined in terms of rejection
 sets, there is sometimes no partition $\Pi$ to take the supremum
 over, and the definition reduces to $\sup_{P\in\mathcal{P}}P(R(P))\leq\alpha$.
 The term\emph{ confidence interval} is far more common than confidence
-set, but this requires that $C$ of equation \ref{eq:c-confidence set}
+set, but this requires that the $C$ in equation \ref{eq:c-confidence set}
 is an interval, which we will not require here.
 
 The following example should make Definition \ref{def:confidence set}
@@ -238,14 +238,12 @@ familiar.
 with $n$ observations. Here $\mathcal{P}$ contains all measures
 $P_{\mu,\sigma}^{n}$, where $P_{\mu,\sigma}$ is the probability
 measure of a normal with mean $\mu$ and standard deviation $\sigma$.
-Furthermore, when $Q$ is a probability measure, $Q^{n}$ denotes
-the $n$-fold product measure of $Q$, corresponding to $n$ independent
-samples from $Q$. Let $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
+Here $Q^{n}$ denotes the $n$-fold product measure of $Q$, corresponding to $n$ independent samples from $Q$, when $Q$ is a probability measure. Let $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
 contain all normal probability measures with mean $\mu$ and some
 positive standard deviation. Then $\{\pi(\mu)\},\mu\in\mathbb{R}$
 defines a partition of $\mathcal{P}$. A two-sided \emph{t}-confidence
 interval is a confidence set of size $\alpha$ with partition $\{\pi(\mu)\},\mu\in\mathbb{R}$
-according to definition \ref{def:confidence set}.
+according to Definition \ref{def:confidence set}.
 \end{example}
 
 Now we must find out how to measure the size of confidence sets. Let
@@ -296,11 +294,10 @@ set. Let $X,Y$ be an observation from a bivariate normal $N([\mu_{1},\mu_{2}],I\
 where $\sigma^{2}$ is known. We want to form a confidence set for
 the ratio $\mu_{2}/\mu_{1}$. The most famous confidence set is due
 to \citet{Fieller1940-lg}. His confidence set can be finite, the
-whole real line, or the union of two disjoint semi-infinite intervals
-\citep{Koschat1987-dk}, all with positive probability.
+whole real line, or the union of two disjoint semi-infinite intervals, all with positive probability \citep{Koschat1987-dk}.
 
 But it is not only Fieller's confidence set that might be infinitely
-long. The Gleser--Hwang theorem can be used to show that every confidence
+long. The Gleser--Hwang theorem can be used to show that \textit{every} confidence
 set for $\mu_{2}/\mu_{1}$ must be infinitely long with positive probability.
 This result is almost independent of the distribution of $X$ and
 $Y$. To state this result in our notation, let $\mathcal{P}$ be
@@ -315,14 +312,14 @@ Then $\left\Vert [p]\right\Vert =\infty$, the conditions of Theorem
 \ref{thm:Gleser--Hwang} are satisfied, and every confidence set with
 level $\alpha>0$ has infinite diameter with positive probability.
 
-\citet{bahadur1956nonexistence} studies non-parametric testing of
+Another example is due to \citet{bahadur1956nonexistence}, who studies non-parametric testing of
 the mean, and concludes the mean cannot be meaningfully tested. They
 are working with a family $\mathcal{P}$ of densities over $\mathbb{R}$
 that covers all finite means, has finite variances, and is closed
 under convex combinations. Similar problems were considered by \citet{romano2004non}
 and \citet{Donoho1988-hg}.
 
-Using the Gleswer--Hwang theorem, it is easy to verify every confidence
+Using the Gleswer--Hwang theorem, it is easy to verify that every confidence
 set has infinite diameter with positive probability. Define the partition
 $\Pi$ by $p,q\in\pi$ if and only if $E_{p}(X)=E_{q}(X)$, and let
 $\left\Vert [p]\right\Vert =|E_{p}(X)|$. Let
@@ -378,9 +375,8 @@ Using Lemma \ref{lem:generalized shifted exponential} it is not hard
 to show that the basic publication bias model (\ref{eq:selection for significance model})
 is a member of the Gleser--Hwang class.
 \begin{thm}
-\label{thm:simple publication bias} Assume $n$ independent samples
-from the basic publication bias model (\ref{eq:selection for significance model}).
-Then, for any $n$, any confidence set for $\theta_{0},\tau$, or
+\label{thm:simple publication bias} Assume we have $N$ independent samples
+from the basic publication bias model (\ref{eq:selection for significance model}). Then any confidence set for $\theta_{0},\tau$, or
 $(\theta_{0},\tau)$ with level $\alpha>0$ will have infinite diameter
 with positive probability. 
 \end{thm}
@@ -423,7 +419,7 @@ and a subset $K'$ such that
 \begin{enumerate}
 \item For all $k\in K'$, there is a density $f^{k\star}$ such that $f_{n}^{k}$
 converges to $f^{k\star}$ pointwise.
-\item For all mixtures $p$, $\supp p\supseteq\supp f^{k\star}$ for some
+\item For all mixtures $p$, $\supp p\supseteq\supp f^{k\star}$ for all
 $k\in K'$.
 \item For all $k\in K'$, the size of $[f_{n}^{k}]$ goes to infinity, $\left\Vert [f_{n}^{k}]\right\Vert \to\infty$.
 \item The density concentrates on the components indexed by $K'$, $\lim_{n\to\infty}\sum_{k\in K'}\pi_{n}^{k}=1$.
@@ -440,28 +436,11 @@ from the assumption that$\left\Vert [p_{n}]\right\Vert =\left\Vert [f_{n}^{k}]\r
 we get that $\left\Vert [p_{n}]\right\Vert \to\infty$ too. 
 \end{proof}
 \begin{thm}
-\label{thm:general publication bias} Assume $n$ independent samples
-from the publication bias model (\ref{eq:selection for significance model}),
-where the selection probability $\rho$ is unknown and $\alpha$ is
-known. Then any confidence set for $\theta_{0},\tau$, or $(\theta_{0},\tau)$
-will have infinite diameter with positive probability.
+\label{thm:general publication bias} Assume we have $N$ independent samples from the publication bias model (\ref{eq:selection for significance model}), where the selection probability $\rho$ is unknown and $\alpha$ is known. Then any confidence set for $\theta_{0},\tau$, or $(\theta_{0},\tau)$ will have infinite diameter with positive probability.
 \end{thm}
 
 \begin{proof}
-\label{proof:general publication bias} Let $n=1$ and consider confidence
-sets for $\theta_{0}$. Let $\Pi$ be the partition of $\mathcal{P}$
-where $p,q\in\pi$ if and only if they share the same $\theta_{0}$,
-and let $||[p]||=|\theta_{0}|$. Then $||f^{k}||=|\theta_{0}|$ from
-the mixture representation (\ref{eq:mixture model formulation}).
-Using Lemma \ref{lem:generalized shifted exponential}, we see that
-$f^{k},k>1$ converges pointwise to a truncated exponential when $\theta_{0}=-n$
-and $\sqrt{\tau^{2}+\sigma^{2}}=n^{1/2}$, so that (i), (ii), (iii)
-of Proposition \ref{prop:Mixture model corollary} are satisfied with
-$K'=K\backslash\{1\}$. The mixture probabilities for $k\neq K$ can
-be fixed at e.g. $\pi=1/(K-1)$, and (iv) is satisfied as well. The
-proofs for $||[p]||=\tau$ and $||[p]||=\sqrt{\tau^{2}+\theta_{0}^{2}}$
-are similar and omitted. When $N>1$, expand the expression $\prod_{j=1}^{n}\sum_{k\leq K}\pi_{i}^{k}(\sigma_{j})f_{i}^{k}(\sigma_{j}),$and
-use the same reasoning as in the first part of this proof.
+\label{proof:general publication bias} Let $n=1$ and consider confidence sets for $\theta_{0}$. Let $\Pi$ be the partition of $\mathcal{P}$ where $p,q\in\pi$ if and only if they share the same $\theta_{0}$, and let $||[p]||=|\theta_{0}|$. Then $||f^{k}||=|\theta_{0}|$ from the mixture representation (\ref{eq:mixture model formulation}). Using Lemma \ref{lem:generalized shifted exponential}, we see that $f^{k},k>1$ converges pointwise to a truncated exponential when $\theta_{0}=-n$ and $\tau_n^{2} = n$, so that (i), (ii), (iii) of Proposition \ref{prop:Mixture model corollary} are satisfied with the set $K'=\{1,2,\ldots, K-1\}$. The mixture probabilities for $k\neq K$ can be fixed at e.g. $\pi=1/(K-1)$, and (iv) is satisfied as well. The proofs for $||[p]||=\tau$ and $||[p]||=\sqrt{\tau^{2}+\theta_{0}^{2}}$ are similar and omitted. When $N>1$, expand the expression $\prod_{i=1}^{N}\sum_{k<K}\pi_{i}^{k}(\sigma_{i})f_{i}^{k}(\sigma_{i}),$ and use the same reasoning as in the first part of this proof.
 \end{proof}
 
 \section{Remarks}
@@ -494,13 +473,13 @@ The proof of Theorem \ref{thm:Gleser--Hwang} closely follows the
 proof of \citet[Theorem 1]{gleser1987nonexistence}.
 \begin{proof}[Proof of Theorem \ref{thm:Gleser--Hwang}]
 \label{proof:Gleser--Hwang}We can assume without loss of generality
-that $\left\Vert [p_{n}]\right\Vert \geq n$, as we can choose a sub-sequence
+that $\left\Vert [p_{n}]\right\Vert \geq n$, as we can choose a suitable sub-sequence
 if we have to. By definition of the diameter $D$ (\ref{eq:diameter})
 we see that
 \[
-\{D\geq n\}=\{\omega\in\Omega\mid\textrm{there is a }\pi\textrm{ such that}\left\Vert \pi\right\Vert \geq n\textrm{ and }\omega\in R^{c}(\pi)\},
+\{D\geq n\}=\{\omega\in\Omega\mid\textrm{there is a }\pi\textrm{ such that}\left\Vert \pi\right\Vert \geq n\textrm{ and }\omega\in R^{c}(\pi)\}.
 \]
-and if $||[p_{n}]||\geq n$, then $R^{c}([p_{n}])\subseteq\{D\geq n\}$.
+It follows that, if $||[p_{n}]||\geq n$, then $R^{c}([p_{n}])\subseteq\{D\geq n\}$.
 Since we assume that $\left\Vert [p_{n}]\right\Vert \geq n$ and 
 \[
 1-\alpha\leq P_{n}(R^{c}([p_{n}]))=\int_{R^{c}([p_{n}])}p_{n}d\mu
@@ -557,9 +536,9 @@ hence
 From Equation 5 of \citet{borjesson1979simple}, we know that $\Phi(-x)\approx\phi(x)/x$
 as $x$ grows. The part of (\ref{eq:truncated}) involving cumulative
 normal distributions become
-\begin{eqnarray*}
-\Phi[-(a+n)(n+c)^{-1/2}] & \approx & \frac{(n+c)^{1/2}}{n+a}\phi[-(a+n)(n+c)^{-1/2}],
-\end{eqnarray*}
+\begin{equation*}
+\Phi[-(a+n)(n+c)^{-1/2}] \approx \frac{(n+c)^{1/2}}{n+a}\phi[-(a+n)(n+c)^{-1/2}],
+\end{equation*}
 and using the same reasoning as above, we find that $\phi[-(a+n)(n+c)^{-1/2}]\approx\phi((n+c)^{1/2})\exp(-a)$
 as $n$ increase. Therefore,
 \[
@@ -575,14 +554,14 @@ Since this reasoning applies to $b$ as well, we get that $f$ approaches
 \end{eqnarray*}
 Here the third line follows from $\phi(n/(n+c)^{1/2})/\phi((n+c)^{1/2})\to1$.
 \end{proof}
-For convenience, we show the formula for the mixture probabilities
-$\pi_{i}$ here. Let $c_{j}=\Phi^{-1}(1-\alpha_{j})$ and define 
+These are the formula for the mixture probabilities
+$\pi_{i}$ here. Let $c_{k}=\Phi^{-1}(1-\alpha_{k})$ and define 
 \[
-c=\sum_{k=1}^{K}\rho^{k}[\Phi(c_{j-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{j};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
+c=\sum_{k=1}^{K}\rho^{k}[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
 \]
-Then $\pi^{K}=\rho^{k}c^{-1}$ and \label{eq:pi_i formula}
+Then $\pi^{K}=\rho^{K}c^{-1}$ and \label{eq:pi_i formula}
 \[
-\pi^{k}=c^{-1}(\rho^{k}-\rho^{k})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})]
+\pi^{k}=c^{-1}(\rho^{k}-\rho^{k-1})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
 \]
 
 \bibliography{infiniteci}
