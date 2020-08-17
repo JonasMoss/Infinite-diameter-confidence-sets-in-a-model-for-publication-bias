@@ -128,7 +128,7 @@ We will assume that the random effects meta-analysis model is true in the absenc
 
 Define $c_{\alpha}=\Phi^{-1}(1-\alpha)$, the cutoff for significance at level $\alpha$. The \emph{basic publication bias model} is a truncated normal model with density
 \begin{equation}
-f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}^{2}+\tau^{2}}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})1[x_{i}/\sigma_{i}>c_{\alpha}],\label{eq:selection for significance model}
+f(x_{i};\theta_{0},\sigma_{i})=\Phi\left(\frac{\theta_{0}-c_{\alpha}}{\sqrt{\sigma_{i}^{2}+\tau^{2}}}\right)^{-1}\phi(x;\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})1(x_{i}/\sigma_{i}>c_{\alpha}],\label{eq:selection for significance model}
 \end{equation}
 where $1[A]$ is the characteristic function of $A$. This model for publication bias was introduced by \citet{hedges1984estimation} in the context of $F$-distributions.
 
@@ -161,8 +161,8 @@ We can write Hedges' model as a mixture model on the form
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})=\sum_{k=1}^{K}\pi^{k}f^{k}(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}).\label{eq:mixture model formulation}
 \end{equation}
-Here $f^{K}$ is a normal density, $f^{k},k<K$ are normal densities
-truncated to $[\Phi^{-1}(1-\alpha_{k-1}),\Phi^{-1}(1-\alpha_k))$, and $\pi^{k}$ are mixture probabilities, i.e., $\pi^{k}>0$ for each $k$ and $\sum_{k=1}^{K}\pi^{k}=1$. The mixture probabilities $\pi^{k}$ are functions of $(\theta_{0},\tau,\sigma_{i},\rho)$, see the appendix (p. \pageref{eq:pi_i formula}) for their formula.
+Where $f^{k},k\leq K$ are normal densities
+truncated to $(\Phi^{-1}(1-\alpha_{k-1}),\Phi^{-1}(1-\alpha_k)]$, and $\pi^{k}$ are mixture probabilities, i.e., $\pi^{k}>0$ for each $k$ and $\sum_{k=1}^{K}\pi^{k}=1$. The mixture probabilities $\pi^{k}$ are functions of $(\theta_{0},\tau,\sigma_{i},\rho)$, see the appendix (p. \pageref{eq:pi_i formula}) for their formula.
 
 The main benefit of Hedges' publication bias model (\ref{eq:hedges model}) is how it models \textit{p}-values based publication bias directly, there is no approximation involved. If you believe in the random effects meta-analysis model and the \textit{p}-value based publication bias scenario, Hedges' publication bias model is simply the correct model. Most statistical methods correcting for publication bias in the literature either do not make use of an explicit statistical model or do not estimate the parameters $\theta_{0}$ and $\tau$. For instance, the funnel plot of \citet{Egger1997-rd} is a graphical method, while the trim-and-fill method of \citet{Duval2000-ct} is a non-parametric method based on making the funnel plot symmetric. \citet{Stanley2005-ng,stanley2014meta} discuss various misspecified regression-based estimators of the corrected effect size $\theta$ based on the fixed effect Hedges' publication bias model. The estimating \textit{p}-curve method of \citet{Simonsohn2014-cn} and \textit{p}-uniform of \citet{Van_Assen2015-qs,Van_Aert2016-cu} are two methods for dealing with publication bias hailing from psychology. Both are based on a variant of the basic publication bias model, but with fixed instead of random effects, and both employ somewhat unusual estimation methods \citep{McShane2016-rb}. Since there is ample evidence of heterogeneity in meta-analysis, restricting oneself to the fixed effects meta-analysis is a mistake.
 
@@ -178,7 +178,7 @@ discusses three problematic cases in economics when maximum likelihood
 was used to estimate Hedges' publication bias model. \citet[Appendix A]{McShane2016-rb}
 notes that while estimation of the basic publication bias model is
 hard, introducing the heterogeneity parameter exacerbates the problem.
-The likelihood function has contours following approximately $\tau\propto\sqrt{|\theta|}$.
+The likelihood function has contours following approximately $\tau\propto|\theta|^{1/2}$.
 Figure \ref{fig:contour lines} shows the contour lines for the meta-analysis
 of \citet{Cuddy2018-kp} where the selection probabilities of the
 step function (\ref{eq:step function}) are fixed at $\rho=(1,0.6,0.1)$.
@@ -326,7 +326,7 @@ $\left\Vert [p]\right\Vert =|E_{p}(X)|$. Let
 \[
 p_{n}(x)=\left(1-\frac{1}{n}\right)q_{0}(x)+\frac{1}{n}q_{n^{2}}(x),
 \]
-where $p_{0}$ has mean $0$ and $q_{n^{2}}$ has mean $n^{2}$. Then
+where $q_{0}$ has mean $0$ and $q_{n^{2}}$ has mean $n^{2}$. Then
 $\left\Vert [p_{n}]\right\Vert =n$, the conditions of Theorem \ref{thm:Gleser--Hwang}
 are satisfied, and every confidence set with level $\alpha>0$ has
 infinite diameter with positive probability.
@@ -404,9 +404,7 @@ and a lemma generalizing Theorem \ref{thm:Gleser--Hwang} to a certain
 kind of mixtures. 
 
 Let $f^{1},f^{2},\ldots,f^{K}$ be a sequence of densities, $\pi=(\pi^{1},\pi^{2},\ldots,\pi^{K})$
-a probability vector, and $p=\sum_{k\leq K}\pi^{k}f^{k}$ a mixture
-distribution. We will assume that the size of $[p]$ equals the size
-of any of its mixture components $[f^{k}]$ for some size $\left\Vert \cdot\right\Vert $,
+be a probability vector, and $p=\sum_{k\leq K}\pi^{k}f^{k}$ be a mixture distribution. We will assume that the size of $[p]$ equals the size of any of its mixture components $[f^{k}]$ for some size $\left\Vert \cdot\right\Vert $,
 i.e., $\left\Vert [p]\right\Vert =\left\Vert [f^{k}]\right\Vert $
 for all $k$. Why we do this will be clear in the proof of Theorem
 \ref{thm:general publication bias}, but think of it this way: If
@@ -419,7 +417,7 @@ and a subset $K'$ such that
 \begin{enumerate}
 \item For all $k\in K'$, there is a density $f^{k\star}$ such that $f_{n}^{k}$
 converges to $f^{k\star}$ pointwise.
-\item For all mixtures $p$, $\supp p\supseteq\supp f^{k\star}$ for all
+\item For all mixtures $p$, $\supp p\supseteq\supp f^{k\star}$ for some
 $k\in K'$.
 \item For all $k\in K'$, the size of $[f_{n}^{k}]$ goes to infinity, $\left\Vert [f_{n}^{k}]\right\Vert \to\infty$.
 \item The density concentrates on the components indexed by $K'$, $\lim_{n\to\infty}\sum_{k\in K'}\pi_{n}^{k}=1$.
@@ -440,8 +438,10 @@ we get that $\left\Vert [p_{n}]\right\Vert \to\infty$ too.
 \end{thm}
 
 \begin{proof}
-\label{proof:general publication bias} Let $n=1$ and consider confidence sets for $\theta_{0}$. Let $\Pi$ be the partition of $\mathcal{P}$ where $p,q\in\pi$ if and only if they share the same $\theta_{0}$, and let $||[p]||=|\theta_{0}|$. Then $||f^{k}||=|\theta_{0}|$ from the mixture representation (\ref{eq:mixture model formulation}). Using Lemma \ref{lem:generalized shifted exponential}, we see that $f^{k},k>1$ converges pointwise to a truncated exponential when $\theta_{0}=-n$ and $\tau_n^{2} = n$, so that (i), (ii), (iii) of Proposition \ref{prop:Mixture model corollary} are satisfied with the set $K'=\{1,2,\ldots, K-1\}$. The mixture probabilities for $k\neq K$ can be fixed at e.g. $\pi=1/(K-1)$, and (iv) is satisfied as well. The proofs for $||[p]||=\tau$ and $||[p]||=\sqrt{\tau^{2}+\theta_{0}^{2}}$ are similar and omitted. When $N>1$, expand the expression $\prod_{i=1}^{N}\sum_{k<K}\pi_{i}^{k}(\sigma_{i})f_{i}^{k}(\sigma_{i}),$ and use the same reasoning as in the first part of this proof.
+\label{proof:general publication bias} Let $n=1$ and consider confidence sets for $\theta_{0}$. Let $\Pi$ be the partition of $\mathcal{P}$ where $p,q\in\pi$ if and only if they share the same $\theta_{0}$, and let $||[p]||=|\theta_{0}|$. Then $||f^{k}||=|\theta_{0}|$ from the mixture representation (\ref{eq:mixture model formulation}). Using Lemma \ref{lem:generalized shifted exponential}, we see that $f^{k},k>1$ converges pointwise to a truncated exponential when $\theta_{0}=-n$ and $\tau_n^{2} = n$, so that (i), (ii), (iii) of Proposition \ref{prop:Mixture model corollary} are satisfied with the set $K'=\{1,2,\ldots, K-1\}$, which is sufficient since we assume that $\rho$ is decreasing. The mixture probabilities for $k\neq K$ can be fixed at e.g. $\pi=1/(K-1)$, and (iv) is satisfied as well. The proofs for $||[p]||=\tau$ and $||[p]||=\sqrt{\tau^{2}+\theta_{0}^{2}}$ are similar and omitted. When $N>1$, expand the expression $\prod_{i=1}^{N}\sum_{k<K}\pi_{i}^{k}(\sigma_{i})f_{i}^{k}(\sigma_{i}),$ and use the same reasoning as in the first part of this proof.
 \end{proof}
+
+
 
 \section{Remarks}
 
@@ -555,13 +555,13 @@ Since this reasoning applies to $b$ as well, we get that $f$ approaches
 Here the third line follows from $\phi(n/(n+c)^{1/2})/\phi((n+c)^{1/2})\to1$.
 \end{proof}
 These are the formula for the mixture probabilities
-$\pi_{i}$ here. Let $c_{k}=\Phi^{-1}(1-\alpha_{k})$ and define 
+$\pi_{i}$, see \eqref{eq:mixture model formulation}. Let $c_{k}=\Phi^{-1}(1-\alpha_{k})$ and define 
 \[
 c=\sum_{k=1}^{K}\rho^{k}[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
 \]
-Then $\pi^{K}=\rho^{K}c^{-1}$ and \label{eq:pi_i formula}
+Then \label{eq:pi_i formula}
 \[
-\pi^{k}=c^{-1}(\rho^{k}-\rho^{k-1})[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
+\pi^{k}=c^{-1}\rho^{k}[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
 \]
 
 \bibliography{infiniteci}
