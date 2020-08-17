@@ -109,7 +109,7 @@ is no reason to trust the results of meta-analytic methods that do
 not account for it, as the parameter estimates will be inconsistent
 \citep{Carter2019-rw}. 
 
-Hedges' \citeyearpar{hedges1992modeling} publication bias model takes publication bias explicitly into account using a selection model, and is arguably the most appropriate model for publication bias \citep{Carter2019-rw}. Despite there being an $\mathtt{R}$ \citep{Team2013-tt} package for maximum likelihood estimation of this model, called $\texttt{weightr}$ \citep{Coburn2019-ec}, the model has not yet taken off. Its maximum likelihood estimation methods are numerically unstable and its estimates can be off even when they converge \citep{Coburn2019-ec,Stanley2005-ng}. The estimate of the mean effect size may be negative and of unrealistically large magnitude, and the estimated heterogeneity parameter might be improbably large. It turns out there are ridges in the likelihood function that can be linked to this behavior \citep{McShane2016-rb}, but it has not been stated in clear terms exactly what the consequences are for inferential procedures. The purpose of this note is to explain why Hedges' publication bias performs poorly, by showing there is no confidence set for the mean effect size that has infinite diameter with probability $0$. %In the terminology of \citet{berger1999integrated}, Hedges' publication bias model belongs to the \emph{Gleser--Hwang} class.
+Hedges' \citeyearpar{hedges1992modeling} publication bias model takes publication bias explicitly into account using a selection model, and is arguably the most appropriate model for publication bias \citep{Carter2019-rw}. Despite there being an $\mathtt{R}$ \citep{Team2013-tt} package for maximum likelihood estimation of this model, called $\texttt{weightr}$ \citep{Coburn2019-ec}, the model has not yet taken off. Its maximum likelihood estimation methods are numerically unstable and its estimates can be off even when they converge \citep{Coburn2019-ec,Stanley2005-ng}. The estimate of the mean effect size may be negative and of unrealistically large magnitude, and the estimated heterogeneity parameter might be improbably large. It turns out there are ridges in the likelihood function that can be linked to this behavior \citep{McShane2016-rb}, but it has not been stated in clear terms exactly what the consequences are for inferential procedures. The purpose of this note is to explain why Hedges' publication bias performs poorly, by showing there is no confidence set for the mean effect size that has infinite diameter with probability zero. %In the terminology of \citet{berger1999integrated}, Hedges' publication bias model belongs to the \emph{Gleser--Hwang} class.
 
 \section{Hedges' publication bias model}
 
@@ -118,7 +118,7 @@ The most popular and well-known meta-analysis method is the random effects model
 \theta_{i} & \sim & N(\theta_{0},\tau),\\
 x_{i}\mid\theta_{i},\sigma & \sim & N(\theta_{i},\sigma_{i}).
 \end{eqnarray*}
-Here $x_{i}$ is the effect size and $\sigma_{i}$ is the standard deviation of the $i$th study, and $i=1,\ldots,N$. Following the convention in meta-analysis, we assume all $\sigma_{i}$s to be known. The mean parameter $\theta$ is the population effect size, $N(\theta_{0},\tau)$ is the effect size distribution, and $\tau$ is the heterogeneity parameter. The purpose of the effect size distribution is to model the fact that most effect size estimates plugged into a meta-analysis do not appear to measure the same phenomenon. By integrating out $\theta_{i}$, we find the density of $x_{i}$,
+xzHere $x_{i}$ is the effect size and $\sigma_{i}$ is the standard deviation of the $i$th study,  $i=1,\ldots,N$. Following the convention in meta-analysis, we assume all $\sigma_{i}$s to be known. The mean parameter $\theta_0$ is the population effect size, $N(\theta_{0},\tau)$ is the effect size distribution, and $\tau$ is the heterogeneity parameter. The purpose of the effect size distribution is to model the fact that most effect size estimates plugged into a meta-analysis do not appear to measure the same phenomenon. By integrating out $\theta_{i}$, we find the density of $x_{i}$,
 \[
 f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}),
 \]
@@ -145,7 +145,7 @@ f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})\propto\phi(x_{i};\theta_{0},\
 \end{equation}
 models the publication bias scenario exactly. This model can be viewed as a rejection sampling procedure \citep{flury1990acceptance,von1951various}, where $\phi$ serves as proposal distribution for $f$. Variants of this model, with and without covariates, has been studied by e.g. \citet{Dear1992-gw,Vevea1995-on,Vevea2005-xp,citkowicz2017parsimonious}.
 
-\citet{hedges1992modeling} studies the selection model when $w$ is a step function with fixed steps. Let $\alpha$ be a vector with elements $0=\alpha_{0}<\alpha_{1}<\ldots<\alpha_{K}=1$ and $\rho$ be a $K$-ary non-negative, non-increasing vector having its first element equal to $\rho_{1}=1$ for identifiability. Define the step function $w$ based on $\alpha$ and $\rho$ as
+\citet{hedges1992modeling} studies the selection model when $w$ is a step function with fixed steps. Let $\alpha$ be a vector with elements $0=\alpha_{0}<\alpha_{1}<\ldots<\alpha_{K}=1$ and $\rho$ be a $K$-ary non-negative, non-decreasing vector having its first element equal to $\rho_{1}=1$ for identifiability. Define the step function $w$ based on $\alpha$ and $\rho$ as
 \begin{equation}
 w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho^{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{eq:step function}
 \end{equation}
@@ -181,8 +181,7 @@ hard, introducing the heterogeneity parameter exacerbates the problem.
 The likelihood function has contours following approximately $\tau\propto|\theta|^{1/2}$.
 Figure \ref{fig:contour lines} shows the contour lines for the meta-analysis
 of \citet{Cuddy2018-kp} where the selection probabilities of the
-step function (\ref{eq:step function}) are fixed at $\rho=(1,0.6,0.1)$.
-Only just around the maximum at $\hat{\theta}_{0}=0.55$ and $\hat{\sigma}=5\cdot10^{-7}$
+step function (\ref{eq:step function}) are fixed at $\rho=(1,0.6,0.1)$ and $\alpha = (0, 0.025, 0.05, 1$. Only just around the maximum at $\hat{\theta}_{0}=0.55$ and $\hat{\sigma}=5\cdot10^{-7}$
 can the likelihood be approximated with a quadratic function. 
 
 \begin{figure}
@@ -203,7 +202,7 @@ space, and $\Pi$ a partition of $\mathcal{P}$. Recall that a partition
 of $\mathcal{P}$ is a collection of disjoint non-empty subsets $\pi$
 of $\mathcal{P}$ such that $\bigcup_{\pi\in\Pi}\pi=\mathcal{P}$.
 When $p$ is a density associated with a $P\in\mathcal{P}$, we will
-use the standard notation $[p]$ to denote the unique $\pi$ containing
+use the standard notation $[p]$ to denote the unique part $\pi$ containing
 $P$. 
 \begin{defn}
 \label{def:confidence set} A \emph{confidence set} of level $\alpha$
@@ -235,7 +234,7 @@ The following example should make Definition \ref{def:confidence set}
 familiar.
 \begin{example}
 \label{exa:t-test} Consider the usual \emph{t}-confidence interval
-with $n$ observations. Here $\mathcal{P}$ contains all measures
+with $n$ observations. In this case, $\mathcal{P}$ contains all measures
 $P_{\mu,\sigma}^{n}$, where $P_{\mu,\sigma}$ is the probability
 measure of a normal with mean $\mu$ and standard deviation $\sigma$.
 Here $Q^{n}$ denotes the $n$-fold product measure of $Q$, corresponding to $n$ independent samples from $Q$, when $Q$ is a probability measure. Let $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
@@ -366,7 +365,7 @@ for the truncated normal. Its proof is in the appendix (p. \pageref{proof:genera
 \begin{lem}
 \label{lem:generalized shifted exponential} Let $f_{n}$ be a normal
 density truncated to $[a,b)$, where $b=\infty$ is allowed, with
-underlying mean $\theta_{n}=-n$ and standard deviation $\sigma_{n}^{2}=n^{2}+c$
+underlying mean $\theta_{n}=-n$ and standard deviation $\sigma_{n}^{2}=n+c$
 for some $c\in\mathbb{R}$. Then $f_{n}$ converges pointwise to $\exp(-x)/[\exp(-a)-\exp(-b)]$,
 the distribution of an exponential variable truncated to $[a,b)$.
 \end{lem}
@@ -417,7 +416,7 @@ and a subset $K'$ such that
 \begin{enumerate}
 \item For all $k\in K'$, there is a density $f^{k\star}$ such that $f_{n}^{k}$
 converges to $f^{k\star}$ pointwise.
-\item For all mixtures $p$, $\supp p\supseteq\supp f^{k\star}$ for some
+\item For all mixtures $p$, $\supp p\supseteq\supp f^{k\star}$ for all
 $k\in K'$.
 \item For all $k\in K'$, the size of $[f_{n}^{k}]$ goes to infinity, $\left\Vert [f_{n}^{k}]\right\Vert \to\infty$.
 \item The density concentrates on the components indexed by $K'$, $\lim_{n\to\infty}\sum_{k\in K'}\pi_{n}^{k}=1$.
@@ -518,9 +517,9 @@ $D$ has infinite diameter with positive probability.
 \end{proof}
 Now we prove Lemma \ref{lem:generalized shifted exponential}.
 \begin{proof}[Proof of Lemma (\ref{lem:generalized shifted exponential})]
-\label{proof:generalized shifted exponential}Let $n^{2}>-c$, so
+\label{proof:generalized shifted exponential}Let $n>-c$, so
 that $\sigma_{n}^{2}>0$. Recall the well-known formula for the normal
-truncated to $[a,b]$,
+truncated to $[a,b]$, and substitute $\theta_n = -n$ and $\sigma^2_n = n + c$,
 \begin{eqnarray}
 f_{n}(x) & = & \frac{1}{\Phi\left(\frac{b-\theta_{n}}{\sigma_{n}}\right)-\Phi\left(\frac{a-\theta_{n}}{\sigma_{n}}\right)}\phi(x;\theta_{n},\sigma_{n})1[a,b](x),\label{eq:truncated}\\
  & = & \frac{\phi(x;-n,(n+c)^{1/2})1[a,b](x)}{\Phi[-(a+n)(n+c)^{-1/2}]-\Phi[-(b+n)(n+c)^{-1/2}]}.\nonumber 
@@ -536,8 +535,7 @@ hence
  & = & (n+c)^{-1/2}\phi(n/(n+c)^{1/2})\exp(-x).
 \end{eqnarray*}
 From Equation 5 of \citet{borjesson1979simple}, we know that $\Phi(-x)\approx\phi(x)/x$
-as $x$ grows. The part of (\ref{eq:truncated}) involving cumulative
-normal distributions become
+as $x$ grows. Then
 \begin{equation*}
 \Phi[-(a+n)(n+c)^{-1/2}] \approx \frac{(n+c)^{1/2}}{n+a}\phi[-(a+n)(n+c)^{-1/2}],
 \end{equation*}
