@@ -1,22 +1,111 @@
-\documentclass[article]{ajs}
+% \documentclass[english]{article}
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% \usepackage[english]{babel}
+% \usepackage{amsmath}
+% \usepackage{amsthm}
+% \usepackage{amssymb}
+% \usepackage{graphicx}
+% \usepackage{natbib}
+% \usepackage{enumitem}
+% \setlist[enumerate]{label = (\roman*)}
+
+% %%%%%%%%%%%%
+% %% Macros %%
+% %%%%%%%%%%%%
+
+% \providecommand{\tabularnewline}{\\}
+% \numberwithin{equation}{section}
+% \numberwithin{figure}{section}
+% \theoremstyle{plain}
+% \newtheorem{thm}{\protect\theoremname}
+% \theoremstyle{definition}
+% \newtheorem{defn}[thm]{\protect\definitionname}
+% \theoremstyle{definition}
+% \newtheorem{example}[thm]{\protect\examplename}
+% \theoremstyle{plain}
+% \newtheorem{lem}[thm]{\protect\lemmaname}
+% \providecommand{\definitionname}{Definition}
+% \providecommand{\examplename}{Example}
+% \providecommand{\lemmaname}{Lemma}
+% \providecommand{\theoremname}{Theorem}
+
+% \renewcommand{\sqrt}[1]{{(#1)^{1/2}}}
+% \DeclareMathOperator{\tr}{tr}
+% \DeclareMathOperator{\Tr}{Tr}
+% \DeclareMathOperator{\Var}{Var}
+% \DeclareMathOperator{\argmin}{argmin}
+% \DeclareMathOperator{\Cor}{Cor}
+% \DeclareMathOperator{\Cov}{Cov}
+% \DeclareMathOperator{\diag}{diag} 
+% \DeclareMathOperator{\argmax}{argmax}
+% \DeclareMathOperator{\supp}{supp}
+
+%%%%%%%%%%%%%%%%%%
+%% Declarations %%
+%%%%%%%%%%%%%%%%%%
+
+% \author{Jonas Moss \\ University of Oslo}
+% \title{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model}
+
+% \Plainauthor{Jonas Moss} 
+% \Plaintitle{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model} 
+% \Shorttitle{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model} 
+
+% \Abstract{
+% Meta-analysis, the statistical analysis of results from separate studies,
+% is a fundamental building block of science. But the assumptions of
+% classical meta-analysis models are not satisfied whenever publication
+% bias is present, which causes inconsistent parameter estimates. Hedges'
+% selection function model takes publication bias into account, but
+% estimating and inferring with this model is tough. Using a generalized
+% Gleser--Hwang theorem, we show there is no confidence set of guaranteed
+% finite diameter for the parameters of Hedges' selection model. This
+% result provides a partial explanation for why inference with Hedges'
+% selection model is fraught with difficulties.
+% }
+
+% \Keywords{meta-analysis, confidence intervals, file-drawer problem, publication bias, selection models, weight function models}
+% \Plainkeywords{meta-analysis, confidence intervals, file-drawer problem, publication bias, selection models, weight function models}
+
+%% publication information
+%% \Volume{50}
+%% \Issue{9}
+%% \Month{June}
+%% \Year{2012}
+%% \Submitdate{2012-06-04}
+%% \Acceptdate{2012-06-04}
+%% \setcounter{page}{1}
+% \Pages{1--xx}
+
+% \Address{
+%   Jonas Moss\\
+%   Department of Mathematics\\
+%   University of Oslo\\
+%   PB 1053, Blindern, NO-0316, Oslo, Norway\\
+%   E-mail: \email{jonasmgj@math.uio.no}
+% }
+
+%% LyX 2.3.4.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,twoside]{article}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+\usepackage[latin9]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage{natbib}
-\usepackage{enumitem}
-\setlist[enumerate]{label = (\roman*)}
 
-%%%%%%%%%%%%
-%% Macros %%
-%%%%%%%%%%%%
+\makeatletter
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
+\usepackage[natbibapa]{apacite}
 \theoremstyle{plain}
 \newtheorem{thm}{\protect\theoremname}
 \theoremstyle{definition}
@@ -25,10 +114,15 @@
 \newtheorem{example}[thm]{\protect\examplename}
 \theoremstyle{plain}
 \newtheorem{lem}[thm]{\protect\lemmaname}
-\providecommand{\definitionname}{Definition}
-\providecommand{\examplename}{Example}
-\providecommand{\lemmaname}{Lemma}
-\providecommand{\theoremname}{Theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{infiniteci}
+
+\titletag{An arXiv preprint, v2}
+\makeatletter
+\titlerunning{\@title}
+\makeatother
+\authorrunning{Jonas Moss}
 
 \renewcommand{\sqrt}[1]{{(#1)^{1/2}}}
 \DeclareMathOperator{\tr}{tr}
@@ -41,18 +135,25 @@
 \DeclareMathOperator{\argmax}{argmax}
 \DeclareMathOperator{\supp}{supp}
 
-%%%%%%%%%%%%%%%%%%
-%% Declarations %%
-%%%%%%%%%%%%%%%%%%
+\usepackage{enumitem}
+\setlist[enumerate]{label = (\roman*)}
 
-\author{Jonas Moss \\ University of Oslo}
+\makeatother
+
+\usepackage{babel}
+\providecommand{\definitionname}{Definition}
+\providecommand{\examplename}{Example}
+\providecommand{\lemmaname}{Lemma}
+\providecommand{\theoremname}{Theorem}
+
+\begin{document}
 \title{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model}
-
-\Plainauthor{Jonas Moss} 
-\Plaintitle{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model} 
-\Shorttitle{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model} 
-
-\Abstract{
+\author{Jonas Moss \orcid{0000-0002-6876-6964}\\
+Department of Mathematics, University of Oslo\\
+PB 1053, Blindern, NO-0316, Oslo, Norway\emph{}\\
+\emph{jonasmgj@math.uio.no}}
+\maketitle
+\begin{abstract}
 Meta-analysis, the statistical analysis of results from separate studies,
 is a fundamental building block of science. But the assumptions of
 classical meta-analysis models are not satisfied whenever publication
@@ -63,30 +164,8 @@ Gleser--Hwang theorem, we show there is no confidence set of guaranteed
 finite diameter for the parameters of Hedges' selection model. This
 result provides a partial explanation for why inference with Hedges'
 selection model is fraught with difficulties.
-}
-
-\Keywords{meta-analysis, confidence intervals, file-drawer problem, publication bias, selection models, weight function models}
-\Plainkeywords{meta-analysis, confidence intervals, file-drawer problem, publication bias, selection models, weight function models}
-
-%% publication information
-%% \Volume{50}
-%% \Issue{9}
-%% \Month{June}
-%% \Year{2012}
-%% \Submitdate{2012-06-04}
-%% \Acceptdate{2012-06-04}
-%% \setcounter{page}{1}
-\Pages{1--xx}
-
-\Address{
-  Jonas Moss\\
-  Department of Mathematics\\
-  University of Oslo\\
-  PB 1053, Blindern, NO-0316, Oslo, Norway\\
-  E-mail: \email{jonasmgj@math.uio.no}
-}
-
-\begin{document}
+\end{abstract}
+\keywords{meta-analysis \and confidence intervals \and file-drawer  problem \and publication bias \and selection models \and weight function models}
 
 \section{Introduction}
 
@@ -100,7 +179,7 @@ reviews \citep{Higgins2019-vv}.
 
 Most meta-analytic techniques assume honest and unbiased reporting
 of results. But there is ample evidence that the scientific literature
-is not unbiased, as studies with\emph{ }significant \textit{p}-values
+is not unbiased, as studies with significant \textit{p}-values
 tend to be published with a greater probability than other studies
 \citep{Easterbrook1991-ph}, a phenomenon called publication bias
 by \citet{sterling1959publication} and the file-drawer problem by
@@ -179,19 +258,16 @@ was used to estimate Hedges' publication bias model. \citet[Appendix A]{McShane2
 notes that while estimation of the basic publication bias model is
 hard, introducing the heterogeneity parameter exacerbates the problem.
 The likelihood function has contours following approximately $\tau\propto|\theta|^{1/2}$.
-Figure \ref{fig:contour lines} shows the contour lines for the meta-analysis
-of \citet{Cuddy2018-kp} where the selection probabilities of the
-step function (\ref{eq:step function}) are fixed at $\rho=(1,0.6,0.1)$ and $\alpha = (0, 0.025, 0.05, 1$. Only just around the maximum at $\hat{\theta}_{0}=0.55$ and $\hat{\sigma}=5\cdot10^{-7}$
-can the likelihood be approximated with a quadratic function. 
-
-\begin{figure}
+\begin{figure}[t]
 \noindent \begin{centering}
-\includegraphics[scale=0.5]{chunks/cuddy}
+\includegraphics[scale = 0.5]{chunks/cuddy}
 \par\end{centering}
 \caption{\label{fig:contour lines}Contour lines for the log-likelihood for
 the simple publication model using power posing data of \citet{Cuddy2018-kp}. }
-
 \end{figure}
+Figure \ref{fig:contour lines} shows the contour lines for the meta-analysis of \citet{Cuddy2018-kp} where the selection probabilities of the step function (\ref{eq:step function}) are fixed at $\rho=(1,0.6,0.1)$ and $\alpha = (0, 0.025, 0.05, 1$. Only just around the maximum at $\hat{\theta}_{0}=0.55$ and $\hat{\sigma}=5\cdot10^{-7}$
+can the likelihood be approximated with a quadratic function. 
+
 
 
 \section{Confidence sets of infinite diameter}
@@ -237,7 +313,7 @@ familiar.
 with $n$ observations. In this case, $\mathcal{P}$ contains all measures
 $P_{\mu,\sigma}^{n}$, where $P_{\mu,\sigma}$ is the probability
 measure of a normal with mean $\mu$ and standard deviation $\sigma$.
-Here $Q^{n}$ denotes the $n$-fold product measure of $Q$, corresponding to $n$ independent samples from $Q$, when $Q$ is a probability measure. Let $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
+Here $Q^{n}$ denotes the $n$-fold product measure of $Q$, corresponding to $n$ independent samples from $Q$ when $Q$ is a probability measure. Let $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
 contain all normal probability measures with mean $\mu$ and some
 positive standard deviation. Then $\{\pi(\mu)\},\mu\in\mathbb{R}$
 defines a partition of $\mathcal{P}$. A two-sided \emph{t}-confidence
@@ -255,7 +331,7 @@ The diameter of a confidence set is the random variable
 \begin{equation}
 D(\omega)=\sup_{\pi\in\Pi}\{\left\Vert \pi\right\Vert \mid\omega\notin R(\pi)\}.\label{eq:diameter}
 \end{equation}
-That is, the diameter tells you the size of the largest accepted $\pi$.
+The diameter tells you the size of the largest accepted $\pi$.
 We will assume that $D$ is Borel measurable.
 \begin{defn}
 \label{def:infinite diameter}A confidence set has infinite diameter
@@ -268,7 +344,7 @@ formulated in terms of partitions. Its proof is in the appendix (p.
 \pageref{proof:Gleser--Hwang}).
 \begin{thm}[Gleser--Hwang theorem]
 \label{thm:Gleser--Hwang} Suppose there is a sequence $\{p_{n}\}$
-of densities from $\mathcal{P}$ satisfying the following: 
+of densities derived from $\mathcal{P}$ satisfying the following: 
 \begin{enumerate}
 \item There is a density $p^{\star}$ such that $p_{n}$ converges to $p^{\star}$
 pointwise,
@@ -289,7 +365,7 @@ more familiar, we will present two examples. More examples can be
 found in the papers of \citet{gleser1987nonexistence} and \citet{berger1999integrated}.
 
 Fieller's problem is the best known case of a badly behaved confidence
-set. Let $X,Y$ be an observation from a bivariate normal $N([\mu_{1},\mu_{2}],I\sigma^{2})$,
+set. Let $(X,Y)$ be an observation from a bivariate normal $N([\mu_{1},\mu_{2}],I\sigma^{2})$,
 where $\sigma^{2}$ is known. We want to form a confidence set for
 the ratio $\mu_{2}/\mu_{1}$. The most famous confidence set is due
 to \citet{Fieller1940-lg}. His confidence set can be finite, the
@@ -564,6 +640,7 @@ Then \label{eq:pi_i formula}
 \pi^{k}=c^{-1}\rho^{k}[\Phi(c_{k-1};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})-\Phi(c_{k};\theta_{0},(\tau^{2}+\sigma_{i}^{2})^{1/2})].
 \]
 
+\bibliographystyle{apacite}
 \bibliography{infiniteci}
 
 \end{document}
