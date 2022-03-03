@@ -118,7 +118,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 \usepackage{infiniteci}
 
-\titletag{An arXiv preprint, v2}
+\titletag{Submission to Journal of the Korean Statistical Society}
 \makeatletter
 \titlerunning{\@title}
 \makeatother
@@ -149,9 +149,9 @@
 \begin{document}
 \title{Infinite Diameter Confidence Sets in Hedges' Publication Bias Model}
 \author{Jonas Moss \orcid{0000-0002-6876-6964}\\
-Department of Mathematics, University of Oslo\\
-PB 1053, Blindern, NO-0316, Oslo, Norway\emph{}\\
-\emph{jonasmgj@math.uio.no}}
+Department of Data Science and Analytics \\
+BI Norwegian Business School\emph{}\\
+\emph{jonas.moss@bi.no}}
 \maketitle
 \begin{abstract}
 Meta-analysis, the statistical analysis of results from separate studies,
@@ -159,7 +159,7 @@ is a fundamental building block of science. But the assumptions of
 classical meta-analysis models are not satisfied whenever publication
 bias is present, which causes inconsistent parameter estimates. Hedges'
 selection function model takes publication bias into account, but
-estimating and inferring with this model is tough. Using a generalized
+estimating and inferring with this model is tough {\color{black} for some datasets}. Using a generalized
 Gleser--Hwang theorem, we show there is no confidence set of guaranteed
 finite diameter for the parameters of Hedges' selection model. This
 result provides a partial explanation for why inference with Hedges'
@@ -195,9 +195,9 @@ Hedges' \citeyearpar{hedges1992modeling} publication bias model takes publicatio
 The most popular and well-known meta-analysis method is the random effects model with normal likelihoods \citep{hedges1998fixed}. Written in hierarchical notation, it equals
 \begin{eqnarray*}
 \theta_{i} & \sim & N(\theta_{0},\tau),\\
-x_{i}\mid\theta_{i},\sigma & \sim & N(\theta_{i},\sigma_{i}).
+x_{i}\mid\theta_{i},\sigma_i & \sim & N(\theta_{i},\sigma_{i}).
 \end{eqnarray*}
-xzHere $x_{i}$ is the effect size and $\sigma_{i}$ is the standard deviation of the $i$th study,  $i=1,\ldots,N$. Following the convention in meta-analysis, we assume all $\sigma_{i}$s to be known. The mean parameter $\theta_0$ is the population effect size, $N(\theta_{0},\tau)$ is the effect size distribution, and $\tau$ is the heterogeneity parameter. The purpose of the effect size distribution is to model the fact that most effect size estimates plugged into a meta-analysis do not appear to measure the same phenomenon. By integrating out $\theta_{i}$, we find the density of $x_{i}$,
+Here $x_{i}$ is the effect size and $\sigma_{i}$ is the standard deviation of the $i$th study,  $i=1,\ldots,N$. Following the convention in meta-analysis, we assume all $\sigma_{i}$s to be known. The mean parameter $\theta_0$ is the population effect size, $N(\theta_{0},\tau)$ is the effect size distribution, and $\tau$ is the heterogeneity parameter. The purpose of the effect size distribution is to model the fact that most effect size estimates plugged into a meta-analysis do not appear to measure the same phenomenon. By integrating out $\theta_{i}$, we find the density of $x_{i}$,
 \[
 f(x_{i};\theta_{0},\tau,\sigma_{i})=\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}}),
 \]
@@ -218,13 +218,12 @@ These problems can be rectified by adopting the selection model for publication 
 \textbf{Publication bias scenario.} Alice the editor receives a study with the \textit{p}-value $u$. Her publication decision is a random function of this \textit{p}-value. That is, she will publish the study with some probability $w(u)$ and reject it with probability $1-w(u)$. Every study you will ever read in Alice's journal has survived this selection mechanism, the rest are lost forever.
 \end{quote}
 Let $w(u_{i})$ be a function of the \textit{p}-value $u_{i}=\Phi(-x_{i}/\sigma_{i})$ taking values in $[0,1]$. Then $w(u_{i})$ is a probability for every $u_{i}$, and the selection model
-
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\sigma_{i}^{2}+\tau^{2}})\propto\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})w(u)\label{eq:iyengar-greenhouse model}
 \end{equation}
 models the publication bias scenario exactly. This model can be viewed as a rejection sampling procedure \citep{flury1990acceptance,von1951various}, where $\phi$ serves as proposal distribution for $f$. Variants of this model, with and without covariates, has been studied by e.g. \citet{Dear1992-gw,Vevea1995-on,Vevea2005-xp,citkowicz2017parsimonious}.
 
-\citet{hedges1992modeling} studies the selection model when $w$ is a step function with fixed steps. Let $\alpha$ be a vector with elements $0=\alpha_{0}<\alpha_{1}<\ldots<\alpha_{K}=1$ and $\rho$ be a $K$-ary non-negative, non-decreasing vector having its first element equal to $\rho_{1}=1$ for identifiability. Define the step function $w$ based on $\alpha$ and $\rho$ as
+\citet{hedges1992modeling} studies the selection model when $w$ is a step function with fixed steps. Let $\alpha$ be a vector with elements $0=\alpha_{0}<\alpha_{1}<\ldots<\alpha_{K}=1$ and $\rho$ be a $K$-ary non-negative, non-increasing vector having its first element equal to $\rho_{1}=1$ for identifiability. Define the step function $w$ based on $\alpha$ and $\rho$ as
 \begin{equation}
 w(u;\rho,\alpha)=\sum_{k=1}^{K}\rho^{k}1_{(\alpha_{k-1},\alpha_{k}]}(u).\label{eq:step function}
 \end{equation}
@@ -232,9 +231,11 @@ We call the selection model with a step function \emph{Hedges' publication bias 
 \begin{equation}
 f(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})\propto\sum_{k=1}^{K}\rho^{k}\phi(x_{i};\theta_{0},\sqrt{\tau^{2}+\sigma_{i}^{2}})1{(\alpha_{k-1},\alpha_{k}]}(u_{i}).\label{eq:hedges model}
 \end{equation}
-Interpreting Hedges' publication bias model is easy. When the editor receives a study with \textit{p}-value $u$, she finds the $k$ such that $u\in(\alpha_{k-1},\alpha_{k}]$ and accepts with probability $\rho^{k}$. Since $\rho^{1}=1$, she always accepts when $u\in[0,\alpha_{1}]$. The vector $\rho$ is non-increasing since a publication decision based solely on \textit{p}-values should always act favorably towards lower \textit{p}-values. The parameters $(\theta_{0},\tau,\rho)$ of the model are identified when $\alpha$ is fixed \citep[Web Appendix A]{moss2019modelling}.
+Interpreting Hedges' publication bias model is easy. When the editor receives a study with \textit{p}-value $u$, she finds the $k$ such that $u\in(\alpha_{k-1},\alpha_{k}]$ and accepts with probability $\rho^{k}$. Since $\rho^{1}=1$, she always accepts when $u\in[0,\alpha_{1}]$. The vector $\rho$ is non-increasing since a publication decision based solely on \textit{p}-values should always act favorably towards lower \textit{p}-values. The parameters $(\theta_{0},\tau,\rho)$ of the model are identified when $\alpha$ is fixed \citep[Web Appendix A]{moss2019modelling}. 
 
-Hedges' publication bias model allows both for non-significant studies to be published and allows the editor to act differently towards different cutoffs such as $\alpha=0.025$ and $\alpha=0.05$. In addition, the model can approximate any non-increasing selection function $w$ by increasing the number of steps.
+{\color{black}It is probably not possible to generalize the results of this paper to selection models that do no follow the step function model. Lemma \ref{lem:generalized shifted exponential}, about the truncated normal, is crucial in the proof of our main result, Theorem \ref{thm:general publication bias}. Truncated densities only appear in step function models, not models with continuous selection functions, such as the Probit selection function of \cite{Copas2013-qi} or the one-parameter selection functions of \cite{Preston2004-pv}.}
+
+Hedges' publication bias model allows both for non-significant studies to be published and allows the editor to act differently towards different cutoffs such as $\alpha=0.025$ and $\alpha=0.05$. In addition, the model can approximate any non-increasing selection function $w$ by increasing the number of steps. {\color{black}In applications, the parameters $\mu$, $\tau$, and $\rho$ are estimated from the data, while $\alpha$ is fixed by the researcher, for instance at $\alpha = (0.025, 0.05, 1)$. We recommend using these cutoffs, as it is well known that applied journals frequently demand statistical significance at this level. Since both two-sided and one-sided \emph{p}-values occur, we need to include $0.025$ in addition to $0.05$.}
 
 We can write Hedges' model as a mixture model on the form
 \begin{equation}
@@ -252,7 +253,7 @@ with other causes than the publication process, such as \textit{p}-hacking
 \citep{simmons2011false}. \citet{moss2019modelling} propose a related
 model that may be more successful at correcting for \textit{p}-hacking. 
 
-Estimation of Hedges' model is difficult. \citet[Section 6.3]{Stanley2005-ng}
+{\color{black} Hedges' model can be hard to estimate, especially if the data is unfavourable}. \citet[Section 6.3]{Stanley2005-ng}
 discusses three problematic cases in economics when maximum likelihood
 was used to estimate Hedges' publication bias model. \citet[Appendix A]{McShane2016-rb}
 notes that while estimation of the basic publication bias model is
@@ -265,10 +266,10 @@ The likelihood function has contours following approximately $\tau\propto|\theta
 \caption{\label{fig:contour lines}Contour lines for the log-likelihood for
 the simple publication model using power posing data of \citet{Cuddy2018-kp}. }
 \end{figure}
-Figure \ref{fig:contour lines} shows the contour lines for the meta-analysis of \citet{Cuddy2018-kp} where the selection probabilities of the step function (\ref{eq:step function}) are fixed at $\rho=(1,0.6,0.1)$ and $\alpha = (0, 0.025, 0.05, 1$. Only just around the maximum at $\hat{\theta}_{0}=0.55$ and $\hat{\sigma}=5\cdot10^{-7}$
-can the likelihood be approximated with a quadratic function. 
+Figure \ref{fig:contour lines} shows the contour lines for the meta-analysis of \citet{Cuddy2018-kp} where the selection probabilities of the step function (\ref{eq:step function}) are fixed at $\rho=(1,0.6,0.1)$ and $\alpha = (0, 0.025, 0.05, 1)$. Only just around the maximum at $\hat{\theta}_{0}=0.55$ and $\hat{\sigma}=5\cdot10^{-7}$
+can the likelihood be approximated with a quadratic function.
 
-
+{\color{black} Estimation of Hedges' model is especially hard when almost all observations lie close to the the cutoffs. In our experience, estimation works well when the data is sufficiently well spread, for instance when some observations are far away from the cutoffs and there are observations that have failed to reach significance. As a simple example of a case when estimation fails to work, consider the observation vector $x = (1.96, 1.96, 1.96, 1.96, 1.96, 1.64, 1.64, 1.64, 1.64, 1.64, -1)$ when the standard deviation of each observation is $\sigma_i=1$. We employ $\alpha = (0, 0.025, 0.05, 1)$, which implies cutoffs at $\Phi^{-1}(0.975)$ and $\Phi^{-1}(0.95)$. In this case, $10$ out of $11$ observations are very close to the cutoffs. When we run the Hedges selection model on this data, using the $\mathtt{sel}$ function of the $\mathtt{R}$ package $\mathtt{metafor}$ \citet{Viechtbauer2010-cf}, the model does not converge. If the last observation is changed to $0$ instead of $-1$, the model converges, but the Hessian cannot be inverted, and the parameter estimate for $\theta_0$ equals $-1.8$. Situations similar to this one are most common when $n$ is small.}
 
 \section{Confidence sets of infinite diameter}
 
@@ -279,7 +280,7 @@ of $\mathcal{P}$ is a collection of disjoint non-empty subsets $\pi$
 of $\mathcal{P}$ such that $\bigcup_{\pi\in\Pi}\pi=\mathcal{P}$.
 When $p$ is a density associated with a $P\in\mathcal{P}$, we will
 use the standard notation $[p]$ to denote the unique part $\pi$ containing
-$P$. 
+$P$. {\color{black} Instead of partitions, we could have used a formulation with main parameters $\theta$ and nuisance parameters $\eta$, and defined the rejection set for $\theta$ as $\sup_{\eta}\sup_{\theta}P_{\theta,\eta}(R(\theta))\leq\alpha$. We have decided to use partitions for two reasons: First, there are no unambiguous nuisance and main parameters in our applications, making notation using nuisance parameters confusing. Second, the upcoming Theorem \ref{thm:Gleser--Hwang} can be applied in purely non-parametric situations, where the mention of nuisance and main parameters is even more confusing.} 
 \begin{defn}
 \label{def:confidence set} A \emph{confidence set} of level $\alpha$
 is a family of rejection sets $\{R(\pi)\},\pi\in\Pi$ such that
@@ -307,25 +308,23 @@ set, but this requires that the $C$ in equation \ref{eq:c-confidence set}
 is an interval, which we will not require here.
 
 The following example should make Definition \ref{def:confidence set}
-familiar.
+clearer. 
 \begin{example}
 \label{exa:t-test} Consider the usual \emph{t}-confidence interval
 with $n$ observations. In this case, $\mathcal{P}$ contains all measures
 $P_{\mu,\sigma}^{n}$, where $P_{\mu,\sigma}$ is the probability
 measure of a normal with mean $\mu$ and standard deviation $\sigma$.
-Here $Q^{n}$ denotes the $n$-fold product measure of $Q$, corresponding to $n$ independent samples from $Q$ when $Q$ is a probability measure. Let $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
+Here $Q^{n}$ denotes the $n$-fold product measure of $Q$, corresponding to $n$ independent samples from $Q$ when $Q$ is a probability measure.  {\color{black} The \emph{t}-confidence interval is an exact confidence interval for $\mu$ no matter what $\sigma>0$, the nuisance parameter, is. Since the test is exact, rejection sets $R(\mu)$ satisfy $P^n_{\mu,\sigma}(R(\mu))=\alpha$ for all $\sigma,\mu$.} We can formulate the confidence set in terms of partitions too. Let $\pi(\mu)=\{P_{\mu,\sigma}^{n}\mid\sigma>0\}$
 contain all normal probability measures with mean $\mu$ and some
 positive standard deviation. Then $\{\pi(\mu)\},\mu\in\mathbb{R}$
-defines a partition of $\mathcal{P}$. A two-sided \emph{t}-confidence
-interval is a confidence set of size $\alpha$ with partition $\{\pi(\mu)\},\mu\in\mathbb{R}$
+defines a partition of $\mathcal{P}$. Then the two-sided \emph{t}-confidence
+interval is a confidence set of size $\alpha$ with partition {\color{black}$\Pi = \{\pi(\mu)\},\mu\in\mathbb{R}$}
 according to Definition \ref{def:confidence set}.
 \end{example}
 
-Now we must find out how to measure the size of confidence sets. Let
-a \emph{size function} be any positive function $\left\Vert \cdot\right\Vert :\Pi\to[0,\infty)$.
-In the \emph{t}-confidence interval example above, $\left\Vert \cdot\right\Vert $
+{\color{black} Now we must find out how to measure the size of confidence sets. To make our results as general as possible, we will let the \emph{size function} be any non-negative function $\left\Vert \cdot\right\Vert :\Pi\to[0,\infty)$. In most cases, the size function will be a norm, but any non-negative function is a valid size function. For instance, in the \emph{t}-confidence interval example above, $\left\Vert \cdot\right\Vert $
 can be taken to be $\left\Vert \pi\right\Vert =|\mu|$ for the unique
-$\mu$ associated with each $\pi$. 
+$\mu$ associated with each $\pi$. }
 
 The diameter of a confidence set is the random variable
 \begin{equation}
@@ -339,9 +338,7 @@ with $P$-positive probability if $P(D=\infty)>0$. It has infinite
 diameter with positive probability if $P(D=\infty)>0$ for all $P\in\mathcal{P}$.
 \end{defn}
 
-This is a modified Gleser--Hwang theorem \citep[Theorem 1]{gleser1987nonexistence}
-formulated in terms of partitions. Its proof is in the appendix (p.
-\pageref{proof:Gleser--Hwang}).
+{\color{black} The original Gleser--Hwang theorem \citep[Theorem 1]{gleser1987nonexistence} is defined for pairs of parameters $\theta_1,\theta_2$, where $\theta_2$ is a nuisance parameter and the confidence set is constructed for a functional $\gamma(\theta_1)$. The following generalization does not require any nuisance parameters. Using partitions, it can be used both with and without nuisance parameters, as well as in non-parametric settings.} Its proof is in the appendix (p. \pageref{proof:Gleser--Hwang}). 
 \begin{thm}[Gleser--Hwang theorem]
 \label{thm:Gleser--Hwang} Suppose there is a sequence $\{p_{n}\}$
 of densities derived from $\mathcal{P}$ satisfying the following: 
@@ -373,7 +370,7 @@ whole real line, or the union of two disjoint semi-infinite intervals, all with 
 
 But it is not only Fieller's confidence set that might be infinitely
 long. The Gleser--Hwang theorem can be used to show that \textit{every} confidence
-set for $\mu_{2}/\mu_{1}$ must be infinitely long with positive probability.
+set for $E(Y)/E(X)$ must be infinitely long with positive probability.
 This result is almost independent of the distribution of $X$ and
 $Y$. To state this result in our notation, let $\mathcal{P}$ be
 a family of bivariate distributions over $(X,Y)$. All of these distributions
@@ -394,7 +391,7 @@ that covers all finite means, has finite variances, and is closed
 under convex combinations. Similar problems were considered by \citet{romano2004non}
 and \citet{Donoho1988-hg}.
 
-Using the Gleswer--Hwang theorem, it is easy to verify that every confidence
+Using the Gleser--Hwang theorem, it is easy to verify that every confidence
 set has infinite diameter with positive probability. Define the partition
 $\Pi$ by $p,q\in\pi$ if and only if $E_{p}(X)=E_{q}(X)$, and let
 $\left\Vert [p]\right\Vert =|E_{p}(X)|$. Let
@@ -540,8 +537,8 @@ employed these priors on several examples.
 The following sandwich convergence theorem is used in the proof of
 the Gleser--Hwang theorem. 
 \begin{lem}[{\citet[Exercise 16.4(a)]{billingsley1995probability}}]
-\label{lem:Dominated covergence theorem} Suppose $a_{n},b_{n},f_{n}$
-converge to $a,b,f$ and $a_{n}\leq f_{n}\leq b_{n}$ for all $n$.
+\label{lem:Dominated covergence theorem} Suppose the functions $a_{n},b_{n},f_{n}$
+converge pointwise to $a,b,f$ and $a_{n}\leq f_{n}\leq b_{n}$ for all $n$.
 If $\int a_{n}d\mu\to\int ad\mu$ and $\int b_{n}d\mu\to\int bd\mu$,
 then $\int f_{n}d\mu\to\int fd\mu$ for any measure $\mu$.
 \end{lem}
