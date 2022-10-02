@@ -32,7 +32,8 @@ z = outer(X = x, Y = y, FUN = FUN)
 
 solution = abs(nlm(objective, p = c(0.2, 0.01))$estimate) # 5.53-01 -4.99-07
 
-pdf("chunks/cuddy.pdf")
+setEPS()
+postscript("chunks/cuddy.eps")
 contour(
   x = x, 
   y = y, 
