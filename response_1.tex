@@ -1,0 +1,37 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\title{Response to reviewer 1 on infinite CI}
+\begin{document}
+\maketitle
+I wish to thank you for a very constructive review.
+
+Major modifications to the manuscript are marked in red and copied into this document. There might be very slight (one the level of spelling error) deviations between the red blocks in this response document and the corresponding blocks in the manuscript.
+
+\section*{Spelling and minor comments}Thank you for informing me about these. They have been fixed.
+
+\section*{Response to comments}
+
+\begin{quotation}The mathematical conditions are vaguely described. For example, see the definition of the size function on page 5, which allows any positive function. Since the size function determines the diameter, a more precise condition is needed there. In the original Gleser-Hwang theorem, the two sets of parameters are treated differently (In their paper, $\theta_1$ and $\theta_2$). In this article, there is no distinction between the two sets so that the conditions of Theorem 4 seem too concise.
+\end{quotation}
+I modified the relevant paragraph clarifying that, indeed, any non-negative size function is actually allowed. (We do not use any properties such as the triangle inequality or homogeneity.) 
+
+{\color{red} Now we must find out how to measure the size of confidence sets. To make our results as general as possible, we will let the \emph{size function} be any non-negative function $\left\Vert \cdot\right\Vert :\Pi\to[0,\infty)$. In most cases, the size function will be a norm, but any non-negative function is a valid size function. For instance, in the \emph{t}-confidence interval example above, $\left\Vert \cdot\right\Vert $
+can be taken to be $\left\Vert \pi\right\Vert =|\mu|$ for the unique
+$\mu$ associated with each $\pi$. }
+
+It is true that Gleser--Hwang formulates their Theorem using two parameters, where one is a nuisance parameter and one is the parameter of interest. Their results do not depend on this detail, however, as we show in Theorem 4. We modified the sentence preceding Theorem 4 to make it clear:
+
+{\color{red} The original Gleser--Hwang theorem is defined for pairs of parameters $\theta_1,\theta_2$, where $\theta_2$ is a nuisance parameter and the confidence set is constructed for a functional $\gamma(\theta_1)$. The following generalization does not require any nuisance parameters. Using partitions, it can be used both with and without nuisance parameters, as well as in non-parametric settings.}
+
+\begin{quotation}
+It will be very helpful to readers that the relationship between the modified Gleser--Hwang theorem and the numerical difficulty of Hedges’ selection model is clearly shown in numerical studies. If the current result should be supported by a numerical study, the key message of this paper becomes clear.
+\end{quotation}
+
+I appreciate this comment, as it should be made clear that the the difficulties with estimation are not universal, across all data sets. Estimation is difficult only if you're unlucky with the data you obtained. I slightly modified the abstract to make this clearer. More importantly, I added the following paragraph to the end of section 2:
+
+{\color{red} Estimation of Hedges' model is especially hard when almost all observations lie close to the the cutoffs. In our experience, estimation works well when the data is sufficiently well spread, for instance when some observations are far away from the cutoffs and there are observations that have failed to reach significance. As a simple example of a case when estimation fails to work, consider the vector $x = (1.96, 1.96, 1.96, 1.96, 1.96, 1.64, 1.64, 1.64, 1.64, 1.64, -1)$ and the standard deviation of each observations is $\sigma_i=1$. We employ $\alpha = (0, 0.025, 0.05, 1)$, which implies cutoffs at $\Phi^{-1}(0.975)$ and $\Phi^{-1}(0.95)$. In this case, $10$ out of $11$ observations are very close to the cutoffs. When we run the Hedges selection model on this data, using the$\mathtt{sel}$ function of the $\mathtt{R}$ package $\mathtt{metafor}$ (Vichtbauer, 2010), the model does not converge. If the last observation is changed to $0$ instead of $-1$, the model converges, but the Hessian cannot be inverted, and the parameter estimate for $\theta_0$ equals $-1.8$. Situations similar to this one are most common when $n$ is small.}
+
+(Of course, confidence sets are defined using universal quantification, and must take unlucky cases into account. The point of this paper is that confidence sets will be infinite \textit{if you're sufficiently unlucky}, no matter what the true parameter estimates are.)
+\end{document}

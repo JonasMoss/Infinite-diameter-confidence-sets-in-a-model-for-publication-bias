@@ -1,0 +1,55 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\title{Response to reviewer 2 on infinite CI}
+\begin{document}
+\maketitle
+I wish to thank you for your very constructive review.
+
+
+Major modifications to the manuscript are marked in red and copied into this document. There might be very slight (one the level of spelling error) deviations between the red blocks in this response document and the corresponding blocks in the manuscript.
+
+\section*{Spelling and minor comments}Thank you for informing me about these. They have been fixed.
+
+\section*{Response to comments}
+
+\begin{quote}
+Could you clarify the motivation to focus on the step function defined
+in (2.3)? As for the selection function w(·) defined in (2.2), there are
+many options such as one-parameter selection function (Preston et al.
+2004) and two-parameters selection function (Copas, 2013). Is it more
+popular or just for some theoretical reason?
+\end{quote}
+
+That is a good questions! There is no reason to believe the results hold for the other selection models. I added the following paragraph to section 2:
+
+{\color{red}It is not probably not possible to generalize the results of this paper to selection models that do no follow the step function model. Lemma 5, about the truncated normal, is crucial in the proof of our main result, Theorem 8. Such truncated functions only appear in step function models, not models with continuous selection functions, such as the Probit selection function of Copas (2013) or the one-parameter selection functions of Preston (2014).}
+
+\begin{quote}
+How can we decide $\mu$, $\alpha$ and $K$ defined in (2.3)? I feel that determining the values without data is very subjective.
+\end{quote}
+
+Only the values of $\alpha$ will have to be supplied by the researcher, as we estimate $\rho$ along with $\mu$ and $\tau$. We believe the most reasonable choice is $\alpha = 1, 0.05, 0.025$, which implies $K=3$. (In this paper, it's entirely possible to estimate $\alpha$ as well, if $K$ is known or estimated itself. That would not change the main message, that confidence intervals are infinitely large with positive probability. I don't think that such models are common enough to warrant an explicit mention though.) 
+
+I added the following paragraph to clarify:
+
+{\color{red}In applications, the parameters $\mu$, $\tau$, and $\rho$ are estimated from the data, while $\alpha$ is fixed by the researcher, for instance at $\alpha = (0.025, 0.05, 1)$. We recommend using these cutoffs, as it is well known that applied journals frequently demand statistical significance at this level. Since both two-sided and one-sided p-values occur, we need to include $0.025$ in addition to $0.05$.}
+
+\begin{quote}
+In section 3, I would like the author to add a more detailed explanation of why partition $\Pi$ is necessary. For example, what is $\Pi$ in Example 2? What are the benefits of introducing $\Pi$ in the example?
+\end{quote}
+
+This comment addresses an important point! There are other ways to present our results than using partitions. A common way is to use nuisance parameters, but I prefer to avoid this approach, as it suggests that:
+\begin{enumerate}
+\item Unambiguous nuisance parameters exist. That isn't the case in this problem, as we may be interested in either the mean $\mu$, the heterogeneity parameter $\tau$, or $\mu$ and $\tau$  together. 
+\item The Theorem is restricted to parametric distributions. This paper is about Hedges publication bias model, but Theorem 4 can be applied to other problems too, including non-parametric problems. 
+\item The notion becomes more involved if we use nuisance parameters.
+\end{enumerate}
+To motivate the usage of partitions instead of nuisance parameters, I added the following immediately after introducing partitions.
+
+{\color{red} Instead of partitions, we could have used a formulation with main parameters $\theta$ and nuisance parameters $\eta$, and defined the rejection set for $\theta$ as $\sup_{\eta}\sup_{\theta}P_{\theta,\eta}(R(\theta))\leq\alpha$. We have decided to use partitions for two reasons: First, there are no unambiguous nuisance and main parameters in our applications, making notation using nuisance parameters confusing. Second, the upcoming Theorem 8 can be applied in purely non-parametric situations, where the mention of nuisance and main parameters is even more confusing.} 
+
+In addition, I added {\color{red} The \emph{t}-confidence interval is an exact confidence interval for $\mu$ no matter what $\sigma>0$, the nuisance parameter, is. Since the test is exact, rejection sets $R(\mu)$ satisfy $P^n_{\mu,\sigma}(R(\mu))=\alpha$ for all $\sigma,\mu$.} to Example 2, along with an explicit mention that {\color{red} $\Pi = \{\pi(\mu)\},\mu\in\mathbb{R}$.}
+\end{document}
+
